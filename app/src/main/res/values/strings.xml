@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">RIT Debit Splitter</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="balanceHeader"><u>Balance</u></string>
+    <string name="dateHeader"><u>Date Range</u></string>
+
+    <string name="initialBalance">Initial</string>
+    <string name="currentBalance">Remaining</string>
+
+    <string name="daysOffHeader"><u>Days Off</u></string>
+    <string name="total">Total</string>
+    <string name="past">Past</string>
+
+    <string name="initialHeader"><u>Initially:</u></string>
+    <string name="currentHeader"><u>Currently:</u></string>
+
+    <string name="daily">Daily Limit: </string>
+    <string name="weekly">Weekly Limit: </string>
+    <string name="difference">Difference: </string>
+
+    <string name="startMonth">1</string>
+    <string name="startDay">25</string>
+    <string name="startYear">2016</string>
+
+    <string name="endMonth">5</string>
+    <string name="endDay">21</string>
+    <string name="endYear">2016</string>
+
+    <!-- Toast messages  -->
+    <string name="remainingGreaterThanInitial">The remaining balance cannot be greater than the initial balance</string>
+    <string name="dateOutOfRangeMessage">The current date is outside the date range</string>
+    <string name="endDateBeforeStart">The end date must be after the start date plus the days off</string>
+    <string name="totalNotEntered">The total days off must be entered with the past days off</string>
+    <string name="pastGreaterThanTotal">The past days off cannot be more than the total days off</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Strings related to Settings -->
+    <string name="saveLabel">Save values?</string>
+    <string name="enabledSaveDesc">The values are being saved</string>
+    <string name="disabledSaveDesc">The values are not being saved</string>
+
+</resources>

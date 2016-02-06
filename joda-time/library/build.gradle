@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 23
+    buildToolsVersion '23.0.2'
+    resourcePrefix 'joda_'
+
+    defaultConfig {
+        minSdkVersion 9
+        consumerProguardFiles 'proguard-rules.txt'
+    }
+
+    lintOptions {
+        lintConfig file('lint.xml')
+        textReport true
+        textOutput 'stdout'
+    }
+}
+
+apply plugin: net.danlew.android.joda.TzDataPlugin
+apply from: 'gradle-mvn-push.gradle'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    compile 'joda-time:joda-time:2.9.1:no-tzdb'
+}
+
+tzdata {
+    tzDataDir = new File(project.rootDir, 'tzdata')
+}

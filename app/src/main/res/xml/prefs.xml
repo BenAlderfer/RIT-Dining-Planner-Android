@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
+    android:key="prefScreen">
+
+    <SwitchPreference
+        android:defaultValue="true"
+        android:key="saveBox"
+        android:summary="@string/disabledSaveDesc"
+        android:title="@string/saveLabel" />
+
+</PreferenceScreen>

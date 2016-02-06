@@ -1,0 +1,502 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/display"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/blue_shape">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="@style/BlueToolbar" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:orientation="horizontal"
+        android:weightSum="2">
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    card_view:cardCornerRadius="4dp"
+                    card_view:cardElevation="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <TextView
+                            android:id="@+id/balanceHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/small_horizontal_margin"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginRight="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/balanceHeader"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <LinearLayout
+                            android:id="@+id/balanceSection"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/balanceHeader"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:id="@+id/initialBalance"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:theme="@style/TextLabel">
+
+                                <android.support.v7.widget.AppCompatEditText
+                                    android:id="@+id/initialBalanceText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/small_horizontal_margin"
+                                    android:layout_marginLeft="@dimen/small_horizontal_margin"
+                                    android:layout_marginRight="@dimen/small_horizontal_margin"
+                                    android:layout_marginStart="@dimen/small_horizontal_margin"
+                                    android:hint="@string/initialBalance"
+                                    android:inputType="numberDecimal"
+                                    android:maxLength="8"
+                                    android:nextFocusDown="@+id/currentBalanceText"
+                                    android:textColor="@color/bluePrimary" />
+
+                            </android.support.design.widget.TextInputLayout>
+
+                            <android.support.design.widget.TextInputLayout
+                                android:id="@+id/currentBalance"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:theme="@style/TextLabel">
+
+                                <android.support.v7.widget.AppCompatEditText
+                                    android:id="@+id/currentBalanceText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/small_horizontal_margin"
+                                    android:layout_marginLeft="@dimen/small_horizontal_margin"
+                                    android:layout_marginRight="@dimen/small_horizontal_margin"
+                                    android:layout_marginStart="@dimen/small_horizontal_margin"
+                                    android:hint="@string/currentBalance"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="numberDecimal"
+                                    android:maxLength="8"
+                                    android:textColor="@color/bluePrimary" />
+
+                            </android.support.design.widget.TextInputLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+                <!-- balance card  -->
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    card_view:cardCornerRadius="4dp"
+                    card_view:cardElevation="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <TextView
+                            android:id="@+id/dateHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/small_horizontal_margin"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginRight="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/dateHeader"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <LinearLayout
+                            android:id="@+id/dateSection"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/dateHeader"
+
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <TextView
+                                android:id="@+id/startDate"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".9"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:onClick="setStartDate"
+                                android:text="1/25/16"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/bluePrimary" />
+
+                            <View
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".2"
+                                android:background="@drawable/ic_arrow_forward" />
+
+                            <TextView
+                                android:id="@+id/endDate"
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_weight=".9"
+                                android:clickable="true"
+                                android:gravity="center"
+                                android:onClick="setEndDate"
+                                android:text="5/21/16"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                android:textColor="@color/bluePrimary" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+                <!-- date card  -->
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    card_view:cardCornerRadius="4dp"
+                    card_view:cardElevation="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin">
+
+                        <TextView
+                            android:id="@+id/daysOffHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/small_horizontal_margin"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginRight="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/daysOffHeader"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <LinearLayout
+                            android:id="@+id/daysSection"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/daysOffHeader"
+
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                            <android.support.design.widget.TextInputLayout
+                                android:id="@+id/totalDaysOff"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:theme="@style/TextLabel">
+
+                                <android.support.v7.widget.AppCompatEditText
+                                    android:id="@+id/totalDaysOffText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/small_horizontal_margin"
+                                    android:layout_marginLeft="@dimen/small_horizontal_margin"
+                                    android:layout_marginRight="@dimen/small_horizontal_margin"
+                                    android:layout_marginStart="@dimen/small_horizontal_margin"
+                                    android:hint="@string/total"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:nextFocusDown="@+id/pastDaysOffText"
+                                    android:textColor="@color/bluePrimary" />
+
+                            </android.support.design.widget.TextInputLayout>
+
+                            <android.support.design.widget.TextInputLayout
+                                android:id="@+id/currentDays"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:theme="@style/TextLabel">
+
+                                <android.support.v7.widget.AppCompatEditText
+                                    android:id="@+id/pastDaysOffText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/small_horizontal_margin"
+                                    android:layout_marginLeft="@dimen/small_horizontal_margin"
+                                    android:layout_marginRight="@dimen/small_horizontal_margin"
+                                    android:layout_marginStart="@dimen/small_horizontal_margin"
+                                    android:hint="@string/past"
+                                    android:imeOptions="actionDone"
+                                    android:inputType="number"
+                                    android:maxLength="3"
+                                    android:textColor="@color/bluePrimary" />
+
+                            </android.support.design.widget.TextInputLayout>
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+                <!-- days off card  -->
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <ScrollView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/blue_shape"
+                android:orientation="vertical">
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/initialCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    card_view:cardCornerRadius="4dp"
+                    card_view:cardElevation="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/initialHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/initialHeader"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/initDaily"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/initialHeader"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/daily"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/initDailyText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/initDaily"
+                            android:layout_alignEnd="@+id/initWeeklyText"
+                            android:layout_alignRight="@+id/initWeeklyText"
+                            android:gravity="end"
+                            android:text="10.00"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/initWeekly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/initDaily"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/weekly"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/initWeeklyText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/initWeekly"
+                            android:layout_marginLeft="@dimen/large_horizontal_margin"
+                            android:layout_marginStart="@dimen/large_horizontal_margin"
+                            android:layout_toEndOf="@+id/initWeekly"
+                            android:layout_toRightOf="@+id/initWeekly"
+                            android:gravity="end"
+                            android:text="10.00"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+                <!-- initial result card  -->
+
+                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/currentCard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="@dimen/activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    card_view:cardCornerRadius="4dp"
+                    card_view:cardElevation="4dp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:gravity="center">
+
+                        <TextView
+                            android:id="@+id/currentHeader"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/currentHeader"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/diff"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/currentHeader"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/difference"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/diffText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/diff"
+                            android:layout_alignEnd="@+id/currentWeeklyText"
+                            android:layout_alignRight="@+id/currentWeeklyText"
+                            android:gravity="end"
+                            android:text="10.00"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/currentDaily"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/diff"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/daily"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/currentDailyText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/currentDaily"
+                            android:layout_alignEnd="@+id/currentWeeklyText"
+                            android:layout_alignRight="@+id/currentWeeklyText"
+                            android:gravity="end"
+                            android:text="10.00"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/currentWeekly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/currentDaily"
+                            android:layout_marginLeft="@dimen/small_horizontal_margin"
+                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:text="@string/weekly"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                        <TextView
+                            android:id="@+id/currentWeeklyText"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_alignBaseline="@+id/currentWeekly"
+                            android:layout_marginLeft="@dimen/large_horizontal_margin"
+                            android:layout_marginStart="@dimen/large_horizontal_margin"
+                            android:layout_toEndOf="@+id/currentWeekly"
+                            android:layout_toRightOf="@+id/currentWeekly"
+                            android:gravity="end"
+                            android:text="10.00"
+                            android:textAppearance="?android:attr/textAppearanceMedium"
+                            android:textColor="@color/bluePrimary" />
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+                <!-- current result card  -->
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </LinearLayout>
+
+</RelativeLayout>

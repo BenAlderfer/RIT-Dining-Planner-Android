@@ -1,0 +1,12 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:1.5.0'
+        classpath 'com.github.ben-manes:gradle-versions-plugin:0.11.3'
+    }
+}
+
+apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'android-reporting'

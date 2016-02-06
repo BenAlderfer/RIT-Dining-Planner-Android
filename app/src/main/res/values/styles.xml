@@ -1,0 +1,115 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+    </style>
+
+    <!-- Main theme -->
+    <style name="BlueDark" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:colorPrimary">@color/bluePrimary</item>
+        <!-- action bar -->
+        <item name="android:colorPrimaryDark">@color/bluePrimaryDark</item>
+        <!-- status bar -->
+        <item name="android:colorAccent">@color/bluePrimary</item>
+        <!-- checkboxes and text fields border-->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- activity name text color -->
+        <item name="android:editTextStyle">@style/blueEditText</item>
+        <!-- EditText color -->
+        <item name="android:windowBackground">@color/bluePrimary</item>
+        <!-- background color -->
+        <item name="android:textColor">@color/white</item>
+        <!-- TextView color -->
+        <item name="android:actionMenuTextColor">@color/bluePrimary</item>
+        <!-- Action button color -->
+        <item name="android:textColorHighlight">@color/blueHighlight</item>
+        <!--  Highlight color -->
+        <item name="colorControlActivated">@color/bluePrimary</item>
+        <!-- Pressed Radio Button -->
+        <item name="colorControlNormal">@color/bluePrimary</item>
+        <!-- Unpressed Radio Button -->
+    </style>
+
+    <style name="BlueLight" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:colorPrimary">@color/bluePrimary</item>
+        <!-- action bar -->
+        <item name="android:colorPrimaryDark">@color/bluePrimaryDark</item>
+        <!-- status bar -->
+        <item name="android:colorAccent">@color/orangePrimary</item>
+        <!-- checkboxes and text fields border-->
+        <item name="android:textColorPrimary">@color/bluePrimary</item>
+        <!-- activity name text color -->
+        <item name="android:editTextStyle">@style/blueEditText</item>
+        <!-- EditText color -->
+        <item name="android:windowBackground">@color/white</item>
+        <!-- background color -->
+        <item name="android:textColor">@color/bluePrimary</item>
+        <!-- TextView color -->
+        <item name="android:actionMenuTextColor">@color/bluePrimary</item>
+        <!-- Action button color -->
+        <item name="android:textColorHighlight">@color/blueHighlight</item>
+        <!--  Highlight color -->
+        <item name="colorControlActivated">@color/bluePrimary</item>
+        <!-- Pressed Radio Button -->
+        <item name="colorControlNormal">@color/bluePrimary</item>
+        <!-- Unpressed Radio Button -->
+    </style>
+
+    <style name="BlueToolbar" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:colorPrimary">@color/bluePrimary</item>
+        <!-- action bar -->
+        <item name="android:colorPrimaryDark">@color/bluePrimaryDark</item>
+        <!-- status bar -->
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- activity name text color -->
+        <item name="android:textColorSecondary">@color/white</item>
+        <!-- overflow text color -->
+        <item name="android:background">@color/bluePrimary</item>
+        <!-- background color -->
+        <item name="android:textColor">@color/white</item>
+        <!-- TextView color -->
+        <item name="android:actionMenuTextColor">@color/bluePrimary</item>
+        <!-- Action button color -->
+    </style>
+
+    <style name="blueEditText" parent="@android:style/Widget.EditText">
+        <item name="android:textColor">@color/bluePrimary</item>
+    </style>
+
+    <style name="TextLabel" parent="TextAppearance.AppCompat">
+        <item name="android:textColorHint">@color/grey</item>
+        <item name="colorAccent">@color/bluePrimary</item>
+        <item name="colorControlNormal">@color/bluePrimary</item>
+        <item name="colorControlActivated">@color/bluePrimary</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
+        <item name="android:textSize">15sp</item>
+        <item name="android:buttonTint">@color/bluePrimary</item>
+    </style>
+
+    <!-- Calendar pop up theme -->
+    <style name="BlueLightPopUp" parent="Theme.AppCompat.Light.Dialog">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="colorPrimary">@color/bluePrimary</item>
+        <item name="colorPrimaryDark">@color/bluePrimaryDark</item>
+        <item name="colorAccent">@color/orangePrimary</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <!-- activity name text color -->
+        <item name="android:windowBackground">@color/bluePrimaryDark</item>
+        <!-- background color -->
+        <item name="android:textColorSecondary">@color/white</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+</resources>
