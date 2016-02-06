@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
@@ -15,7 +16,9 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -72,22 +75,32 @@ public class MainActivity extends AppCompatActivity {
      * Start and end date TextViews
      */
     private TextView startDateText, endDateText;
+
+    /**
+     * The dropdown menu for meal options
+     */
+    private Spinner mealOptionSpinner;
+
     /**
      * The EditText fields
      */
-    private EditText initialBalanceEditText, currentBalanceEditText, totalDaysOffEditText, pastDaysOffEditText;
+    private EditText currentBalanceEditText, totalDaysOffEditText, pastDaysOffEditText;
+
     /**
      * The text input in the fields
      */
-    private String initialBalance = "", currentBalance = "", totalDaysOff = "", pastDaysOff = "";
+    private String currentBalance = "", totalDaysOff = "", pastDaysOff = "";
+
     /**
      * Whether the fields have been entered
      */
-    private boolean initialBalanceIsEntered, currentBalanceIsEntered, currentDateIsInRange, totalDaysOffIsEntered, pastDaysOffIsEntered;
+    private boolean currentBalanceIsEntered, currentDateIsInRange, totalDaysOffIsEntered, pastDaysOffIsEntered;
+
     /**
      * Either start or end date
      */
     private String dateBeingSet;
+
     /**
      * Context reference for later
      */
@@ -131,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        initialBalanceEditText = (EditText) findViewById(R.id.initialBalanceText);
+        mealOptionSpinner = (Spinner) findViewById(R.id.mealOption);
         currentBalanceEditText = (EditText) findViewById(R.id.currentBalanceText);
         startDateText = (TextView) findViewById(R.id.startDate);
         endDateText = (TextView) findViewById(R.id.endDate);
@@ -147,6 +160,8 @@ public class MainActivity extends AppCompatActivity {
 
         initialCard = (CardView) findViewById(R.id.initialCard);
         currentCard = (CardView) findViewById(R.id.currentCard);
+
+        initializeMealOptionSpinner();
 
         clearResults();
         addTextListeners();
@@ -189,6 +204,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent settingsActivity = new Intent(this, SettingsActivity.class);
                 startActivity(settingsActivity);
                 return true;
+            case R.id.tigerbucks:
+                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu/tigerBucks/app/index.html"));
+                startActivity(browserIntent);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
@@ -199,28 +218,6 @@ public class MainActivity extends AppCompatActivity {
      * Updates the results if possible
      */
     private void addTextListeners() {
-        initialBalanceEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-                initialBalance = initialBalanceEditText.getText().toString();
-                //if it ends with a "." remove the "." before getting the number
-                if (initialBalance.length() > 0 && initialBalance.charAt(0) != '.' && initialBalance.substring(initialBalance.length() - 1, initialBalance.length()).equals(".")) {
-                    initialBalance = initialBalance.substring(0, initialBalance.length());
-                }
-                initialBalanceIsEntered = !initialBalance.equals("") && (initialBalance.length() > 1 || initialBalance.charAt(0) != '.');
-
-                attemptUpdate();
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-            }
-        });
-
         currentBalanceEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -235,16 +232,9 @@ public class MainActivity extends AppCompatActivity {
                     if (currentBalance.length() > 0 && currentBalance.charAt(0) != '.' && currentBalance.substring(currentBalance.length() - 1, currentBalance.length()).equals(".")) {
                         currentBalance = currentBalance.substring(0, currentBalance.length());
                     }
-                    //if current balance > initial, fix that
-                    if (!initialBalance.equals("") && !currentBalance.equals("") &&
-                            Double.parseDouble(currentBalance) > Double.parseDouble(initialBalance)) {
-                        currentBalance = initialBalance;
-                        currentBalanceEditText.setText(currentBalance);
-                        Toast.makeText(c, R.string.remainingGreaterThanInitial, Toast.LENGTH_LONG).show();
-                    }
                 }
 
-                attemptUpdate();
+                updateResults();
             }
 
             @Override
@@ -261,7 +251,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 totalDaysOff = totalDaysOffEditText.getText().toString();
                 totalDaysOffIsEntered = true;
-                attemptUpdate();
+                updateResults();
             }
 
             @Override
@@ -292,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
                     Toast.makeText(c, R.string.pastGreaterThanTotal, Toast.LENGTH_LONG).show();
                 }
 
-                attemptUpdate();
+                updateResults();
             }
 
             @Override
@@ -302,13 +292,54 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Sets the items in the meal option dropdown menu
+     */
+    private void initializeMealOptionSpinner() {
+        Spinner dropdown = (Spinner) findViewById(R.id.mealOption);
+        String[] items = new String[]{getString(R.string.mealOption1), getString(R.string.mealOption2),
+                getString(R.string.mealOption3), getString(R.string.mealOption4),
+                getString(R.string.mealOption5), getString(R.string.mealOption6),
+                getString(R.string.mealOption7), getString(R.string.mealOption8),
+                getString(R.string.mealOption9)};
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        dropdown.setAdapter(adapter);
+    }
+
+    /**
+     * Returns the value of the selected plan
+     * Switch cannot be used since the strings are not constants
+     *
+     * @return the value of the selected plan
+     */
+    private int getPlanValue() {
+        String selected = mealOptionSpinner.getSelectedItem().toString();
+        if (selected.equals(getString(R.string.mealOption1))) {
+            return Integer.parseInt(getString(R.string.mealOptionValue1));
+        } else if (selected.equals(getString(R.string.mealOption2))) {
+            return Integer.parseInt(getString(R.string.mealOptionValue2));
+        } else if (selected.equals(getString(R.string.mealOption3))) {
+            return Integer.parseInt(getString(R.string.mealOptionValue3));
+        } else if (selected.equals(getString(R.string.mealOption4))) {
+            return Integer.parseInt(getString(R.string.mealOptionValue4));
+        } else if (selected.equals(getString(R.string.mealOption5))) {
+            return Integer.parseInt(getString(R.string.mealOptionValue5));
+        } else if (selected.equals(getString(R.string.mealOption6))) {
+            return Integer.parseInt(getString(R.string.mealOptionValue6));
+        } else if (selected.equals(getString(R.string.mealOption7))) {
+            return Integer.parseInt(getString(R.string.mealOptionValue7));
+        } else if (selected.equals(getString(R.string.mealOption8))) {
+            return Integer.parseInt(getString(R.string.mealOptionValue8));
+        } else if (selected.equals(getString(R.string.mealOption9))) {
+            return Integer.parseInt(getString(R.string.mealOptionValue9));
+        }
+        return 0;
+    }
+
+    /**
      * Saves the entered values for later
      */
     private void saveValues() {
         //save entered values
-        if (initialBalanceIsEntered && !initialBalance.equals("")) {
-            editor.putFloat("initialBalance", Float.parseFloat(initialBalance));
-        }
         if (currentBalanceIsEntered && !currentBalance.equals("")) {
             editor.putFloat("currentBalance", Float.parseFloat(currentBalance));
         }
@@ -354,10 +385,6 @@ public class MainActivity extends AppCompatActivity {
 
             //restore entered values
             float initial = shared.getFloat("initialBalance", 0.0f);
-            if (initial != 0.0f) {
-                initialBalance = initial + "";
-                initialBalanceEditText.setText(initialBalance);
-            }
 
             float current = shared.getFloat("currentBalance", 0.0f);
             if (current != 0.0f) {
@@ -389,19 +416,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks if results can be updated
-     * If possible, update
-     * If not, clear results
-     */
-    private void attemptUpdate() {
-        if (initialBalanceIsEntered) {
-            updateResults();
-        } else {
-            clearResults();
-        }
-    }
-
-    /**
      * Updates the results text
      */
     private void updateResults() {
@@ -411,7 +425,7 @@ public class MainActivity extends AppCompatActivity {
         initialCard.setVisibility(View.VISIBLE);
 
         DecimalFormat twoDecimal = new DecimalFormat("0.00");
-        double initial = Double.parseDouble(initialBalance);
+        int initial = getPlanValue();
 
         double daily, weekly;
         if (weekDiff > 0) {
@@ -469,11 +483,9 @@ public class MainActivity extends AppCompatActivity {
      * Note - only clears fields, not any saved data
      */
     private void clearFields() {
-        initialBalanceEditText.setText("");
         currentBalanceEditText.setText("");
         totalDaysOffEditText.setText("");
         pastDaysOffEditText.setText("");
-        initialBalanceIsEntered = false;
         currentBalanceIsEntered = false;
         totalDaysOffIsEntered = false;
         pastDaysOffIsEntered = false;
@@ -523,13 +535,13 @@ public class MainActivity extends AppCompatActivity {
                 startMonth = data.getIntExtra("month", 1) + 1;
                 startDay = data.getIntExtra("day", 25);
                 startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
-                attemptUpdate();
+                updateResults();
             } else {
                 endYear = data.getIntExtra("year", 2016);
                 endMonth = data.getIntExtra("month", 1) + 1;
                 endDay = data.getIntExtra("day", 25);
                 endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
-                attemptUpdate();
+                updateResults();
             }
         }
     }
@@ -564,7 +576,7 @@ public class MainActivity extends AppCompatActivity {
             endDay = startDay;
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
             Toast.makeText(this, R.string.endDateBeforeStart, Toast.LENGTH_LONG).show();
-            attemptUpdate();
+            updateResults();
             return;
         }
 

@@ -1,5 +1,6 @@
 <resources>
     <string name="app_name">RIT Debit Splitter</string>
+    <string name="tigerbucks">Tigerbucks</string>
     <string name="action_settings">Settings</string>
 
     <string name="balanceHeader"><u>Balance</u></string>
@@ -39,5 +40,25 @@
     <string name="saveLabel">Save values?</string>
     <string name="enabledSaveDesc">The values are being saved</string>
     <string name="disabledSaveDesc">The values are not being saved</string>
+
+    <string name="mealOption1">All Debit</string>
+    <string name="mealOption2">5+</string>
+    <string name="mealOption3">10+</string>
+    <string name="mealOption4">14+</string>
+    <string name="mealOption5">20+</string>
+    <string name="mealOption6">Debit Plan 1</string>
+    <string name="mealOption7">Debit Plan 2</string>
+    <string name="mealOption8">Debit Plan 3</string>
+    <string name="mealOption9">Inn Reduced Debit</string>
+
+    <string name="mealOptionValue1">2482</string>
+    <string name="mealOptionValue2">1300</string>
+    <string name="mealOptionValue3">650</string>
+    <string name="mealOptionValue4">350</string>
+    <string name="mealOptionValue5">250</string>
+    <string name="mealOptionValue6">500</string>
+    <string name="mealOptionValue7">900</string>
+    <string name="mealOptionValue8">1300</string>
+    <string name="mealOptionValue9">1858</string>
 
 </resources>
