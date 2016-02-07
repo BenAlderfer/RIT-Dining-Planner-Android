@@ -16,6 +16,7 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -84,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The EditText fields
      */
-    private EditText currentBalanceEditText, totalDaysOffEditText, pastDaysOffEditText;
+    private EditText rolloverEditText, currentBalanceEditText, totalDaysOffEditText, pastDaysOffEditText;
 
     /**
      * The text input in the fields
@@ -145,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mealOptionSpinner = (Spinner) findViewById(R.id.mealOption);
+        rolloverEditText = (EditText) findViewById(R.id.rolloverBalanceText);
         currentBalanceEditText = (EditText) findViewById(R.id.currentBalanceText);
         startDateText = (TextView) findViewById(R.id.startDate);
         endDateText = (TextView) findViewById(R.id.endDate);
@@ -218,6 +220,34 @@ public class MainActivity extends AppCompatActivity {
      * Updates the results if possible
      */
     private void addTextListeners() {
+        mealOptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updateResults();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+
+        rolloverEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                updateResults();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
         currentBalanceEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -301,7 +331,7 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.mealOption5), getString(R.string.mealOption6),
                 getString(R.string.mealOption7), getString(R.string.mealOption8),
                 getString(R.string.mealOption9)};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_dropdown_item, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, items);
         dropdown.setAdapter(adapter);
     }
 
@@ -340,6 +370,8 @@ public class MainActivity extends AppCompatActivity {
      */
     private void saveValues() {
         //save entered values
+        ///////////////////////////////////////////////////////////////////////////////////////
+
         if (currentBalanceIsEntered && !currentBalance.equals("")) {
             editor.putFloat("currentBalance", Float.parseFloat(currentBalance));
         }
@@ -384,6 +416,7 @@ public class MainActivity extends AppCompatActivity {
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
 
             //restore entered values
+            ////////////////////////////////////////////////////////////////////////////
             float initial = shared.getFloat("initialBalance", 0.0f);
 
             float current = shared.getFloat("currentBalance", 0.0f);
@@ -419,13 +452,17 @@ public class MainActivity extends AppCompatActivity {
      * Updates the results text
      */
     private void updateResults() {
-        calculateDateDiff(findViewById(R.id.initialBalanceText));
+        //feed it a useless view since an onClick method needs a view
+        calculateDateDiff(findViewById(R.id.rolloverBalanceText));
         saveValues();
 
         initialCard.setVisibility(View.VISIBLE);
 
         DecimalFormat twoDecimal = new DecimalFormat("0.00");
-        int initial = getPlanValue();
+        double initial = getPlanValue();
+        if (!rolloverEditText.getText().toString().equals("")) {
+            initial += Integer.parseInt(rolloverEditText.getText().toString());
+        }
 
         double daily, weekly;
         if (weekDiff > 0) {
@@ -554,6 +591,7 @@ public class MainActivity extends AppCompatActivity {
         DateTime start = new DateTime(startYear, startMonth, startDay, 0, 0, 0, Eastern);
         DateTime end = new DateTime(endYear, endMonth, endDay, 0, 0, 0, Eastern);
         dayDiff = Days.daysBetween(start.toLocalDate(), end.toLocalDate()).getDays();
+        ++dayDiff;  //increment dayDiff by 1 so the end date is included
 
         int totalDaysOffNumber = 0;
         if (!totalDaysOff.equals("")) {

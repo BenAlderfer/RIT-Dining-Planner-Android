@@ -2,8 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/display"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/blue_shape">
+    android:layout_height="wrap_content">
 
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
@@ -67,30 +66,51 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
+                            <Spinner
+                                android:id="@+id/mealOption"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="@dimen/small_horizontal_margin"
+                                android:layout_marginLeft="@dimen/small_horizontal_margin"
+                                android:layout_marginRight="@dimen/small_horizontal_margin"
+                                android:layout_marginStart="@dimen/small_horizontal_margin"
+                                android:layout_weight="1" />
+
                             <android.support.design.widget.TextInputLayout
-                                android:id="@+id/initialBalance"
+                                android:id="@+id/rolloverBalance"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:theme="@style/TextLabel">
 
                                 <android.support.v7.widget.AppCompatEditText
-                                    android:id="@+id/initialBalanceText"
+                                    android:id="@+id/rolloverBalanceText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginEnd="@dimen/small_horizontal_margin"
                                     android:layout_marginLeft="@dimen/small_horizontal_margin"
                                     android:layout_marginRight="@dimen/small_horizontal_margin"
                                     android:layout_marginStart="@dimen/small_horizontal_margin"
-                                    android:hint="@string/initialBalance"
+                                    android:hint="@string/rolloverBalance"
+                                    android:imeOptions="actionDone"
                                     android:inputType="numberDecimal"
                                     android:maxLength="8"
-                                    android:nextFocusDown="@+id/currentBalanceText"
                                     android:textColor="@color/bluePrimary" />
 
                             </android.support.design.widget.TextInputLayout>
 
-                            <android.support.design.widget.TextInputLayout
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/currentBalanceSection"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/balanceSection"
+                            android:orientation="horizontal"
+                            android:weightSum="2">
+
+                        <android.support.design.widget.TextInputLayout
                                 android:id="@+id/currentBalance"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -112,7 +132,6 @@
                                     android:textColor="@color/bluePrimary" />
 
                             </android.support.design.widget.TextInputLayout>
-
                         </LinearLayout>
 
                     </RelativeLayout>
@@ -155,7 +174,6 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@+id/dateHeader"
-
                             android:layout_marginTop="@dimen/activity_vertical_margin"
                             android:orientation="horizontal"
                             android:weightSum="2">
@@ -168,7 +186,7 @@
                                 android:clickable="true"
                                 android:gravity="center"
                                 android:onClick="setStartDate"
-                                android:text="1/25/16"
+                                android:text="1/24/16"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="@color/bluePrimary" />
 
@@ -186,7 +204,7 @@
                                 android:clickable="true"
                                 android:gravity="center"
                                 android:onClick="setEndDate"
-                                android:text="5/21/16"
+                                android:text="5/20/16"
                                 android:textAppearance="?android:attr/textAppearanceMedium"
                                 android:textColor="@color/bluePrimary" />
 

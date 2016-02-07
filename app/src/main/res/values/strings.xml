@@ -5,11 +5,10 @@
 
     <string name="balanceHeader"><u>Balance</u></string>
     <string name="dateHeader"><u>Date Range</u></string>
-
-    <string name="initialBalance">Initial</string>
-    <string name="currentBalance">Remaining</string>
-
     <string name="daysOffHeader"><u>Days Off</u></string>
+
+    <string name="currentBalance">Current</string>
+    <string name="rolloverBalance">Rollover</string>
     <string name="total">Total</string>
     <string name="past">Past</string>
 
@@ -21,11 +20,11 @@
     <string name="difference">Difference: </string>
 
     <string name="startMonth">1</string>
-    <string name="startDay">25</string>
+    <string name="startDay">24</string>
     <string name="startYear">2016</string>
 
     <string name="endMonth">5</string>
-    <string name="endDay">21</string>
+    <string name="endDay">20</string>
     <string name="endYear">2016</string>
 
     <!-- Toast messages  -->
