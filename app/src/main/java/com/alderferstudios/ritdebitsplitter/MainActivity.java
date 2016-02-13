@@ -8,6 +8,7 @@ import android.content.res.Configuration;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -21,7 +22,6 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -78,9 +78,9 @@ public class MainActivity extends AppCompatActivity {
     private TextView startDateText, endDateText;
 
     /**
-     * The dropdown menu for meal options
+     * The dropdowns for meal options and terms
      */
-    private Spinner mealOptionSpinner;
+    private Spinner mealOptionSpinner, termSpinner;
 
     /**
      * The EditText fields
@@ -90,7 +90,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The text input in the fields
      */
-    private String currentBalance = "", totalDaysOff = "", pastDaysOff = "";
+    private String currentBalance = "", totalDaysOff = "", pastDaysOff = "", rollOver = "", currentTerm = "", selectedMealPlan = "";
 
     /**
      * Whether the fields have been entered
@@ -106,6 +106,11 @@ public class MainActivity extends AppCompatActivity {
      * Context reference for later
      */
     private Context c;
+
+    /**
+     * Adapter for the two spinners
+     */
+    private ArrayAdapter<String> mealPlanAdapter, termAdapter;
 
     /**
      * Checks if the device is a tablet
@@ -146,6 +151,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         mealOptionSpinner = (Spinner) findViewById(R.id.mealOption);
+        termSpinner = (Spinner) findViewById(R.id.termSpinner);
         rolloverEditText = (EditText) findViewById(R.id.rolloverBalanceText);
         currentBalanceEditText = (EditText) findViewById(R.id.currentBalanceText);
         startDateText = (TextView) findViewById(R.id.startDate);
@@ -163,12 +169,12 @@ public class MainActivity extends AppCompatActivity {
         initialCard = (CardView) findViewById(R.id.initialCard);
         currentCard = (CardView) findViewById(R.id.currentCard);
 
-        initializeMealOptionSpinner();
+        currentTerm = getResources().getString(R.string.defaultTerm);
+
+        initializeSpinners();
 
         clearResults();
-        addTextListeners();
-
-        restoreValues();
+        addListeners();
     }
 
     /**
@@ -208,6 +214,11 @@ public class MainActivity extends AppCompatActivity {
                 return true;
             case R.id.tigerbucks:
                 Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu/tigerBucks/app/index.html"));
+                browserIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Bundle b = new Bundle();
+                b.putBoolean("new_window", true);
+                browserIntent.putExtras(b);
                 startActivity(browserIntent);
                 return true;
         }
@@ -219,11 +230,59 @@ public class MainActivity extends AppCompatActivity {
      * Text is saved to reduce method calls
      * Updates the results if possible
      */
-    private void addTextListeners() {
+    private void addListeners() {
         mealOptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 updateResults();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+
+        termSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                currentTerm = termSpinner.getSelectedItem().toString();
+                String dateRange = "";
+                switch (currentTerm) {
+                    case "Fall":
+                        //get the dates, will split later
+                        dateRange = getString(R.string.fallDateRange);
+
+                        //set the days off
+                        totalDaysOff = getResources().getString(R.string.fallDaysOff);
+                        break;
+                    case "Spring":
+                        //get the dates, will split later
+                        dateRange = getString(R.string.springDateRange);
+
+                        //set the days off
+                        totalDaysOff = getResources().getString(R.string.springDaysOff);
+                        break;
+                }
+                //parse the dates
+                startMonth = Integer.parseInt(dateRange.substring(0, 2));
+                startDay = Integer.parseInt(dateRange.substring(3, 5));
+                startYear = Integer.parseInt(dateRange.substring(6, 10));
+
+                endMonth = Integer.parseInt(dateRange.substring(11, 13));
+                endDay = Integer.parseInt(dateRange.substring(14, 16));
+                endYear = Integer.parseInt(dateRange.substring(17));
+
+                //update date fields
+                startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
+                endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
+
+                //set days off after date change to prevent wrong toasts
+                totalDaysOffIsEntered = true;
+                totalDaysOffEditText.setText(totalDaysOff);
+
+                //call to updateResults not needed since updating other fields will do that
             }
 
             @Override
@@ -240,6 +299,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                rollOver = rolloverEditText.getText().toString();
                 updateResults();
             }
 
@@ -302,14 +362,14 @@ public class MainActivity extends AppCompatActivity {
                 if (totalDaysOff.equals("") && !pastDaysOff.equals("")) {
                     totalDaysOff = pastDaysOff;
                     totalDaysOffEditText.setText(totalDaysOff);
-                    Toast.makeText(c, R.string.totalNotEntered, Toast.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(R.id.display), R.string.totalNotEntered, Snackbar.LENGTH_LONG).show();
                 }
 
                 // if current days off > total days off, change it to the total
                 if (!totalDaysOff.equals("") && !pastDaysOff.equals("") && Integer.parseInt(pastDaysOff) > Integer.parseInt(totalDaysOff)) {
                     pastDaysOff = totalDaysOff;
                     pastDaysOffEditText.setText(totalDaysOff);
-                    Toast.makeText(c, R.string.pastGreaterThanTotal, Toast.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(R.id.display), R.string.pastGreaterThanTotal, Snackbar.LENGTH_LONG).show();
                 }
 
                 updateResults();
@@ -324,15 +384,18 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Sets the items in the meal option dropdown menu
      */
-    private void initializeMealOptionSpinner() {
-        Spinner dropdown = (Spinner) findViewById(R.id.mealOption);
+    private void initializeSpinners() {
         String[] items = new String[]{getString(R.string.mealOption1), getString(R.string.mealOption2),
                 getString(R.string.mealOption3), getString(R.string.mealOption4),
                 getString(R.string.mealOption5), getString(R.string.mealOption6),
                 getString(R.string.mealOption7), getString(R.string.mealOption8),
                 getString(R.string.mealOption9)};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, R.layout.spinner_item, items);
-        dropdown.setAdapter(adapter);
+        mealPlanAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, items);
+        mealOptionSpinner.setAdapter(mealPlanAdapter);
+
+        String[] items2 = new String[]{getString(R.string.fallTerm), getString(R.string.springTerm)};
+        termAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, items2);
+        termSpinner.setAdapter(termAdapter);
     }
 
     /**
@@ -342,25 +405,27 @@ public class MainActivity extends AppCompatActivity {
      * @return the value of the selected plan
      */
     private int getPlanValue() {
-        String selected = mealOptionSpinner.getSelectedItem().toString();
-        if (selected.equals(getString(R.string.mealOption1))) {
-            return Integer.parseInt(getString(R.string.mealOptionValue1));
-        } else if (selected.equals(getString(R.string.mealOption2))) {
-            return Integer.parseInt(getString(R.string.mealOptionValue2));
-        } else if (selected.equals(getString(R.string.mealOption3))) {
-            return Integer.parseInt(getString(R.string.mealOptionValue3));
-        } else if (selected.equals(getString(R.string.mealOption4))) {
-            return Integer.parseInt(getString(R.string.mealOptionValue4));
-        } else if (selected.equals(getString(R.string.mealOption5))) {
-            return Integer.parseInt(getString(R.string.mealOptionValue5));
-        } else if (selected.equals(getString(R.string.mealOption6))) {
-            return Integer.parseInt(getString(R.string.mealOptionValue6));
-        } else if (selected.equals(getString(R.string.mealOption7))) {
-            return Integer.parseInt(getString(R.string.mealOptionValue7));
-        } else if (selected.equals(getString(R.string.mealOption8))) {
-            return Integer.parseInt(getString(R.string.mealOptionValue8));
-        } else if (selected.equals(getString(R.string.mealOption9))) {
-            return Integer.parseInt(getString(R.string.mealOptionValue9));
+        if (mealOptionSpinner.getSelectedItem() != null) {
+            selectedMealPlan = mealOptionSpinner.getSelectedItem().toString();
+            if (selectedMealPlan.equals(getString(R.string.mealOption1))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue1));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption2))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue2));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption3))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue3));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption4))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue4));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption5))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue5));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption6))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue6));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption7))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue7));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption8))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue8));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption9))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue9));
+            }
         }
         return 0;
     }
@@ -369,9 +434,12 @@ public class MainActivity extends AppCompatActivity {
      * Saves the entered values for later
      */
     private void saveValues() {
-        //save entered values
-        ///////////////////////////////////////////////////////////////////////////////////////
+        editor.putInt("mealPlan", mealOptionSpinner.getSelectedItemPosition());
+        editor.putInt("term", termSpinner.getSelectedItemPosition());
 
+        if (!rollOver.equals("")) {
+            editor.putFloat("rollOver", Float.parseFloat(rollOver));
+        }
         if (currentBalanceIsEntered && !currentBalance.equals("")) {
             editor.putFloat("currentBalance", Float.parseFloat(currentBalance));
         }
@@ -415,9 +483,14 @@ public class MainActivity extends AppCompatActivity {
             startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
 
-            //restore entered values
-            ////////////////////////////////////////////////////////////////////////////
-            float initial = shared.getFloat("initialBalance", 0.0f);
+            mealOptionSpinner.setSelection(shared.getInt("mealPlan", 0));
+            termSpinner.setSelection(shared.getInt("term", 0));
+
+            float rolledover = shared.getFloat("rollOver", 0.0f);
+            if (rolledover != 0.0f) {
+                rollOver = rolledover + "";
+                rolloverEditText.setText(rollOver);
+            }
 
             float current = shared.getFloat("currentBalance", 0.0f);
             if (current != 0.0f) {
@@ -460,9 +533,10 @@ public class MainActivity extends AppCompatActivity {
 
         DecimalFormat twoDecimal = new DecimalFormat("0.00");
         double initial = getPlanValue();
-        if (!rolloverEditText.getText().toString().equals("")) {
-            initial += Integer.parseInt(rolloverEditText.getText().toString());
+        if (!rollOver.equals("")) {
+            initial += Float.parseFloat(rollOver);
         }
+        ((TextView) findViewById(R.id.totalInitialText)).setText(twoDecimal.format(initial));
 
         double daily, weekly;
         if (weekDiff > 0) {
@@ -613,7 +687,7 @@ public class MainActivity extends AppCompatActivity {
 
             endDay = startDay;
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
-            Toast.makeText(this, R.string.endDateBeforeStart, Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.display), R.string.endDateBeforeStart, Snackbar.LENGTH_LONG).show();
             updateResults();
             return;
         }
@@ -675,7 +749,7 @@ public class MainActivity extends AppCompatActivity {
             currentWeekDiff = currentDayDiff / 7;
             currentDayDiff -= currentWeekDiff * 7;
         } else if (currentBalanceIsEntered) {
-            Toast.makeText(this, getString(R.string.dateOutOfRangeMessage), Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.display), getString(R.string.dateOutOfRangeMessage), Snackbar.LENGTH_LONG).show();
         }
     }
 }

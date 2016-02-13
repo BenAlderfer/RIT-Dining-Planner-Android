@@ -9,6 +9,7 @@
 
     <string name="currentBalance">Current</string>
     <string name="rolloverBalance">Rollover</string>
+    <string name="initial">Initial</string>
     <string name="total">Total</string>
     <string name="past">Past</string>
 
@@ -59,5 +60,15 @@
     <string name="mealOptionValue7">900</string>
     <string name="mealOptionValue8">1300</string>
     <string name="mealOptionValue9">1858</string>
+
+    <string name="fallTerm">Fall</string>
+    <string name="springTerm">Spring</string>
+    <string name="defaultTerm">Spring</string>
+
+    <string name="fallDateRange">08/24/2015-12/18/2015</string>
+    <string name="springDateRange">01/24/2016-05/20/2016</string>
+
+    <string name="fallDaysOff">11</string>
+    <string name="springDaysOff">9</string>
 
 </resources>

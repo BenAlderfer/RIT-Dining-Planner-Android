@@ -18,6 +18,8 @@
     <color name="navy">#000080</color>
     <color name="black">#000000</color>
 
+    <color name="lightgrey">#EEEEEE</color>
+
     <!-- Custom colors -->
     <color name="greenPrimary">#0F9D58</color>
     <color name="greenPrimaryDark">#0B8043</color>
