@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.alderferstudios.ritdebitsplitter">
 
@@ -23,7 +24,7 @@
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/BlueLight"></activity>
+            android:theme="@style/BlueLight" />
     </application>
 
 </manifest>

@@ -7,8 +7,7 @@
     <android.support.design.widget.AppBarLayout
         android:id="@+id/bar_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/activity_vertical_margin">
+        android:layout_height="wrap_content">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -45,6 +44,7 @@
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     card_view:cardCornerRadius="4dp"
                     card_view:cardElevation="4dp">
 
@@ -58,10 +58,10 @@
                             android:id="@+id/balanceHeader"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/small_horizontal_margin"
-                            android:layout_marginLeft="@dimen/small_horizontal_margin"
-                            android:layout_marginRight="@dimen/small_horizontal_margin"
-                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
                             android:text="@string/balanceHeader"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textColor="@color/bluePrimary" />
@@ -79,10 +79,10 @@
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/small_horizontal_margin"
-                                android:layout_marginLeft="@dimen/small_horizontal_margin"
-                                android:layout_marginRight="@dimen/small_horizontal_margin"
-                                android:layout_marginStart="@dimen/small_horizontal_margin"
+                                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                android:layout_marginStart="@dimen/activity_horizontal_margin"
                                 android:layout_weight="1" />
 
                             <android.support.design.widget.TextInputLayout
@@ -96,14 +96,12 @@
                                     android:id="@+id/rolloverBalanceText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="@dimen/small_horizontal_margin"
-                                    android:layout_marginLeft="@dimen/small_horizontal_margin"
-                                    android:layout_marginRight="@dimen/small_horizontal_margin"
-                                    android:layout_marginStart="@dimen/small_horizontal_margin"
+                                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                    android:layout_marginRight="@dimen/activity_horizontal_margin"
                                     android:hint="@string/rolloverBalance"
-                                    android:imeOptions="actionDone"
                                     android:inputType="numberDecimal"
                                     android:maxLength="8"
+                                    android:nextFocusDown="@+id/currentBalanceText"
                                     android:textColor="@color/bluePrimary" />
 
                             </android.support.design.widget.TextInputLayout>
@@ -118,7 +116,39 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                        <android.support.design.widget.TextInputLayout
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                                    android:text="@string/initial"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:textColor="@color/grey" />
+
+                                <TextView
+                                    android:id="@+id/totalInitialText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                                    android:text="@string/mealOptionValue1"
+                                    android:textAppearance="?android:attr/textAppearanceLarge"
+                                    android:textColor="@color/bluePrimary" />
+
+                            </LinearLayout>
+
+                            <android.support.design.widget.TextInputLayout
                                 android:id="@+id/currentBalance"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -129,10 +159,10 @@
                                     android:id="@+id/currentBalanceText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="@dimen/small_horizontal_margin"
-                                    android:layout_marginLeft="@dimen/small_horizontal_margin"
-                                    android:layout_marginRight="@dimen/small_horizontal_margin"
-                                    android:layout_marginStart="@dimen/small_horizontal_margin"
+                                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                                     android:hint="@string/currentBalance"
                                     android:imeOptions="actionDone"
                                     android:inputType="numberDecimal"
@@ -165,15 +195,15 @@
                         android:layout_marginBottom="@dimen/activity_vertical_margin"
                         android:layout_marginTop="@dimen/activity_vertical_margin">
 
-                        <TextView
-                            android:id="@+id/dateHeader"
-                            android:layout_width="match_parent"
+                        <android.support.v7.widget.AppCompatSpinner
+                            android:id="@+id/termSpinner"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/small_horizontal_margin"
-                            android:layout_marginLeft="@dimen/small_horizontal_margin"
-                            android:layout_marginRight="@dimen/small_horizontal_margin"
-                            android:layout_marginStart="@dimen/small_horizontal_margin"
-                            android:text="@string/dateHeader"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:text="@string/springTerm"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textColor="@color/bluePrimary" />
 
@@ -181,7 +211,8 @@
                             android:id="@+id/dateSection"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/dateHeader"
+                            android:layout_below="@+id/termSpinner"
+
                             android:layout_marginTop="@dimen/activity_vertical_margin"
                             android:orientation="horizontal"
                             android:weightSum="2">
@@ -245,10 +276,10 @@
                             android:id="@+id/daysOffHeader"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/small_horizontal_margin"
-                            android:layout_marginLeft="@dimen/small_horizontal_margin"
-                            android:layout_marginRight="@dimen/small_horizontal_margin"
-                            android:layout_marginStart="@dimen/small_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginStart="@dimen/activity_horizontal_margin"
                             android:text="@string/daysOffHeader"
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:textColor="@color/bluePrimary" />
@@ -273,10 +304,10 @@
                                     android:id="@+id/totalDaysOffText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="@dimen/small_horizontal_margin"
-                                    android:layout_marginLeft="@dimen/small_horizontal_margin"
-                                    android:layout_marginRight="@dimen/small_horizontal_margin"
-                                    android:layout_marginStart="@dimen/small_horizontal_margin"
+                                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                                     android:hint="@string/total"
                                     android:inputType="number"
                                     android:maxLength="3"
@@ -296,10 +327,10 @@
                                     android:id="@+id/pastDaysOffText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="@dimen/small_horizontal_margin"
-                                    android:layout_marginLeft="@dimen/small_horizontal_margin"
-                                    android:layout_marginRight="@dimen/small_horizontal_margin"
-                                    android:layout_marginStart="@dimen/small_horizontal_margin"
+                                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                    android:layout_marginStart="@dimen/activity_horizontal_margin"
                                     android:hint="@string/past"
                                     android:imeOptions="actionDone"
                                     android:inputType="number"
@@ -340,6 +371,7 @@
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginTop="@dimen/activity_vertical_margin"
                     card_view:cardCornerRadius="4dp"
                     card_view:cardElevation="4dp">
 
