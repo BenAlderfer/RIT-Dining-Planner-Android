@@ -7,9 +7,9 @@
     <string name="dateHeader"><u>Date Range</u></string>
     <string name="daysOffHeader"><u>Days Off</u></string>
 
-    <string name="currentBalance">Current</string>
+    <string name="currentBalance">Remaining</string>
     <string name="rolloverBalance">Rollover</string>
-    <string name="initial">Initial</string>
+    <string name="initial">Total Initial</string>
     <string name="total">Total</string>
     <string name="past">Past</string>
 

@@ -113,6 +113,12 @@ public class MainActivity extends AppCompatActivity {
     private ArrayAdapter<String> mealPlanAdapter, termAdapter;
 
     /**
+     * The total initial debit
+     * Meal plan + rollover
+     */
+    private double totalInitial;
+
+    /**
      * Checks if the device is a tablet
      *
      * @param context the Context
@@ -320,6 +326,12 @@ public class MainActivity extends AppCompatActivity {
                     //if it ends with a "." remove the "." before getting the number
                     if (currentBalance.length() > 0 && currentBalance.charAt(0) != '.' && currentBalance.substring(currentBalance.length() - 1, currentBalance.length()).equals(".")) {
                         currentBalance = currentBalance.substring(0, currentBalance.length());
+                    }
+                    //if current balance > initial, fix that
+                    if (!currentBalance.equals("") && Double.parseDouble(currentBalance) > totalInitial) {
+                        currentBalance = totalInitial + "";
+                        currentBalanceEditText.setText(currentBalance);
+                        Snackbar.make(findViewById(R.id.display), R.string.remainingGreaterThanInitial, Snackbar.LENGTH_LONG).show();
                     }
                 }
 
@@ -539,18 +551,18 @@ public class MainActivity extends AppCompatActivity {
         initialCard.setVisibility(View.VISIBLE);
 
         DecimalFormat twoDecimal = new DecimalFormat("0.00");
-        double initial = getPlanValue();
+        totalInitial = getPlanValue();
         if (!rollOver.equals("")) {
-            initial += Float.parseFloat(rollOver);
+            totalInitial += Float.parseFloat(rollOver);
         }
-        ((TextView) findViewById(R.id.totalInitialText)).setText(twoDecimal.format(initial));
+        ((TextView) findViewById(R.id.totalInitialText)).setText(twoDecimal.format(totalInitial));
 
         double daily, weekly;
         if (weekDiff > 0) {
-            daily = initial / ((weekDiff * 7) + dayDiff);
+            daily = totalInitial / ((weekDiff * 7) + dayDiff);
             weekly = daily * 7;
         } else {    //only 1 week or less
-            weekly = initial;
+            weekly = totalInitial;
             daily = weekly / currentDayDiff;
         }
 
