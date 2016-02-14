@@ -241,7 +241,6 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-
         });
 
         termSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -471,11 +470,19 @@ public class MainActivity extends AppCompatActivity {
         if (shared.getBoolean("saveBox", false)) {
             //restore start date
             startMonth = shared.getInt("startMonth", Integer.parseInt(getString(R.string.startMonth)));
+            //correct wrong month, Java starts at 0 but Jodatime starts at 1
+            if (startMonth == 0) {
+                startMonth = 1;
+            }
             startDay = shared.getInt("startDay", Integer.parseInt(getString(R.string.startDay)));
             startYear = shared.getInt("startYear", Integer.parseInt(getString(R.string.startYear)));
 
             //restore end date
             endMonth = shared.getInt("endMonth", Integer.parseInt(getString(R.string.endMonth)));
+            //correct wrong month, Java starts at 0 but Jodatime starts at 1
+            if (endMonth == 0) {
+                endMonth = 1;
+            }
             endDay = shared.getInt("endDay", Integer.parseInt(getString(R.string.endDay)));
             endYear = shared.getInt("endYear", Integer.parseInt(getString(R.string.endYear)));
 
