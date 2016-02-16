@@ -119,6 +119,12 @@ public class MainActivity extends AppCompatActivity {
     private double totalInitial;
 
     /**
+     * Flag to prevent overwriting days off on boot
+     * Will only overwrite if nothing was entered
+     */
+    private boolean isBooting;
+
+    /**
      * Checks if the device is a tablet
      *
      * @param context the Context
@@ -155,6 +161,8 @@ public class MainActivity extends AppCompatActivity {
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        isBooting = true;
 
         mealOptionSpinner = (Spinner) findViewById(R.id.mealOption);
         termSpinner = (Spinner) findViewById(R.id.termSpinner);
@@ -219,14 +227,20 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(settingsActivity);
                 return true;
             case R.id.tigerbucks:
-                Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu/tigerBucks/app/index.html"));
-                browserIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                browserIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                Intent tigerbucks = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu/tigerBucks/app/index.html"));
+                tigerbucks.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                tigerbucks.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                tigerbucks.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
                 Bundle b = new Bundle();
                 b.putBoolean("new_window", true);
-                browserIntent.putExtras(b);
-                startActivity(browserIntent);
+                tigerbucks.putExtras(b);
+                startActivity(tigerbucks);
                 return true;
+            case R.id.eservices:
+                Intent eservices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://eservices.rit.edu/eServices"));
+                startActivity(eservices);
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -259,15 +273,40 @@ public class MainActivity extends AppCompatActivity {
                         //get the dates, will split later
                         dateRange = getString(R.string.fallDateRange);
 
-                        //set the days off
-                        totalDaysOff = getResources().getString(R.string.fallDaysOff);
+                        //on boot, do not overwrite any input
+                        if (isBooting) {
+                            //set the days off if none were entered
+                            if (totalDaysOff.equals("")) {
+                                totalDaysOff = getResources().getString(R.string.fallDaysOff);
+                            }
+                            isBooting = false;
+                            break;
+                        }
+
+                        //set the days off if none were entered or the other term's days were entered
+                        if (totalDaysOff.equals("") || totalDaysOff.equals(getResources().getString(R.string.springDaysOff))) {
+                            totalDaysOff = getResources().getString(R.string.fallDaysOff);
+                        }
+
                         break;
                     case "Spring":
                         //get the dates, will split later
                         dateRange = getString(R.string.springDateRange);
 
-                        //set the days off
-                        totalDaysOff = getResources().getString(R.string.springDaysOff);
+                        //on boot, do not overwrite any input
+                        if (isBooting) {
+                            //set the days off if none were entered
+                            if (totalDaysOff.equals("")) {
+                                totalDaysOff = getResources().getString(R.string.springDaysOff);
+                            }
+                            isBooting = false;
+                            break;
+                        }
+
+                        //set the days off if none were entered or the other term's days were entered
+                        if (totalDaysOff.equals("") || totalDaysOff.equals(getResources().getString(R.string.fallDaysOff))) {
+                            totalDaysOff = getResources().getString(R.string.springDaysOff);
+                        }
                         break;
                 }
                 //parse the dates
@@ -699,7 +738,7 @@ public class MainActivity extends AppCompatActivity {
         if (dayDiff < 1) {
             endYear = startYear;
             endMonth = startMonth + 1 + (totalDaysOffNumber / 29);
-            if (endMonth > 12) {
+            while (endMonth > 12) {
                 endMonth -= 12;
                 ++endYear;
             }

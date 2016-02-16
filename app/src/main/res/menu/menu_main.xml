@@ -14,5 +14,11 @@
         android:orderInCategory="1"
         android:title="@string/tigerbucks"
         app:showAsAction="ifRoom" />
+    <item
+        android:id="@+id/eservices"
+        android:icon="@drawable/e_button"
+        android:orderInCategory="2"
+        android:title="@string/eservices"
+        app:showAsAction="ifRoom" />
 
 </menu>

@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">RIT Debit Splitter</string>
     <string name="tigerbucks">Tigerbucks</string>
+    <string name="eservices">eServices</string>
     <string name="action_settings">Settings</string>
+    <string name="title_activity_settings">Settings</string>
 
     <string name="balanceHeader"><u>Balance</u></string>
     <string name="dateHeader"><u>Date Range</u></string>
@@ -28,13 +30,12 @@
     <string name="endDay">20</string>
     <string name="endYear">2016</string>
 
-    <!-- Toast messages  -->
+    <!-- Snackbar messages  -->
     <string name="remainingGreaterThanInitial">The remaining balance cannot be greater than the initial balance</string>
     <string name="dateOutOfRangeMessage">The current date is outside the date range</string>
     <string name="endDateBeforeStart">The end date must be after the start date plus the days off</string>
     <string name="totalNotEntered">The total days off must be entered with the past days off</string>
     <string name="pastGreaterThanTotal">The past days off cannot be more than the total days off</string>
-    <string name="title_activity_settings">Settings</string>
 
     <!-- Strings related to Settings -->
     <string name="saveLabel">Save values?</string>
