@@ -1,9 +1,14 @@
 <resources>
     <string name="app_name">RIT Debit Splitter</string>
+    <string name="title_activity_settings">Settings</string>
+    <string name="title_activity_help">Help</string>
+    <string name="title_activity_about">About</string>
+
     <string name="tigerbucks">Tigerbucks</string>
     <string name="eservices">eServices</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_settings">Settings</string>
+    <string name="action_help">Help</string>
+    <string name="action_about">About</string>
 
     <string name="balanceHeader"><u>Balance</u></string>
     <string name="dateHeader"><u>Date Range</u></string>
@@ -30,6 +35,7 @@
     <string name="endDay">20</string>
     <string name="endYear">2016</string>
 
+
     <!-- Snackbar messages  -->
     <string name="remainingGreaterThanInitial">The remaining balance cannot be greater than the initial balance</string>
     <string name="dateOutOfRangeMessage">The current date is outside the date range</string>
@@ -42,6 +48,21 @@
     <string name="enabledSaveDesc">The values are being saved</string>
     <string name="disabledSaveDesc">The values are not being saved</string>
 
+    <!-- Help strings -->
+    <string name="actionButtons">Toolbar buttons:\n\n• The pawprint button opens Tigerbucks (may need a refresh to load content)\n• The \'e\' button opens eServices</string>
+    <string name="userfields">User fields:\n\n• Rollover: How much you are rolling over from a previous semester\n• Remaining balance: How much you have now\n• Click on the meal plan and term drop-downs to change them\n• Click on the dates to change them\n• Total days off: The total number of days off in the date range\n• Past days off: The number of days off that have already past</string>
+    <string name="resultsfields">Results fields:\n\n• Difference: The difference between your current balance and the expected balance based on your initial daily limit and the number of days past</string>
+
+    <!-- About strings -->
+    <string name="appInfo">RIT Debit Splitter by Alderfer Studios</string>
+    <string name="version">Version: </string>
+    <string name="versionInfo">Version: 0.0.0</string>
+    <string name="openSource">This app is open source. You can find it here: <a href="https://github.com/BenAlderfer/RIT-Debit-Splitter">https://github.com/BenAlderfer/RIT-Debit-Splitter</a></string>
+    <string name="translate">If you would like to translate this app, please email <a href="mailto:alderferstudios@gmail.com">alderferstudios@gmail.com</a> with your request and I will send you instructions.\nIf you already know how to do this, you can edit the strings.xml (\\app\\src\\main\\res\\values) file in the source and send it to the above email.</string>
+    <string name="contact">If you have any questions, bug reports, or suggestions, contact: <a href="mailto:alderferstudios@gmail.com">alderferstudios@gmail.com</a>\n\nPlease include your device and version of Android with any bug reports\n\nIf you run into an error while using the app, please tap \"Report\" to send the error message to me</string>
+    <string name="donate">If you would like to show your appreciation, here\'s how:\n\n• Donate to a charity - they probably need it more than me\n• Paypal or Venmo: benalderfer974@gmail.com\n</string>
+
+    <!-- Spinner related values -->
     <string name="mealOption1">All Debit</string>
     <string name="mealOption2">5+</string>
     <string name="mealOption3">10+</string>

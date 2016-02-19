@@ -48,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The starting date
      */
-    private int startYear, startMonth, startDay;
+    private int startYear = 2016, startMonth = 1, startDay = 1;
     /**
      * The ending date
      */
-    private int endYear, endMonth, endDay;
+    private int endYear = 2016, endMonth = 2, endDay = 2;
     /**
      * week and day difference between dates
      */
@@ -239,6 +239,14 @@ public class MainActivity extends AppCompatActivity {
             case R.id.eservices:
                 Intent eservices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://eservices.rit.edu/eServices"));
                 startActivity(eservices);
+                return true;
+            case R.id.help:
+                Intent helpActivity = new Intent(this, HelpActivity.class);
+                startActivity(helpActivity);
+                return true;
+            case R.id.about:
+                Intent aboutActivity = new Intent(this, AboutActivity.class);
+                startActivity(aboutActivity);
                 return true;
 
         }
@@ -519,21 +527,14 @@ public class MainActivity extends AppCompatActivity {
     private void restoreValues() {
         //only restore values if they want to
         if (shared.getBoolean("saveBox", false)) {
+
             //restore start date
             startMonth = shared.getInt("startMonth", Integer.parseInt(getString(R.string.startMonth)));
-            //correct wrong month, Java starts at 0 but Jodatime starts at 1
-            if (startMonth == 0) {
-                startMonth = 1;
-            }
             startDay = shared.getInt("startDay", Integer.parseInt(getString(R.string.startDay)));
             startYear = shared.getInt("startYear", Integer.parseInt(getString(R.string.startYear)));
 
             //restore end date
             endMonth = shared.getInt("endMonth", Integer.parseInt(getString(R.string.endMonth)));
-            //correct wrong month, Java starts at 0 but Jodatime starts at 1
-            if (endMonth == 0) {
-                endMonth = 1;
-            }
             endDay = shared.getInt("endDay", Integer.parseInt(getString(R.string.endDay)));
             endYear = shared.getInt("endYear", Integer.parseInt(getString(R.string.endYear)));
 
@@ -719,6 +720,7 @@ public class MainActivity extends AppCompatActivity {
      * Calculates the difference in the two dates
      */
     public void calculateDateDiff(View v) {
+
         DateTimeZone Eastern = DateTimeZone.forID("America/New_York");
         DateTime start = new DateTime(startYear, startMonth, startDay, 0, 0, 0, Eastern);
         DateTime end = new DateTime(endYear, endMonth, endDay, 0, 0, 0, Eastern);
