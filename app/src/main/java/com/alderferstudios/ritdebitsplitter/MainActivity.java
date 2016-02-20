@@ -556,16 +556,14 @@ public class MainActivity extends AppCompatActivity {
             mealOptionSpinner.setSelection(shared.getInt("mealPlan", 0));
             termSpinner.setSelection(shared.getInt("term", 0));
 
-            float rolledover = shared.getFloat("rollOver", 0.0f);
-            if (rolledover != 0.0f) {
-                rollOver = rolledover + "";
-                rolloverEditText.setText(rollOver);
+            float rollOver = shared.getFloat("rollOver", 0.0f);
+            if (rollOver != 0.0f) {
+                rolloverEditText.setText(String.format("%.02f", rollOver));
             }
 
             float current = shared.getFloat("currentBalance", 0.0f);
             if (current != 0.0f) {
-                currentBalance = current + "";
-                currentBalanceEditText.setText(currentBalance);
+                currentBalanceEditText.setText(String.format("%.02f", current));
             }
 
             int totalDays = shared.getInt("totalDaysOff", 0);
