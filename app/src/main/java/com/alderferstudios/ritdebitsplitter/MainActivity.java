@@ -5,8 +5,10 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
@@ -15,9 +17,11 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -44,11 +48,11 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The starting date
      */
-    private int startYear, startMonth, startDay;
+    private int startYear = 2016, startMonth = 1, startDay = 1;
     /**
      * The ending date
      */
-    private int endYear, endMonth, endDay;
+    private int endYear = 2016, endMonth = 2, endDay = 2;
     /**
      * week and day difference between dates
      */
@@ -72,26 +76,53 @@ public class MainActivity extends AppCompatActivity {
      * Start and end date TextViews
      */
     private TextView startDateText, endDateText;
+
+    /**
+     * The dropdowns for meal options and terms
+     */
+    private Spinner mealOptionSpinner, termSpinner;
+
     /**
      * The EditText fields
      */
-    private EditText initialBalanceEditText, currentBalanceEditText, totalDaysOffEditText, pastDaysOffEditText;
+    private EditText rolloverEditText, currentBalanceEditText, totalDaysOffEditText, pastDaysOffEditText;
+
     /**
      * The text input in the fields
      */
-    private String initialBalance = "", currentBalance = "", totalDaysOff = "", pastDaysOff = "";
+    private String currentBalance = "", totalDaysOff = "", pastDaysOff = "", rollOver = "", currentTerm = "", selectedMealPlan = "";
+
     /**
      * Whether the fields have been entered
      */
-    private boolean initialBalanceIsEntered, currentBalanceIsEntered, currentDateIsInRange, totalDaysOffIsEntered, pastDaysOffIsEntered;
+    private boolean currentBalanceIsEntered, currentDateIsInRange, totalDaysOffIsEntered, pastDaysOffIsEntered;
+
     /**
      * Either start or end date
      */
     private String dateBeingSet;
+
     /**
      * Context reference for later
      */
     private Context c;
+
+    /**
+     * Adapter for the two spinners
+     */
+    private ArrayAdapter<String> mealPlanAdapter, termAdapter;
+
+    /**
+     * The total initial debit
+     * Meal plan + rollover
+     */
+    private double totalInitial;
+
+    /**
+     * Flag to prevent overwriting days off on boot
+     * Will only overwrite if nothing was entered
+     */
+    private boolean isBooting;
 
     /**
      * Checks if the device is a tablet
@@ -127,11 +158,17 @@ public class MainActivity extends AppCompatActivity {
 
         shared = PreferenceManager.getDefaultSharedPreferences(this);
         editor = shared.edit();
+        //set the default value for the preferences
+        PreferenceManager.setDefaultValues(this, R.xml.prefs, false);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        initialBalanceEditText = (EditText) findViewById(R.id.initialBalanceText);
+        isBooting = true;
+
+        mealOptionSpinner = (Spinner) findViewById(R.id.mealOption);
+        termSpinner = (Spinner) findViewById(R.id.termSpinner);
+        rolloverEditText = (EditText) findViewById(R.id.rolloverBalanceText);
         currentBalanceEditText = (EditText) findViewById(R.id.currentBalanceText);
         startDateText = (TextView) findViewById(R.id.startDate);
         endDateText = (TextView) findViewById(R.id.endDate);
@@ -148,10 +185,12 @@ public class MainActivity extends AppCompatActivity {
         initialCard = (CardView) findViewById(R.id.initialCard);
         currentCard = (CardView) findViewById(R.id.currentCard);
 
-        clearResults();
-        addTextListeners();
+        currentTerm = getResources().getString(R.string.defaultTerm);
 
-        restoreValues();
+        initializeSpinners();
+
+        clearResults();
+        addListeners();
     }
 
     /**
@@ -162,6 +201,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         restoreValues();
+    }
+
+    /**
+     * Save entered values when app pauses
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveValues();
     }
 
     /**
@@ -189,6 +237,29 @@ public class MainActivity extends AppCompatActivity {
                 Intent settingsActivity = new Intent(this, SettingsActivity.class);
                 startActivity(settingsActivity);
                 return true;
+            case R.id.tigerbucks:
+                Intent tigerbucks = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu/tigerBucks/app/index.html"));
+                tigerbucks.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                tigerbucks.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                tigerbucks.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+                Bundle b = new Bundle();
+                b.putBoolean("new_window", true);
+                tigerbucks.putExtras(b);
+                startActivity(tigerbucks);
+                return true;
+            case R.id.eservices:
+                Intent eservices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://eservices.rit.edu/eServices"));
+                startActivity(eservices);
+                return true;
+            case R.id.help:
+                Intent helpActivity = new Intent(this, HelpActivity.class);
+                startActivity(helpActivity);
+                return true;
+            case R.id.about:
+                Intent aboutActivity = new Intent(this, AboutActivity.class);
+                startActivity(aboutActivity);
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -198,22 +269,101 @@ public class MainActivity extends AppCompatActivity {
      * Text is saved to reduce method calls
      * Updates the results if possible
      */
-    private void addTextListeners() {
-        initialBalanceEditText.addTextChangedListener(new TextWatcher() {
+    private void addListeners() {
+        mealOptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                updateResults();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        termSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                currentTerm = termSpinner.getSelectedItem().toString();
+                String dateRange = "";
+                switch (currentTerm) {
+                    case "Fall":
+                        //get the dates, will split later
+                        dateRange = getString(R.string.fallDateRange);
+
+                        //on boot, do not overwrite any input
+                        if (isBooting) {
+                            //set the days off if none were entered
+                            if (totalDaysOff.equals("")) {
+                                totalDaysOff = getResources().getString(R.string.fallDaysOff);
+                            }
+                            isBooting = false;
+                            break;
+                        }
+
+                        //set the days off if none were entered or the other term's days were entered
+                        if (totalDaysOff.equals("") || totalDaysOff.equals(getResources().getString(R.string.springDaysOff))) {
+                            totalDaysOff = getResources().getString(R.string.fallDaysOff);
+                        }
+
+                        break;
+                    case "Spring":
+                        //get the dates, will split later
+                        dateRange = getString(R.string.springDateRange);
+
+                        //on boot, do not overwrite any input
+                        if (isBooting) {
+                            //set the days off if none were entered
+                            if (totalDaysOff.equals("")) {
+                                totalDaysOff = getResources().getString(R.string.springDaysOff);
+                            }
+                            isBooting = false;
+                            break;
+                        }
+
+                        //set the days off if none were entered or the other term's days were entered
+                        if (totalDaysOff.equals("") || totalDaysOff.equals(getResources().getString(R.string.fallDaysOff))) {
+                            totalDaysOff = getResources().getString(R.string.springDaysOff);
+                        }
+                        break;
+                }
+                //parse the dates
+                startMonth = Integer.parseInt(dateRange.substring(0, 2));
+                startDay = Integer.parseInt(dateRange.substring(3, 5));
+                startYear = Integer.parseInt(dateRange.substring(6, 10));
+
+                endMonth = Integer.parseInt(dateRange.substring(11, 13));
+                endDay = Integer.parseInt(dateRange.substring(14, 16));
+                endYear = Integer.parseInt(dateRange.substring(17));
+
+                //update date fields
+                startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
+                endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
+
+                //set days off after date change to prevent wrong toasts
+                totalDaysOffIsEntered = true;
+                totalDaysOffEditText.setText(totalDaysOff);
+
+                //call to updateResults not needed since updating other fields will do that
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+
+        });
+
+        rolloverEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
             }
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
-                initialBalance = initialBalanceEditText.getText().toString();
-                //if it ends with a "." remove the "." before getting the number
-                if (initialBalance.length() > 0 && initialBalance.charAt(0) != '.' && initialBalance.substring(initialBalance.length() - 1, initialBalance.length()).equals(".")) {
-                    initialBalance = initialBalance.substring(0, initialBalance.length());
-                }
-                initialBalanceIsEntered = !initialBalance.equals("") && (initialBalance.length() > 1 || initialBalance.charAt(0) != '.');
-
-                attemptUpdate();
+                rollOver = rolloverEditText.getText().toString();
+                updateResults();
             }
 
             @Override
@@ -236,15 +386,14 @@ public class MainActivity extends AppCompatActivity {
                         currentBalance = currentBalance.substring(0, currentBalance.length());
                     }
                     //if current balance > initial, fix that
-                    if (!initialBalance.equals("") && !currentBalance.equals("") &&
-                            Double.parseDouble(currentBalance) > Double.parseDouble(initialBalance)) {
-                        currentBalance = initialBalance;
+                    if (!currentBalance.equals("") && Double.parseDouble(currentBalance) > totalInitial) {
+                        currentBalance = totalInitial + "";
                         currentBalanceEditText.setText(currentBalance);
-                        Toast.makeText(c, R.string.remainingGreaterThanInitial, Toast.LENGTH_LONG).show();
+                        Snackbar.make(findViewById(R.id.display), R.string.remainingGreaterThanInitial, Snackbar.LENGTH_LONG).show();
                     }
                 }
 
-                attemptUpdate();
+                updateResults();
             }
 
             @Override
@@ -261,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 totalDaysOff = totalDaysOffEditText.getText().toString();
                 totalDaysOffIsEntered = true;
-                attemptUpdate();
+                updateResults();
             }
 
             @Override
@@ -282,17 +431,17 @@ public class MainActivity extends AppCompatActivity {
                 if (totalDaysOff.equals("") && !pastDaysOff.equals("")) {
                     totalDaysOff = pastDaysOff;
                     totalDaysOffEditText.setText(totalDaysOff);
-                    Toast.makeText(c, R.string.totalNotEntered, Toast.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(R.id.display), R.string.totalNotEntered, Snackbar.LENGTH_LONG).show();
                 }
 
                 // if current days off > total days off, change it to the total
                 if (!totalDaysOff.equals("") && !pastDaysOff.equals("") && Integer.parseInt(pastDaysOff) > Integer.parseInt(totalDaysOff)) {
                     pastDaysOff = totalDaysOff;
                     pastDaysOffEditText.setText(totalDaysOff);
-                    Toast.makeText(c, R.string.pastGreaterThanTotal, Toast.LENGTH_LONG).show();
+                    Snackbar.make(findViewById(R.id.display), R.string.pastGreaterThanTotal, Snackbar.LENGTH_LONG).show();
                 }
 
-                attemptUpdate();
+                updateResults();
             }
 
             @Override
@@ -302,12 +451,63 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Sets the items in the meal option dropdown menu
+     */
+    private void initializeSpinners() {
+        String[] items = new String[]{getString(R.string.mealOption1), getString(R.string.mealOption2),
+                getString(R.string.mealOption3), getString(R.string.mealOption4),
+                getString(R.string.mealOption5), getString(R.string.mealOption6),
+                getString(R.string.mealOption7), getString(R.string.mealOption8),
+                getString(R.string.mealOption9)};
+        mealPlanAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, items);
+        mealOptionSpinner.setAdapter(mealPlanAdapter);
+
+        String[] items2 = new String[]{getString(R.string.fallTerm), getString(R.string.springTerm)};
+        termAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, items2);
+        termSpinner.setAdapter(termAdapter);
+    }
+
+    /**
+     * Returns the value of the selected plan
+     * Switch cannot be used since the strings are not constants
+     *
+     * @return the value of the selected plan
+     */
+    private int getPlanValue() {
+        if (mealOptionSpinner.getSelectedItem() != null) {
+            selectedMealPlan = mealOptionSpinner.getSelectedItem().toString();
+            if (selectedMealPlan.equals(getString(R.string.mealOption1))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue1));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption2))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue2));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption3))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue3));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption4))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue4));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption5))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue5));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption6))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue6));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption7))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue7));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption8))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue8));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOption9))) {
+                return Integer.parseInt(getString(R.string.mealOptionValue9));
+            }
+        }
+        return 0;
+    }
+
+    /**
      * Saves the entered values for later
      */
     private void saveValues() {
-        //save entered values
-        if (initialBalanceIsEntered && !initialBalance.equals("")) {
-            editor.putFloat("initialBalance", Float.parseFloat(initialBalance));
+        editor.putInt("mealPlan", mealOptionSpinner.getSelectedItemPosition());
+        editor.putInt("term", termSpinner.getSelectedItemPosition());
+
+        if (!rollOver.equals("")) {
+            editor.putFloat("rollOver", Float.parseFloat(rollOver));
         }
         if (currentBalanceIsEntered && !currentBalance.equals("")) {
             editor.putFloat("currentBalance", Float.parseFloat(currentBalance));
@@ -338,6 +538,7 @@ public class MainActivity extends AppCompatActivity {
     private void restoreValues() {
         //only restore values if they want to
         if (shared.getBoolean("saveBox", false)) {
+
             //restore start date
             startMonth = shared.getInt("startMonth", Integer.parseInt(getString(R.string.startMonth)));
             startDay = shared.getInt("startDay", Integer.parseInt(getString(R.string.startDay)));
@@ -352,17 +553,17 @@ public class MainActivity extends AppCompatActivity {
             startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
 
-            //restore entered values
-            float initial = shared.getFloat("initialBalance", 0.0f);
-            if (initial != 0.0f) {
-                initialBalance = initial + "";
-                initialBalanceEditText.setText(initialBalance);
+            mealOptionSpinner.setSelection(shared.getInt("mealPlan", 0));
+            termSpinner.setSelection(shared.getInt("term", 0));
+
+            float rollOver = shared.getFloat("rollOver", 0.0f);
+            if (rollOver != 0.0f) {
+                rolloverEditText.setText(String.format("%.02f", rollOver));
             }
 
             float current = shared.getFloat("currentBalance", 0.0f);
             if (current != 0.0f) {
-                currentBalance = current + "";
-                currentBalanceEditText.setText(currentBalance);
+                currentBalanceEditText.setText(String.format("%.02f", current));
             }
 
             int totalDays = shared.getInt("totalDaysOff", 0);
@@ -389,36 +590,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Checks if results can be updated
-     * If possible, update
-     * If not, clear results
-     */
-    private void attemptUpdate() {
-        if (initialBalanceIsEntered) {
-            updateResults();
-        } else {
-            clearResults();
-        }
-    }
-
-    /**
      * Updates the results text
      */
     private void updateResults() {
-        calculateDateDiff(findViewById(R.id.initialBalanceText));
-        saveValues();
+        //feed it a useless view since an onClick method needs a view
+        calculateDateDiff(findViewById(R.id.rolloverBalanceText));
 
         initialCard.setVisibility(View.VISIBLE);
 
         DecimalFormat twoDecimal = new DecimalFormat("0.00");
-        double initial = Double.parseDouble(initialBalance);
+        totalInitial = getPlanValue();
+        if (!rollOver.equals("")) {
+            totalInitial += Float.parseFloat(rollOver);
+        }
+        ((TextView) findViewById(R.id.totalInitialText)).setText(twoDecimal.format(totalInitial));
 
         double daily, weekly;
         if (weekDiff > 0) {
-            daily = initial / ((weekDiff * 7) + dayDiff);
+            daily = totalInitial / ((weekDiff * 7) + dayDiff);
             weekly = daily * 7;
         } else {    //only 1 week or less
-            weekly = initial;
+            weekly = totalInitial;
             daily = weekly / currentDayDiff;
         }
 
@@ -469,11 +661,9 @@ public class MainActivity extends AppCompatActivity {
      * Note - only clears fields, not any saved data
      */
     private void clearFields() {
-        initialBalanceEditText.setText("");
         currentBalanceEditText.setText("");
         totalDaysOffEditText.setText("");
         pastDaysOffEditText.setText("");
-        initialBalanceIsEntered = false;
         currentBalanceIsEntered = false;
         totalDaysOffIsEntered = false;
         pastDaysOffIsEntered = false;
@@ -523,13 +713,13 @@ public class MainActivity extends AppCompatActivity {
                 startMonth = data.getIntExtra("month", 1) + 1;
                 startDay = data.getIntExtra("day", 25);
                 startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
-                attemptUpdate();
+                updateResults();
             } else {
                 endYear = data.getIntExtra("year", 2016);
                 endMonth = data.getIntExtra("month", 1) + 1;
                 endDay = data.getIntExtra("day", 25);
                 endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
-                attemptUpdate();
+                updateResults();
             }
         }
     }
@@ -538,10 +728,12 @@ public class MainActivity extends AppCompatActivity {
      * Calculates the difference in the two dates
      */
     public void calculateDateDiff(View v) {
+
         DateTimeZone Eastern = DateTimeZone.forID("America/New_York");
         DateTime start = new DateTime(startYear, startMonth, startDay, 0, 0, 0, Eastern);
         DateTime end = new DateTime(endYear, endMonth, endDay, 0, 0, 0, Eastern);
         dayDiff = Days.daysBetween(start.toLocalDate(), end.toLocalDate()).getDays();
+        ++dayDiff;  //increment dayDiff by 1 so the end date is included
 
         int totalDaysOffNumber = 0;
         if (!totalDaysOff.equals("")) {
@@ -556,15 +748,15 @@ public class MainActivity extends AppCompatActivity {
         if (dayDiff < 1) {
             endYear = startYear;
             endMonth = startMonth + 1 + (totalDaysOffNumber / 29);
-            if (endMonth > 12) {
+            while (endMonth > 12) {
                 endMonth -= 12;
                 ++endYear;
             }
 
             endDay = startDay;
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
-            Toast.makeText(this, R.string.endDateBeforeStart, Toast.LENGTH_LONG).show();
-            attemptUpdate();
+            Snackbar.make(findViewById(R.id.display), R.string.endDateBeforeStart, Snackbar.LENGTH_LONG).show();
+            updateResults();
             return;
         }
 
@@ -625,7 +817,7 @@ public class MainActivity extends AppCompatActivity {
             currentWeekDiff = currentDayDiff / 7;
             currentDayDiff -= currentWeekDiff * 7;
         } else if (currentBalanceIsEntered) {
-            Toast.makeText(this, getString(R.string.dateOutOfRangeMessage), Toast.LENGTH_LONG).show();
+            Snackbar.make(findViewById(R.id.display), getString(R.string.dateOutOfRangeMessage), Snackbar.LENGTH_LONG).show();
         }
     }
 }

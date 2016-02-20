@@ -28,11 +28,15 @@ public class SettingsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
 
         shared = PreferenceManager.getDefaultSharedPreferences(this);
+        //set the default value for the preferences
+        PreferenceManager.setDefaultValues(this, R.xml.prefs, false);
 
         setContentView(R.layout.activity_settings);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        if (getSupportActionBar() != null) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        }
 
         //lock orientation on phones
         if (!MainActivity.isTablet(this)) {
