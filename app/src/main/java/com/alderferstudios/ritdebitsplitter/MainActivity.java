@@ -158,6 +158,8 @@ public class MainActivity extends AppCompatActivity {
 
         shared = PreferenceManager.getDefaultSharedPreferences(this);
         editor = shared.edit();
+        //set the default value for the preferences
+        PreferenceManager.setDefaultValues(this, R.xml.prefs, false);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -199,6 +201,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         restoreValues();
+    }
+
+    /**
+     * Save entered values when app pauses
+     */
+    @Override
+    protected void onPause() {
+        super.onPause();
+        saveValues();
     }
 
     /**
@@ -586,7 +597,6 @@ public class MainActivity extends AppCompatActivity {
     private void updateResults() {
         //feed it a useless view since an onClick method needs a view
         calculateDateDiff(findViewById(R.id.rolloverBalanceText));
-        saveValues();
 
         initialCard.setVisibility(View.VISIBLE);
 
