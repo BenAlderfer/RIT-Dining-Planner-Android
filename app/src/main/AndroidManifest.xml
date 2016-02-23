@@ -28,11 +28,11 @@
         <activity
             android:name=".HelpActivity"
             android:label="@string/title_activity_help"
-            android:theme="@style/BlueLight" />
+            android:theme="@style/BlueOverflow" />
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
-            android:theme="@style/BlueLight" />
+            android:theme="@style/BlueOverflow" />
     </application>
 
 </manifest>
