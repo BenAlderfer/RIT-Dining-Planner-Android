@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Whether the fields have been entered
      */
-    private boolean currentBalanceIsEntered, currentDateIsInRange, totalDaysOffIsEntered, pastDaysOffIsEntered;
+    private boolean currentBalanceIsEntered, currentDateIsInRange, totalDaysOffIsEntered, pastDaysOffIsEntered, isEnteringDate;
 
     /**
      * Either start or end date
@@ -194,13 +194,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Check to restore values on resume also
-     * since it could be changed in the settings
+     * Restore values when the app resumes
+     * Do not change anything if they are just resuming from a date picker
      */
     @Override
     protected void onResume() {
         super.onResume();
-        restoreValues();
+        if (!isEnteringDate) {
+            restoreValues();
+        } else {
+            isEnteringDate = false;
+        }
     }
 
     /**
@@ -259,7 +263,6 @@ public class MainActivity extends AppCompatActivity {
                 Intent aboutActivity = new Intent(this, AboutActivity.class);
                 startActivity(aboutActivity);
                 return true;
-
         }
         return super.onOptionsItemSelected(item);
     }
@@ -707,6 +710,9 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        //flag to prevent the default values from being applied when resuming from date picker
+        isEnteringDate = true;
+
         if (resultCode != RESULT_CANCELED) {    //only gets info if they didn't press back
             if (dateBeingSet.equals("start")) {
                 startYear = data.getIntExtra("year", 2016);
