@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Whether the fields have been entered
      */
-    private boolean currentBalanceIsEntered, currentDateIsInRange, totalDaysOffIsEntered, pastDaysOffIsEntered, isEnteringDate;
+    private boolean currentBalanceIsEntered, currentDateIsInRange, totalDaysOffIsEntered, isEnteringDate;
 
     /**
      * Either start or end date
@@ -518,7 +518,7 @@ public class MainActivity extends AppCompatActivity {
         if (totalDaysOffIsEntered && !totalDaysOff.equals("")) {
             editor.putInt("totalDaysOff", Integer.parseInt(totalDaysOff));
         }
-        if (pastDaysOffIsEntered && !pastDaysOff.equals("")) {
+        if (!pastDaysOff.equals("")) {
             editor.putInt("pastDaysOff", Integer.parseInt(pastDaysOff));
         }
 
@@ -669,7 +669,6 @@ public class MainActivity extends AppCompatActivity {
         pastDaysOffEditText.setText("");
         currentBalanceIsEntered = false;
         totalDaysOffIsEntered = false;
-        pastDaysOffIsEntered = false;
 
         //this will be called after restoring default dates
         startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
