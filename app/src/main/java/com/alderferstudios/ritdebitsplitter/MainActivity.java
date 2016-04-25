@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Whether the fields have been entered
      */
-    private boolean currentBalanceIsEntered, currentDateIsInRange, totalDaysOffIsEntered, isEnteringDate;
+    private boolean currentDateIsInRange, isEnteringDate;
 
     /**
      * Either start or end date
@@ -345,7 +345,6 @@ public class MainActivity extends AppCompatActivity {
                 endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
 
                 //set days off after date change to prevent wrong toasts
-                totalDaysOffIsEntered = true;
                 totalDaysOffEditText.setText(totalDaysOff);
 
                 //call to updateResults not needed since updating other fields will do that
@@ -382,8 +381,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 currentBalance = currentBalanceEditText.getText().toString();
-                currentBalanceIsEntered = !currentBalance.equals("") && (currentBalance.length() > 1 || currentBalance.charAt(0) != '.');
-                if (currentBalanceIsEntered) {
+                if (currentBalanceIsEntered()) {
                     //if it ends with a "." remove the "." before getting the number
                     if (currentBalance.length() > 0 && currentBalance.charAt(0) != '.' && currentBalance.substring(currentBalance.length() - 1, currentBalance.length()).equals(".")) {
                         currentBalance = currentBalance.substring(0, currentBalance.length());
@@ -412,7 +410,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 totalDaysOff = totalDaysOffEditText.getText().toString();
-                totalDaysOffIsEntered = true;
                 updateResults();
             }
 
@@ -511,15 +508,26 @@ public class MainActivity extends AppCompatActivity {
 
         if (!rollOver.equals("")) {
             editor.putFloat("rollOver", Float.parseFloat(rollOver));
+        } else { //save 0 to overwrite previous value
+            editor.putFloat("rollOver", 0.0f);
         }
-        if (currentBalanceIsEntered && !currentBalance.equals("")) {
+
+        if (currentBalanceIsEntered()) {
             editor.putFloat("currentBalance", Float.parseFloat(currentBalance));
+        } else { //save 0 to overwrite previous value
+            editor.putFloat("currentBalance", 0.0f);
         }
-        if (totalDaysOffIsEntered && !totalDaysOff.equals("")) {
+
+        if (totalDaysOffIsEntered()) {
             editor.putInt("totalDaysOff", Integer.parseInt(totalDaysOff));
+        } else { //save 0 to overwrite previous value
+            editor.putInt("totalDaysOff", 0);
         }
+
         if (!pastDaysOff.equals("")) {
             editor.putInt("pastDaysOff", Integer.parseInt(pastDaysOff));
+        } else { //save 0 to overwrite previous value
+            editor.putInt("pastDaysOff", 0);
         }
 
         //save start date
@@ -620,7 +628,7 @@ public class MainActivity extends AppCompatActivity {
         tvs[0].setText(twoDecimal.format(daily));
         tvs[1].setText(twoDecimal.format(weekly));
 
-        if (currentDateIsInRange && currentBalanceIsEntered) {
+        if (currentDateIsInRange && currentBalanceIsEntered()) {
             currentCard.setVisibility(View.VISIBLE);
 
             double curBalance = Double.parseDouble(currentBalance);
@@ -667,8 +675,6 @@ public class MainActivity extends AppCompatActivity {
         currentBalanceEditText.setText("");
         totalDaysOffEditText.setText("");
         pastDaysOffEditText.setText("");
-        currentBalanceIsEntered = false;
-        totalDaysOffIsEntered = false;
 
         //this will be called after restoring default dates
         startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
@@ -821,8 +827,24 @@ public class MainActivity extends AppCompatActivity {
 
             currentWeekDiff = currentDayDiff / 7;
             currentDayDiff -= currentWeekDiff * 7;
-        } else if (currentBalanceIsEntered) {
+        } else if (currentBalanceIsEntered()) {
             Snackbar.make(findViewById(R.id.display), getString(R.string.dateOutOfRangeMessage), Snackbar.LENGTH_LONG).show();
         }
+    }
+
+    /**
+     * Checks if the current balance is entered
+     * @return true if the current balance is entered
+     */
+    private boolean currentBalanceIsEntered() {
+        return !currentBalance.equals("") && currentBalance.charAt(0) != '.';
+    }
+
+    /**
+     * Checks if the total days off is entered
+     * @return true if the total days off is entered
+     */
+    private boolean totalDaysOffIsEntered() {
+        return !totalDaysOff.equals("");
     }
 }
