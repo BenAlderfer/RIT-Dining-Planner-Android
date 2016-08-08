@@ -1,4 +1,4 @@
-package com.alderferstudios.ritdebitsplitter;
+package com.alderferstudios.ritdiningplanner;
 
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +14,7 @@ import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -33,7 +34,7 @@ import org.joda.time.LocalDate;
 import java.text.DecimalFormat;
 
 /**
- * Main window of the Budget Splitter
+ * Main window
  *
  * @author Ben Alderfer
  *         Alderfer Studios
@@ -45,22 +46,27 @@ public class MainActivity extends AppCompatActivity {
      */
     protected static SharedPreferences shared;
     protected static SharedPreferences.Editor editor;
+
     /**
      * The starting date
      */
     private int startYear = 2016, startMonth = 1, startDay = 1;
+
     /**
      * The ending date
      */
     private int endYear = 2016, endMonth = 2, endDay = 2;
+
     /**
      * week and day difference between dates
      */
     private int weekDiff, dayDiff, currentWeekDiff, currentDayDiff;
+
     /**
      * Results cards
      */
     private CardView initialCard, currentCard;
+
     /**
      * The results TextViews
      * <p/>
@@ -72,6 +78,7 @@ public class MainActivity extends AppCompatActivity {
      * 4 - Current Weekly
      */
     private TextView[] tvs = new TextView[5];
+
     /**
      * Start and end date TextViews
      */
@@ -390,7 +397,11 @@ public class MainActivity extends AppCompatActivity {
                     if (!currentBalance.equals("") && Double.parseDouble(currentBalance) > totalInitial) {
                         currentBalance = totalInitial + "";
                         currentBalanceEditText.setText(currentBalance);
-                        Snackbar.make(findViewById(R.id.display), R.string.remainingGreaterThanInitial, Snackbar.LENGTH_LONG).show();
+                        try {
+                            Snackbar.make(findViewById(R.id.display), R.string.remainingGreaterThanInitial, Snackbar.LENGTH_LONG).show();
+                        } catch (NullPointerException e) {
+                            Log.e("remain. > initial error", e.getMessage());
+                        }
                     }
                 }
 
@@ -431,14 +442,22 @@ public class MainActivity extends AppCompatActivity {
                 if (totalDaysOff.equals("") && !pastDaysOff.equals("")) {
                     totalDaysOff = pastDaysOff;
                     totalDaysOffEditText.setText(totalDaysOff);
-                    Snackbar.make(findViewById(R.id.display), R.string.totalNotEntered, Snackbar.LENGTH_LONG).show();
+                    try {
+                        Snackbar.make(findViewById(R.id.display), R.string.totalNotEntered, Snackbar.LENGTH_LONG).show();
+                    } catch (NullPointerException e) {
+                        Log.e("total missing error", e.getMessage());
+                    }
                 }
 
                 // if current days off > total days off, change it to the total
                 if (!totalDaysOff.equals("") && !pastDaysOff.equals("") && Integer.parseInt(pastDaysOff) > Integer.parseInt(totalDaysOff)) {
                     pastDaysOff = totalDaysOff;
                     pastDaysOffEditText.setText(totalDaysOff);
-                    Snackbar.make(findViewById(R.id.display), R.string.pastGreaterThanTotal, Snackbar.LENGTH_LONG).show();
+                    try {
+                        Snackbar.make(findViewById(R.id.display), R.string.pastGreaterThanTotal, Snackbar.LENGTH_LONG).show();
+                    } catch (NullPointerException e) {
+                        Log.e("past days > total error", e.getMessage());
+                    }
                 }
 
                 updateResults();
@@ -614,7 +633,11 @@ public class MainActivity extends AppCompatActivity {
         if (!rollOver.equals("")) {
             totalInitial += Float.parseFloat(rollOver);
         }
-        ((TextView) findViewById(R.id.totalInitialText)).setText(twoDecimal.format(totalInitial));
+        try {
+            ((TextView) findViewById(R.id.totalInitialText)).setText(twoDecimal.format(totalInitial));
+        } catch (NullPointerException e) {
+            Log.e("set total initial error", e.getMessage());
+        }
 
         double daily, weekly;
         if (weekDiff > 0) {
@@ -766,7 +789,13 @@ public class MainActivity extends AppCompatActivity {
 
             endDay = startDay;
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
-            Snackbar.make(findViewById(R.id.display), R.string.endDateBeforeStart, Snackbar.LENGTH_LONG).show();
+
+            try {
+                Snackbar.make(findViewById(R.id.display), R.string.endDateBeforeStart, Snackbar.LENGTH_LONG).show();
+            } catch (NullPointerException e) {
+                Log.e("end date before start", e.getMessage());
+            }
+
             updateResults();
             return;
         }
@@ -828,7 +857,11 @@ public class MainActivity extends AppCompatActivity {
             currentWeekDiff = currentDayDiff / 7;
             currentDayDiff -= currentWeekDiff * 7;
         } else if (currentBalanceIsEntered()) {
-            Snackbar.make(findViewById(R.id.display), getString(R.string.dateOutOfRangeMessage), Snackbar.LENGTH_LONG).show();
+            try {
+                Snackbar.make(findViewById(R.id.display), getString(R.string.dateOutOfRangeMessage), Snackbar.LENGTH_LONG).show();
+            } catch (NullPointerException e) {
+                Log.e("date out of range error", e.getMessage());
+            }
         }
     }
 

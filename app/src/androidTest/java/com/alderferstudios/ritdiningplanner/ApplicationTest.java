@@ -1,4 +1,4 @@
-package com.alderferstudios.ritdebitsplitter;
+package com.alderferstudios.ritdiningplanner;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

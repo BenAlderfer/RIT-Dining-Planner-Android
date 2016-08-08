@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.alderferstudios.ritdebitsplitter">
+    package="com.alderferstudios.ritdiningplanner">
 
     <application
         android:allowBackup="true"
@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/BlueDark">
         <activity
-            android:name=".MainActivity"
+            android:name="com.alderferstudios.ritdiningplanner.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/BlueDark">
             <intent-filter>
@@ -19,18 +19,18 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CalendarDialog"
+            android:name="com.alderferstudios.ritdiningplanner.CalendarDialog"
             android:theme="@style/BlueLightPopUp" />
         <activity
-            android:name=".SettingsActivity"
+            android:name="com.alderferstudios.ritdiningplanner.SettingsActivity"
             android:label="@string/title_activity_settings"
             android:theme="@style/BlueLight" />
         <activity
-            android:name=".HelpActivity"
+            android:name="com.alderferstudios.ritdiningplanner.HelpActivity"
             android:label="@string/title_activity_help"
             android:theme="@style/BlueOverflow" />
         <activity
-            android:name=".AboutActivity"
+            android:name="com.alderferstudios.ritdiningplanner.AboutActivity"
             android:label="@string/title_activity_about"
             android:theme="@style/BlueOverflow" />
     </application>

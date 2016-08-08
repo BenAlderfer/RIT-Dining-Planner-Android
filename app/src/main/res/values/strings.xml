@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">RIT Debit Splitter</string>
+    <string name="app_name">RIT Dining Planner</string>
     <string name="title_activity_settings">Settings</string>
     <string name="title_activity_help">Help</string>
     <string name="title_activity_about">About</string>
@@ -54,43 +54,43 @@
     <string name="resultsfields">Results fields:\n\n• Difference: The difference between your current balance and the expected balance based on your initial daily limit and the number of days past</string>
 
     <!-- About strings -->
-    <string name="appInfo">RIT Debit Splitter by Alderfer Studios</string>
+    <string name="appInfo">RIT Dining Planner by Alderfer Studios</string>
     <string name="version">Version: </string>
     <string name="versionInfo">Version: 0.0.0</string>
-    <string name="openSource">This app is open source. You can find it here: <a href="https://github.com/BenAlderfer/RIT-Debit-Splitter">https://github.com/BenAlderfer/RIT-Debit-Splitter</a></string>
+    <string name="openSource">This app is open source. You can find it here: <a href="https://github.com/BenAlderfer/RIT-Dining-Planner-Android">https://github.com/BenAlderfer/RIT-Dining-Planner-Android</a></string>
     <string name="translate">If you would like to translate this app, please email <a href="mailto:alderferstudios@gmail.com">alderferstudios@gmail.com</a> with your request and I will send you instructions.\n\nIf you already know how to do this, you can edit the strings.xml (\\app\\src\\main\\res\\values) file in the source and send it to the above email.</string>
     <string name="contact">If you have any questions, bug reports, or suggestions, contact: <a href="mailto:alderferstudios@gmail.com">alderferstudios@gmail.com</a>\n\nPlease include your device and version of Android with any bug reports.\n\nIf you run into an error while using the app, please tap \"Report\" to send the error message to me.</string>
     <string name="donate">If you would like to show your appreciation, here\'s how:\n\n• Donate to a charity - they probably need it more than me\n• Paypal or Venmo: benalderfer974@gmail.com</string>
 
     <!-- Spinner related values -->
-    <string name="mealOption1">All Debit</string>
-    <string name="mealOption2">5+</string>
-    <string name="mealOption3">10+</string>
-    <string name="mealOption4">14+</string>
-    <string name="mealOption5">20+</string>
-    <string name="mealOption6">Debit Plan 1</string>
-    <string name="mealOption7">Debit Plan 2</string>
-    <string name="mealOption8">Debit Plan 3</string>
-    <string name="mealOption9">Inn Reduced Debit</string>
+    <string name="mealOption1">Tiger 5 ($1300)</string>
+    <string name="mealOption2">Tiger 10 ($700)</string>
+    <string name="mealOption3">Tiger 14 ($500)</string>
+    <string name="mealOption4">Tiger 20 ($300)</string>
+    <string name="mealOption5">Orange ($2669)</string>
+    <string name="mealOption6">Brown ($1914)</string>
+    <string name="mealOption7">Gold ($1340)</string>
+    <string name="mealOption8">Silver ($930)</string>
+    <string name="mealOption9">Bronze ($515)</string>
 
-    <string name="mealOptionValue1">2482</string>
-    <string name="mealOptionValue2">1300</string>
-    <string name="mealOptionValue3">650</string>
-    <string name="mealOptionValue4">350</string>
-    <string name="mealOptionValue5">250</string>
-    <string name="mealOptionValue6">500</string>
-    <string name="mealOptionValue7">900</string>
-    <string name="mealOptionValue8">1300</string>
-    <string name="mealOptionValue9">1858</string>
+    <string name="mealOptionValue1">1300</string>
+    <string name="mealOptionValue2">700</string>
+    <string name="mealOptionValue3">500</string>
+    <string name="mealOptionValue4">300</string>
+    <string name="mealOptionValue5">2669</string>
+    <string name="mealOptionValue6">1914</string>
+    <string name="mealOptionValue7">1340</string>
+    <string name="mealOptionValue8">930</string>
+    <string name="mealOptionValue9">515</string>
 
     <string name="fallTerm">Fall</string>
     <string name="springTerm">Spring</string>
-    <string name="defaultTerm">Spring</string>
+    <string name="defaultTerm">Fall</string>
 
-    <string name="fallDateRange">08/24/2015-12/18/2015</string>
-    <string name="springDateRange">01/24/2016-05/20/2016</string>
+    <string name="fallDateRange">08/22/2016-12/17/2016</string>
+    <string name="springDateRange">01/23/2017-05/19/2017</string>
 
-    <string name="fallDaysOff">11</string>
+    <string name="fallDaysOff">3</string>
     <string name="springDaysOff">9</string>
 
 </resources>

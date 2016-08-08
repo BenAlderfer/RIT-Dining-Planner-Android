@@ -1,4 +1,4 @@
-package com.alderferstudios.ritdebitsplitter;
+package com.alderferstudios.ritdiningplanner;
 
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 /**
- * Settings activity of the Budget Splitter
+ * Settings activity
  *
  * @author Ben Alderfer
  *         Alderfer Studios
