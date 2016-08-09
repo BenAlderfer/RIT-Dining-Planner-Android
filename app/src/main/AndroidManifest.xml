@@ -7,11 +7,11 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/BlueDark">
+        android:theme="@style/OrangeTheme">
         <activity
             android:name="com.alderferstudios.ritdiningplanner.MainActivity"
             android:label="@string/app_name"
-            android:theme="@style/BlueDark">
+            android:theme="@style/OrangeTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -20,19 +20,19 @@
         </activity>
         <activity
             android:name="com.alderferstudios.ritdiningplanner.CalendarDialog"
-            android:theme="@style/BlueLightPopUp" />
+            android:theme="@style/OrangeLightPopUp" />
         <activity
             android:name="com.alderferstudios.ritdiningplanner.SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@style/BlueLight" />
+            android:theme="@style/OrangeTheme" />
         <activity
             android:name="com.alderferstudios.ritdiningplanner.HelpActivity"
             android:label="@string/title_activity_help"
-            android:theme="@style/BlueOverflow" />
+            android:theme="@style/OrangeTheme" />
         <activity
             android:name="com.alderferstudios.ritdiningplanner.AboutActivity"
             android:label="@string/title_activity_about"
-            android:theme="@style/BlueOverflow" />
+            android:theme="@style/OrangeTheme" />
     </application>
 
 </manifest>

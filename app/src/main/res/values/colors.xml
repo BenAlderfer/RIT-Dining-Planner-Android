@@ -24,8 +24,9 @@
     <color name="greenPrimary">#0F9D58</color>
     <color name="greenPrimaryDark">#0B8043</color>
 
-    <color name="orangePrimary">#FF9800</color>
-    <color name="orangePrimaryDark">#F57C00</color>
+    <color name="orangePrimary">#FF5722</color>
+    <color name="orangePrimaryDark">#E64A19</color>
+    <color name="orangeHighlight">#FFCC80</color>
 
     <color name="redPrimary">#DB4437</color>
     <color name="redPrimaryDark">#BC3A31</color>

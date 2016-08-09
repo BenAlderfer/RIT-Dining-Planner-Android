@@ -15,7 +15,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/BlueToolbar" />
+            android:theme="@style/OrangeToolbar" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -47,16 +47,14 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/appInfo"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:id="@+id/version"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/versionInfo"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 </LinearLayout>
 
@@ -86,8 +84,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/openSource"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 </LinearLayout>
 
@@ -117,8 +114,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/translate"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </LinearLayout>
 
@@ -148,8 +144,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/contact"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 </LinearLayout>
 
@@ -178,8 +173,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="@string/donate"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
 
                 </LinearLayout>
 
