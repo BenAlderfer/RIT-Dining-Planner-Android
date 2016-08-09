@@ -885,7 +885,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      *
      */
-    private void showSnackbar(String textToShow) {
+    private void showSnackbar(String textToShow) throws NullPointerException {
         Snackbar snack = Snackbar.make(findViewById(R.id.display), textToShow, Snackbar.LENGTH_LONG);
 
         //set text color to white
