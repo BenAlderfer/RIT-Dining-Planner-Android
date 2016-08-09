@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -398,7 +399,7 @@ public class MainActivity extends AppCompatActivity {
                         currentBalance = totalInitial + "";
                         currentBalanceEditText.setText(currentBalance);
                         try {
-                            Snackbar.make(findViewById(R.id.display), R.string.remainingGreaterThanInitial, Snackbar.LENGTH_LONG).show();
+                            showSnackbar(getResources().getString(R.string.remainingGreaterThanInitial));
                         } catch (NullPointerException e) {
                             Log.e("remain. > initial error", e.getMessage());
                         }
@@ -443,7 +444,7 @@ public class MainActivity extends AppCompatActivity {
                     totalDaysOff = pastDaysOff;
                     totalDaysOffEditText.setText(totalDaysOff);
                     try {
-                        Snackbar.make(findViewById(R.id.display), R.string.totalNotEntered, Snackbar.LENGTH_LONG).show();
+                        showSnackbar(getResources().getString(R.string.totalNotEntered));
                     } catch (NullPointerException e) {
                         Log.e("total missing error", e.getMessage());
                     }
@@ -454,7 +455,7 @@ public class MainActivity extends AppCompatActivity {
                     pastDaysOff = totalDaysOff;
                     pastDaysOffEditText.setText(totalDaysOff);
                     try {
-                        Snackbar.make(findViewById(R.id.display), R.string.pastGreaterThanTotal, Snackbar.LENGTH_LONG).show();
+                        showSnackbar(getResources().getString(R.string.pastGreaterThanTotal));
                     } catch (NullPointerException e) {
                         Log.e("past days > total error", e.getMessage());
                     }
@@ -791,7 +792,7 @@ public class MainActivity extends AppCompatActivity {
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
 
             try {
-                Snackbar.make(findViewById(R.id.display), R.string.endDateBeforeStart, Snackbar.LENGTH_LONG).show();
+                showSnackbar(getResources().getString(R.string.endDateBeforeStart));
             } catch (NullPointerException e) {
                 Log.e("end date before start", e.getMessage());
             }
@@ -858,7 +859,7 @@ public class MainActivity extends AppCompatActivity {
             currentDayDiff -= currentWeekDiff * 7;
         } else if (currentBalanceIsEntered()) {
             try {
-                Snackbar.make(findViewById(R.id.display), getString(R.string.dateOutOfRangeMessage), Snackbar.LENGTH_LONG).show();
+                showSnackbar(getResources().getString(R.string.dateOutOfRangeMessage));
             } catch (NullPointerException e) {
                 Log.e("date out of range error", e.getMessage());
             }
@@ -879,5 +880,19 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean totalDaysOffIsEntered() {
         return !totalDaysOff.equals("");
+    }
+
+    /**
+     *
+     */
+    private void showSnackbar(String textToShow) {
+        Snackbar snack = Snackbar.make(findViewById(R.id.display), textToShow, Snackbar.LENGTH_LONG);
+
+        //set text color to white
+        View view = snack.getView();
+        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        tv.setTextColor(Color.WHITE);
+
+        snack.show();
     }
 }
