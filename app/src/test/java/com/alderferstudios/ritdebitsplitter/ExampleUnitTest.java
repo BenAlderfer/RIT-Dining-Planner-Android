@@ -1,4 +1,4 @@
-package com.alderferstudios.ritdiningplanner;
+package com.alderferstudios.ritdebitsplitter;
 
 import org.junit.Test;
 
