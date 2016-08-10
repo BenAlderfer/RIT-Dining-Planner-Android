@@ -62,6 +62,12 @@
         <item name="android:paddingStart">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingEnd">@dimen/activity_horizontal_margin</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+    </style>
+
+    <style name="TableRowItemHeaderStyle" parent="@style/TableRowItemStyle">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/orangePrimary</item>
     </style>
 
     <style name="Header">
@@ -72,13 +78,7 @@
 
     <style name="LargeOrange">
         <item name="android:textStyle">bold</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
-        <item name="android:textColor">@color/orangePrimary</item>
-    </style>
-
-    <style name="TableRowItemHeaderStyle" parent="@style/TableRowItemStyle">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
+        <item name="android:textSize">30sp</item>
         <item name="android:textColor">@color/orangePrimary</item>
     </style>
 

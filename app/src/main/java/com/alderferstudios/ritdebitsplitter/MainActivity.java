@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Results cards
      */
-    private CardView initialCard, currentCard;
+    private CardView summaryCard, tableCard;
 
     /**
      * The results TextViews
@@ -188,12 +188,13 @@ public class MainActivity extends AppCompatActivity {
         tvs[0] = (TextView) findViewById(R.id.initDailyText);
         tvs[1] = (TextView) findViewById(R.id.initWeeklyText);
 
-        tvs[2] = (TextView) findViewById(R.id.diffText);
+        //////////////////////////////////////////////////////////////////////////////////////////////////////////
+        tvs[2] = (TextView) findViewById(R.id.summaryAmount);
         tvs[3] = (TextView) findViewById(R.id.currentDailyText);
         tvs[4] = (TextView) findViewById(R.id.currentWeeklyText);
 
-        initialCard = (CardView) findViewById(R.id.initialCard);
-        currentCard = (CardView) findViewById(R.id.currentCard);
+        summaryCard = (CardView) findViewById(R.id.summaryCard);
+        tableCard = (CardView) findViewById(R.id.tableCard);
 
         initializeSpinners();
 
@@ -612,7 +613,7 @@ public class MainActivity extends AppCompatActivity {
         //feed it a useless view since an onClick method needs a view
         calculateDateDiff(findViewById(R.id.rolloverBalanceText));
 
-        initialCard.setVisibility(View.VISIBLE);
+        summaryCard.setVisibility(View.VISIBLE);
 
         DecimalFormat twoDecimal = new DecimalFormat("0.00");
         totalInitial = getPlanValue();
@@ -642,7 +643,7 @@ public class MainActivity extends AppCompatActivity {
         tvs[1].setText(twoDecimal.format(weekly));
 
         if (currentDateIsInRange && currentBalanceIsEntered()) {
-            currentCard.setVisibility(View.VISIBLE);
+            tableCard.setVisibility(View.VISIBLE);
 
             double curBalance = Double.parseDouble(currentBalance);
 
@@ -667,7 +668,7 @@ public class MainActivity extends AppCompatActivity {
             tvs[3].setText(twoDecimal.format(currentDaily));
             tvs[4].setText(twoDecimal.format(currentWeekly));
         } else { //if it can't be displayed, make sure its hidden
-            currentCard.setVisibility(View.INVISIBLE);
+            tableCard.setVisibility(View.INVISIBLE);
         }
     }
 
@@ -676,8 +677,8 @@ public class MainActivity extends AppCompatActivity {
      * Makes all TextViews invisible
      */
     private void clearResults() {
-        initialCard.setVisibility(View.INVISIBLE);
-        currentCard.setVisibility(View.INVISIBLE);
+        summaryCard.setVisibility(View.INVISIBLE);
+        tableCard.setVisibility(View.INVISIBLE);
     }
 
     /**
