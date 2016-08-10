@@ -24,6 +24,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ViewSwitcher;
 
 import net.danlew.android.joda.JodaTimeAndroid;
 
@@ -93,12 +94,13 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The EditText fields
      */
-    private EditText rolloverEditText, currentBalanceEditText, totalDaysOffEditText, pastDaysOffEditText;
+    private EditText customDiningEditText, rolloverEditText, currentBalanceEditText, totalDaysOffEditText, pastDaysOffEditText;
 
     /**
      * The text input in the fields
      */
-    private String currentBalance = "", totalDaysOff = "", pastDaysOff = "", rollOver = "", currentTerm = "", selectedMealPlan = "";
+    private String customDining = "", currentBalance = "", totalDaysOff = "", pastDaysOff = "",
+            rollOver = "", currentTerm = "", selectedMealPlan = "", lastPlanSelected = "";
 
     /**
      * Whether the fields have been entered
@@ -176,6 +178,7 @@ public class MainActivity extends AppCompatActivity {
 
         mealOptionSpinner = (Spinner) findViewById(R.id.mealOption);
         termSpinner = (Spinner) findViewById(R.id.termSpinner);
+        customDiningEditText = (EditText) findViewById(R.id.customDiningText);
         rolloverEditText = (EditText) findViewById(R.id.rolloverBalanceText);
         currentBalanceEditText = (EditText) findViewById(R.id.currentBalanceText);
         startDateText = (TextView) findViewById(R.id.startDate);
@@ -284,7 +287,13 @@ public class MainActivity extends AppCompatActivity {
         mealOptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                //saves previous meal plan before checking new one
+                //previous used to figure out if ViewSwitcher should switch
+                lastPlanSelected = selectedMealPlan;
                 updateResults();
+
+                //switches fields if needed
+                switchTotalCustom();
             }
 
             @Override
@@ -478,7 +487,7 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.mealOption3), getString(R.string.mealOption4),
                 getString(R.string.mealOption5), getString(R.string.mealOption6),
                 getString(R.string.mealOption7), getString(R.string.mealOption8),
-                getString(R.string.mealOption9)};
+                getString(R.string.mealOption9), getString(R.string.mealOptionCustom)};
         mealPlanAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, items);
         mealOptionSpinner.setAdapter(mealPlanAdapter);
 
@@ -493,27 +502,32 @@ public class MainActivity extends AppCompatActivity {
      *
      * @return the value of the selected plan
      */
-    private int getPlanValue() {
+    private float getPlanValue() {
         if (mealOptionSpinner.getSelectedItem() != null) {
             selectedMealPlan = mealOptionSpinner.getSelectedItem().toString();
             if (selectedMealPlan.equals(getString(R.string.mealOption1))) {
-                return Integer.parseInt(getString(R.string.mealOptionValue1));
+                return Float.parseFloat(getString(R.string.mealOptionValue1));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption2))) {
-                return Integer.parseInt(getString(R.string.mealOptionValue2));
+                return Float.parseFloat(getString(R.string.mealOptionValue2));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption3))) {
-                return Integer.parseInt(getString(R.string.mealOptionValue3));
+                return Float.parseFloat(getString(R.string.mealOptionValue3));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption4))) {
-                return Integer.parseInt(getString(R.string.mealOptionValue4));
+                return Float.parseFloat(getString(R.string.mealOptionValue4));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption5))) {
-                return Integer.parseInt(getString(R.string.mealOptionValue5));
+                return Float.parseFloat(getString(R.string.mealOptionValue5));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption6))) {
-                return Integer.parseInt(getString(R.string.mealOptionValue6));
+                return Float.parseFloat(getString(R.string.mealOptionValue6));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption7))) {
-                return Integer.parseInt(getString(R.string.mealOptionValue7));
+                return Float.parseFloat(getString(R.string.mealOptionValue7));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption8))) {
-                return Integer.parseInt(getString(R.string.mealOptionValue8));
+                return Float.parseFloat(getString(R.string.mealOptionValue8));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption9))) {
-                return Integer.parseInt(getString(R.string.mealOptionValue9));
+                return Float.parseFloat(getString(R.string.mealOptionValue9));
+            } else if (selectedMealPlan.equals(getString(R.string.mealOptionCustom))) { //custom dining
+                customDining = ((EditText) findViewById(R.id.customDiningText)).getText().toString();
+                if (!customDining.equals("")) {
+                    return Float.parseFloat(customDining);
+                }
             }
         }
         return 0;
@@ -525,6 +539,12 @@ public class MainActivity extends AppCompatActivity {
     private void saveValues() {
         editor.putInt("mealPlan", mealOptionSpinner.getSelectedItemPosition());
         editor.putInt("term", termSpinner.getSelectedItemPosition());
+
+        if (!customDining.equals("")) {
+            editor.putFloat("customDining", Float.parseFloat(customDining));
+        } else { //save 0 to overwrite previous value
+            editor.putFloat("customDining", 0.0f);
+        }
 
         if (!rollOver.equals("")) {
             editor.putFloat("rollOver", Float.parseFloat(rollOver));
@@ -587,6 +607,11 @@ public class MainActivity extends AppCompatActivity {
             mealOptionSpinner.setSelection(shared.getInt("mealPlan", 0));
             termSpinner.setSelection(shared.getInt("term", 0));
 
+            float customDiningRestored = shared.getFloat("customDining", 0.0f);
+            if (customDiningRestored != 0.0f) {
+                customDiningEditText.setText(String.format("%.02f", customDiningRestored));
+            }
+
             float rollOver = shared.getFloat("rollOver", 0.0f);
             if (rollOver != 0.0f) {
                 rolloverEditText.setText(String.format("%.02f", rollOver));
@@ -634,10 +659,14 @@ public class MainActivity extends AppCompatActivity {
         if (!rollOver.equals("")) {
             totalInitial += Float.parseFloat(rollOver);
         }
-        try {
-            ((TextView) findViewById(R.id.totalInitialText)).setText(twoDecimal.format(totalInitial));
-        } catch (NullPointerException e) {
-            Log.e("set total initial error", e.getMessage());
+
+        //only update total text if its showing, doesn't show with custom
+        if (!selectedMealPlan.equals(getString(R.string.mealOptionCustom))) {
+            try {
+                ((TextView) findViewById(R.id.totalInitialText)).setText(twoDecimal.format(totalInitial));
+            } catch (NullPointerException e) {
+                Log.e("set total initial error", e.getMessage());
+            }
         }
 
         double daily, weekly;
@@ -894,5 +923,14 @@ public class MainActivity extends AppCompatActivity {
         tv.setTextColor(Color.WHITE);
 
         snack.show();
+    }
+
+    /**
+     * Switches between total initial and custom dining based on spinner
+     */
+    public void switchTotalCustom() {
+        if (lastPlanSelected.equals(getString(R.string.mealOptionCustom)) || selectedMealPlan.equals(getString(R.string.mealOptionCustom))) {
+            ((ViewSwitcher) findViewById(R.id.totalCustomSwitcher)).showNext();
+        }
     }
 }

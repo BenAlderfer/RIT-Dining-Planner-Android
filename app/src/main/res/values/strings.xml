@@ -17,6 +17,7 @@
     <string name="currentBalance">Remaining</string>
     <string name="rolloverBalance">Rollover</string>
     <string name="initial">Total Initial</string>
+    <string name="custom">Custom</string>
     <string name="total">Total</string>
     <string name="past">Past</string>
 
@@ -72,6 +73,7 @@
     <string name="mealOption7">Gold ($1340)</string>
     <string name="mealOption8">Silver ($930)</string>
     <string name="mealOption9">Bronze ($515)</string>
+    <string name="mealOptionCustom">Custom</string>
 
     <string name="mealOptionValue1">1300</string>
     <string name="mealOptionValue2">700</string>
