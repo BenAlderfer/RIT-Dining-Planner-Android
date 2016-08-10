@@ -20,8 +20,8 @@
     <string name="total">Total Days Off</string>
     <string name="past">Past Days Off</string>
 
-    <string name="initialHeader"><u>Initially:</u></string>
-    <string name="currentHeader"><u>Currently:</u></string>
+    <string name="initialHeader">Average</string>
+    <string name="currentHeader">Currently</string>
 
     <string name="daily">Daily Limit: </string>
     <string name="weekly">Weekly Limit: </string>
