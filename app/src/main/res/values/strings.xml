@@ -10,16 +10,15 @@
     <string name="action_help">Help</string>
     <string name="action_about">About</string>
 
-    <string name="balanceHeader"><u>Balance</u></string>
-    <string name="dateHeader"><u>Date Range</u></string>
-    <string name="daysOffHeader"><u>Days Off</u></string>
+    <string name="balanceHeader">Balance</string>
+    <string name="dateHeader">Date Range</string>
 
     <string name="currentBalance">Remaining</string>
     <string name="rolloverBalance">Rollover</string>
     <string name="initial">Total Initial</string>
     <string name="custom">Custom</string>
-    <string name="total">Total</string>
-    <string name="past">Past</string>
+    <string name="total">Total Days Off</string>
+    <string name="past">Past Days Off</string>
 
     <string name="initialHeader"><u>Initially:</u></string>
     <string name="currentHeader"><u>Currently:</u></string>
@@ -85,14 +84,7 @@
     <string name="mealOptionValue8">930</string>
     <string name="mealOptionValue9">515</string>
 
-    <string name="fallTerm">Fall</string>
-    <string name="springTerm">Spring</string>
-    <string name="defaultTerm">Fall</string>
-
-    <string name="fallDateRange">08/22/2016-12/17/2016</string>
-    <string name="springDateRange">01/23/2017-05/19/2017</string>
-
-    <string name="fallDaysOff">3</string>
-    <string name="springDaysOff">9</string>
+    <string name="dateRange">08/22/2016-12/17/2016</string>
+    <string name="daysOff">3</string>
 
 </resources>

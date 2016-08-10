@@ -89,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The dropdowns for meal options and terms
      */
-    private Spinner mealOptionSpinner, termSpinner;
+    private Spinner mealOptionSpinner;
 
     /**
      * The EditText fields
@@ -100,7 +100,7 @@ public class MainActivity extends AppCompatActivity {
      * The text input in the fields
      */
     private String customDining = "", currentBalance = "", totalDaysOff = "", pastDaysOff = "",
-            rollOver = "", currentTerm = "", selectedMealPlan = "", lastPlanSelected = "";
+            rollOver = "", selectedMealPlan = "", lastPlanSelected = "";
 
     /**
      * Whether the fields have been entered
@@ -120,7 +120,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Adapter for the two spinners
      */
-    private ArrayAdapter<String> mealPlanAdapter, termAdapter;
+    private ArrayAdapter<String> mealPlanAdapter;
 
     /**
      * The total initial debit
@@ -177,7 +177,6 @@ public class MainActivity extends AppCompatActivity {
         isBooting = true;
 
         mealOptionSpinner = (Spinner) findViewById(R.id.mealOption);
-        termSpinner = (Spinner) findViewById(R.id.termSpinner);
         customDiningEditText = (EditText) findViewById(R.id.customDiningText);
         rolloverEditText = (EditText) findViewById(R.id.rolloverBalanceText);
         currentBalanceEditText = (EditText) findViewById(R.id.currentBalanceText);
@@ -196,11 +195,10 @@ public class MainActivity extends AppCompatActivity {
         initialCard = (CardView) findViewById(R.id.initialCard);
         currentCard = (CardView) findViewById(R.id.currentCard);
 
-        currentTerm = getResources().getString(R.string.defaultTerm);
-
         initializeSpinners();
 
         clearResults();
+        setDateDefaults();
         addListeners();
     }
 
@@ -279,6 +277,46 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Sets the date defaults based on resource strings
+     */
+    private void setDateDefaults() {
+        //get the dates, will split later
+        String dateRange = getString(R.string.dateRange);
+
+        //on boot, do not overwrite any input
+        if (isBooting) {
+            //set the days off if none were entered
+            if (totalDaysOff.equals("")) {
+                totalDaysOff = getResources().getString(R.string.daysOff);
+            }
+            isBooting = false;
+        }
+
+        //set the days off if none were entered or the other term's days were entered
+        if (totalDaysOff.equals("")) {
+            totalDaysOff = getResources().getString(R.string.daysOff);
+        }
+
+        //parse the dates
+        startMonth = Integer.parseInt(dateRange.substring(0, 2));
+        startDay = Integer.parseInt(dateRange.substring(3, 5));
+        startYear = Integer.parseInt(dateRange.substring(6, 10));
+
+        endMonth = Integer.parseInt(dateRange.substring(11, 13));
+        endDay = Integer.parseInt(dateRange.substring(14, 16));
+        endYear = Integer.parseInt(dateRange.substring(17));
+
+        //update date fields
+        startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
+        endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
+
+        //set days off after date change to prevent wrong toasts
+        totalDaysOffEditText.setText(totalDaysOff);
+
+        //call to updateResults not needed since updating other fields will do that
+    }
+
+    /**
      * Adds a listener to the EditTexts
      * Text is saved to reduce method calls
      * Updates the results if possible
@@ -300,78 +338,6 @@ public class MainActivity extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
 
             }
-        });
-
-        termSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                currentTerm = termSpinner.getSelectedItem().toString();
-                String dateRange = "";
-                switch (currentTerm) {
-                    case "Fall":
-                        //get the dates, will split later
-                        dateRange = getString(R.string.fallDateRange);
-
-                        //on boot, do not overwrite any input
-                        if (isBooting) {
-                            //set the days off if none were entered
-                            if (totalDaysOff.equals("")) {
-                                totalDaysOff = getResources().getString(R.string.fallDaysOff);
-                            }
-                            isBooting = false;
-                            break;
-                        }
-
-                        //set the days off if none were entered or the other term's days were entered
-                        if (totalDaysOff.equals("") || totalDaysOff.equals(getResources().getString(R.string.springDaysOff))) {
-                            totalDaysOff = getResources().getString(R.string.fallDaysOff);
-                        }
-
-                        break;
-                    case "Spring":
-                        //get the dates, will split later
-                        dateRange = getString(R.string.springDateRange);
-
-                        //on boot, do not overwrite any input
-                        if (isBooting) {
-                            //set the days off if none were entered
-                            if (totalDaysOff.equals("")) {
-                                totalDaysOff = getResources().getString(R.string.springDaysOff);
-                            }
-                            isBooting = false;
-                            break;
-                        }
-
-                        //set the days off if none were entered or the other term's days were entered
-                        if (totalDaysOff.equals("") || totalDaysOff.equals(getResources().getString(R.string.fallDaysOff))) {
-                            totalDaysOff = getResources().getString(R.string.springDaysOff);
-                        }
-                        break;
-                }
-                //parse the dates
-                startMonth = Integer.parseInt(dateRange.substring(0, 2));
-                startDay = Integer.parseInt(dateRange.substring(3, 5));
-                startYear = Integer.parseInt(dateRange.substring(6, 10));
-
-                endMonth = Integer.parseInt(dateRange.substring(11, 13));
-                endDay = Integer.parseInt(dateRange.substring(14, 16));
-                endYear = Integer.parseInt(dateRange.substring(17));
-
-                //update date fields
-                startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
-                endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
-
-                //set days off after date change to prevent wrong toasts
-                totalDaysOffEditText.setText(totalDaysOff);
-
-                //call to updateResults not needed since updating other fields will do that
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parent) {
-
-            }
-
         });
 
         rolloverEditText.addTextChangedListener(new TextWatcher() {
@@ -490,10 +456,6 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.mealOption9), getString(R.string.mealOptionCustom)};
         mealPlanAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, items);
         mealOptionSpinner.setAdapter(mealPlanAdapter);
-
-        String[] items2 = new String[]{getString(R.string.fallTerm), getString(R.string.springTerm)};
-        termAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, items2);
-        termSpinner.setAdapter(termAdapter);
     }
 
     /**
@@ -538,7 +500,6 @@ public class MainActivity extends AppCompatActivity {
      */
     private void saveValues() {
         editor.putInt("mealPlan", mealOptionSpinner.getSelectedItemPosition());
-        editor.putInt("term", termSpinner.getSelectedItemPosition());
 
         if (!customDining.equals("")) {
             editor.putFloat("customDining", Float.parseFloat(customDining));
@@ -605,7 +566,6 @@ public class MainActivity extends AppCompatActivity {
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
 
             mealOptionSpinner.setSelection(shared.getInt("mealPlan", 0));
-            termSpinner.setSelection(shared.getInt("term", 0));
 
             float customDiningRestored = shared.getFloat("customDining", 0.0f);
             if (customDiningRestored != 0.0f) {
@@ -927,9 +887,12 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Switches between total initial and custom dining based on spinner
+     * Switches when custom selected or last was custom and another selected
      */
     public void switchTotalCustom() {
-        if (lastPlanSelected.equals(getString(R.string.mealOptionCustom)) || selectedMealPlan.equals(getString(R.string.mealOptionCustom))) {
+        if (selectedMealPlan.equals(getString(R.string.mealOptionCustom)) ||
+                lastPlanSelected.equals(getString(R.string.mealOptionCustom)) &&
+                !selectedMealPlan.equals(getString(R.string.mealOptionCustom))) {
             ((ViewSwitcher) findViewById(R.id.totalCustomSwitcher)).showNext();
         }
     }

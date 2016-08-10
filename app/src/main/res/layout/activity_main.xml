@@ -56,7 +56,9 @@
                         android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_marginEnd="@dimen/activity_horizontal_margin"
                         android:text="@string/balanceHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textColor="@color/orangePrimary"/>
 
                     <LinearLayout
                         android:id="@+id/balanceSection"
@@ -81,8 +83,7 @@
                             android:id="@+id/totalCustomSwitcher"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:onClick="switchSwitcher">
+                            android:layout_weight="1">
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -209,22 +210,24 @@
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:layout_marginTop="@dimen/activity_vertical_margin">
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/termSpinner"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/dateHeader"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
                         android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                        android:text="@string/springTerm"
-                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        android:text="@string/dateHeader"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:textStyle="bold"
+                        android:textColor="@color/orangePrimary"/>
 
                     <LinearLayout
                         android:id="@+id/dateSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/termSpinner"
+                        android:layout_below="@+id/dateHeader"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:orientation="horizontal"
                         android:weightSum="2">
@@ -259,46 +262,12 @@
 
                     </LinearLayout>
 
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-            <!-- date card  -->
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                card_view:cardCornerRadius="4dp"
-                card_view:cardElevation="4dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/activity_vertical_margin">
-
-                    <TextView
-                        android:id="@+id/daysOffHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
-                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                        android:text="@string/daysOffHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium" />
-
                     <LinearLayout
                         android:id="@+id/daysSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/daysOffHeader"
-
+                        android:layout_below="@+id/dateSection"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
@@ -351,7 +320,7 @@
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
-            <!-- days off card  -->
+            <!-- date card  -->
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/initialCard"
