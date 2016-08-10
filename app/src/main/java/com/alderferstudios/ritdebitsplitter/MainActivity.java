@@ -163,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
         c = this;
 
         if (!isTablet(this)) {
-          //  setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
+            setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
         }
 
         shared = PreferenceManager.getDefaultSharedPreferences(this);

@@ -56,9 +56,7 @@
                         android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_marginEnd="@dimen/activity_horizontal_margin"
                         android:text="@string/balanceHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold"
-                        android:textColor="@color/orangePrimary"/>
+                        style="@style/Header"/>
 
                     <LinearLayout
                         android:id="@+id/balanceSection"
@@ -219,9 +217,7 @@
                         android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_marginEnd="@dimen/activity_horizontal_margin"
                         android:text="@string/dateHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold"
-                        android:textColor="@color/orangePrimary"/>
+                        style="@style/Header"/>
 
                     <LinearLayout
                         android:id="@+id/dateSection"
@@ -323,6 +319,148 @@
             <!-- date card  -->
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/summaryCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:gravity="center"
+                    android:orientation="vertical">
+                    
+                    <TextView
+                        android:id="@+id/summaryTop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="You can spend"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                    <TextView
+                        android:id="@+id/summaryAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="$12.34"
+                        style="@style/LargeOrange"/>
+
+                    <TextView
+                        android:id="@+id/summaryBottom"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="today and still be on schedule."
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <!-- table results card -->
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/tableCard"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                card_view:cardCornerRadius="4dp"
+                card_view:cardElevation="4dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <TableLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <TableRow
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+                            <TextView
+                                android:text=""
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemStyle"/>
+                            <TextView
+                                android:text="Daily"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemHeaderStyle"/>
+                            <TextView
+                                android:text="Monthly"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemHeaderStyle"/>
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+                            <TextView
+                                android:text="Average"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemHeaderStyle"/>
+                            <TextView
+                                android:text="$12.34"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemStyle"/>
+                            <TextView
+                                android:text="$56.78"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemStyle"/>
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_marginTop="@dimen/activity_vertical_margin">
+                            <TextView
+                                android:text="Currently"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemHeaderStyle"/>
+                            <TextView
+                                android:text="$12.34"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemStyle"/>
+                            <TextView
+                                android:text="$56.78"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemStyle"/>
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_marginTop="@dimen/activity_vertical_margin"
+                            android:layout_marginBottom="@dimen/activity_vertical_margin">
+                            <TextView
+                                android:text="Difference"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemHeaderStyle"/>
+                            <TextView
+                                android:text="$12.34"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemStyle"/>
+                            <TextView
+                                android:text="$56.78"
+                                android:textAppearance="?android:attr/textAppearanceMedium"
+                                style="@style/TableRowItemStyle"/>
+                        </TableRow>
+
+                    </TableLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+            <!-- table results card -->
+
+            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                 android:id="@+id/initialCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -348,9 +486,7 @@
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
                         android:text="@string/initialHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold"
-                        android:textColor="@color/orangePrimary" />
+                        style="@style/Header" />
 
                     <TextView
                         android:id="@+id/initDaily"
@@ -427,9 +563,7 @@
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
                         android:text="@string/currentHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textStyle="bold"
-                        android:textColor="@color/orangePrimary" />
+                        style="@style/Header" />
 
                     <TextView
                         android:id="@+id/diff"
