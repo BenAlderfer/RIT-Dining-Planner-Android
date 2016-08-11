@@ -424,12 +424,12 @@
                                     android:layout_weight="1"/>
 
                                 <TextView
-                                    android:text="Daily"
+                                    android:text="@string/daily"
                                     style="@style/TableRowItemStyle"
                                     android:layout_weight="1"/>
 
                                 <TextView
-                                    android:text="Monthly"
+                                    android:text="@string/weekly"
                                     style="@style/TableRowItemStyle"
                                     android:layout_weight="1"/>
                             </TableRow>
@@ -480,7 +480,7 @@
                                 android:layout_gravity="center_horizontal"
                                 android:weightSum="3">
                                 <TextView
-                                    android:text="Difference"
+                                    android:text="@string/differenceHeader"
                                     style="@style/TableRowItemStyle"
                                     android:layout_weight="1"/>
 
