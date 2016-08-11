@@ -3,8 +3,6 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
     </style>
 
     <!-- Base application theme. -->
@@ -17,9 +15,6 @@
     <style name="OrangeTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
-        <item name="android:colorPrimary">@color/orangePrimary</item>        <!-- action bar -->
-        <item name="android:colorPrimaryDark">@color/orangePrimaryDark</item>        <!-- status bar -->
-        <item name="android:colorAccent">@color/orangePrimary</item>        <!-- checkboxes and text fields border-->
         <item name="android:textColorPrimary">@color/black</item>        <!-- TextInputLayout text color -->
         <item name="android:editTextStyle">@style/orangeEditText</item>        <!-- EditText color -->
         <item name="android:windowBackground">@color/lightgrey</item>        <!-- background color -->
@@ -33,8 +28,6 @@
     <style name="OrangeToolbar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
-        <item name="android:colorPrimary">@color/orangePrimary</item>        <!-- action bar -->
-        <item name="android:colorPrimaryDark">@color/orangePrimaryDark</item>        <!-- status bar -->
         <item name="android:textColorPrimary">@color/white</item>        <!-- activity name text color -->
         <item name="android:textColorSecondary">@color/white</item>        <!-- overflow text color -->
         <item name="android:background">@color/orangePrimary</item>        <!-- background color -->
@@ -56,7 +49,6 @@
 
     <style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
         <item name="android:textSize">15sp</item>
-        <item name="android:buttonTint">@color/orangePrimary</item>
     </style>
 
     <!-- Calendar pop up theme -->
