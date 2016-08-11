@@ -403,12 +403,12 @@
 
                             <TextView
                                 android:text="Daily"
-                                style="@style/TableRowItemHeaderStyle"
+                                style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
 
                             <TextView
                                 android:text="Monthly"
-                                style="@style/TableRowItemHeaderStyle"
+                                style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
                         </TableRow>
 
@@ -418,18 +418,16 @@
                             android:weightSum="3">
                             <TextView
                                 android:text="@string/initialHeader"
-                                style="@style/TableRowItemHeaderStyle"
+                                style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
 
                             <TextView
                                 android:id="@+id/initDailyText"
-                                android:text="$12.34"
                                 style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
 
                             <TextView
                                 android:id="@+id/initWeeklyText"
-                                android:text="$56.78"
                                 style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
                         </TableRow>
@@ -440,18 +438,16 @@
                             android:weightSum="3">
                             <TextView
                                 android:text="@string/currentHeader"
-                                style="@style/TableRowItemHeaderStyle"
+                                style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
 
                             <TextView
                                 android:id="@+id/currentDailyText"
-                                android:text="$12.34"
                                 style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
 
                             <TextView
                                 android:id="@+id/currentWeeklyText"
-                                android:text="$56.78"
                                 style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
                         </TableRow>
@@ -463,16 +459,16 @@
                             android:weightSum="3">
                             <TextView
                                 android:text="Difference"
-                                style="@style/TableRowItemHeaderStyle"
-                                android:layout_weight="1"/>
-
-                            <TextView
-                                android:text="$12.34"
                                 style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
 
                             <TextView
-                                android:text="$56.78"
+                                android:id="@+id/differenceDailyText"
+                                style="@style/TableRowItemStyle"
+                                android:layout_weight="1"/>
+
+                            <TextView
+                                android:id="@+id/differenceWeeklyText"
                                 style="@style/TableRowItemStyle"
                                 android:layout_weight="1"/>
                         </TableRow>

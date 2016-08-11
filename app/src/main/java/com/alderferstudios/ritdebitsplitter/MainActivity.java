@@ -72,14 +72,16 @@ public class MainActivity extends AppCompatActivity {
     /**
      * The results TextViews
      * <p/>
-     * 0 - Initial Daily
-     * 1 - Initial Weekly
+     * 0 - summary amount - "you can spend"
      * <p/>
-     * 2 - Diff
+     * 1 - Average Daily
+     * 2 - Average Weekly
      * 3 - Current Daily
      * 4 - Current Weekly
+     * 5 - Difference Daily
+     * 6 - Difference Weekly
      */
-    private TextView[] tvs = new TextView[5];
+    private TextView[] tvs = new TextView[7];
 
     /**
      * Start and end date TextViews
@@ -185,13 +187,14 @@ public class MainActivity extends AppCompatActivity {
         totalDaysOffEditText = (EditText) findViewById(R.id.totalDaysOffText);
         pastDaysOffEditText = (EditText) findViewById(R.id.pastDaysOffText);
 
-        tvs[0] = (TextView) findViewById(R.id.initDailyText);
-        tvs[1] = (TextView) findViewById(R.id.initWeeklyText);
+        tvs[0] = (TextView) findViewById(R.id.summaryAmount);
 
-        //////////////////////////////////////////////////////////////////////////////////////////////////////////
-        tvs[2] = (TextView) findViewById(R.id.summaryAmount);
+        tvs[1] = (TextView) findViewById(R.id.initDailyText);
+        tvs[2] = (TextView) findViewById(R.id.initWeeklyText);
         tvs[3] = (TextView) findViewById(R.id.currentDailyText);
         tvs[4] = (TextView) findViewById(R.id.currentWeeklyText);
+        tvs[5] = (TextView) findViewById(R.id.differenceDailyText);
+        tvs[6] = (TextView) findViewById(R.id.differenceWeeklyText);
 
         summaryCard = (CardView) findViewById(R.id.summaryCard);
         tableCard = (CardView) findViewById(R.id.tableCard);
@@ -630,25 +633,28 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        double daily, weekly;
+        double averageDaily, averageWeekly;
         if (weekDiff > 0) {
-            daily = totalInitial / ((weekDiff * 7) + dayDiff);
-            weekly = daily * 7;
+            averageDaily = totalInitial / ((weekDiff * 7) + dayDiff);
+            averageWeekly = averageDaily * 7;
         } else {    //only 1 week or less
-            weekly = totalInitial;
-            daily = weekly / currentDayDiff;
+            averageWeekly = totalInitial;
+            averageDaily = averageWeekly / currentDayDiff;
         }
 
-        tvs[0].setText(twoDecimal.format(daily));
-        tvs[1].setText(twoDecimal.format(weekly));
-
         if (currentDateIsInRange && currentBalanceIsEntered()) {
+            summaryCard.setVisibility(View.VISIBLE);
             tableCard.setVisibility(View.VISIBLE);
 
             double curBalance = Double.parseDouble(currentBalance);
 
             // current balance - amount that should be left initially
-            double diff = curBalance - (weekly * currentWeekDiff + daily * currentDayDiff);
+            double diff = curBalance - (averageWeekly * currentWeekDiff + averageDaily * currentDayDiff);
+            if (diff > 0) {
+                tvs[0].setText("+$" + twoDecimal.format(diff));
+            } else {
+                tvs[0].setText("-$" + twoDecimal.format(Math.abs(diff)));
+            }
 
             double currentWeekly, currentDaily;
             if (currentWeekDiff > 0) {
@@ -659,15 +665,20 @@ public class MainActivity extends AppCompatActivity {
                 currentDaily = currentWeekly / currentDayDiff;
             }
 
-            if (diff > 0) {
-                tvs[2].setText("+" + twoDecimal.format(diff));
-            } else {
-                tvs[2].setText(twoDecimal.format(diff));
-            }
+            //set average calculations
+            tvs[1].setText(twoDecimal.format(averageDaily));
+            tvs[2].setText(twoDecimal.format(averageWeekly));
 
+            //set current calculations
             tvs[3].setText(twoDecimal.format(currentDaily));
             tvs[4].setText(twoDecimal.format(currentWeekly));
+
+            //set difference calculations
+            tvs[5].setText(twoDecimal.format(averageDaily - currentDaily));
+            tvs[6].setText(twoDecimal.format(averageWeekly - currentWeekly));
+
         } else { //if it can't be displayed, make sure its hidden
+            summaryCard.setVisibility(View.INVISIBLE);
             tableCard.setVisibility(View.INVISIBLE);
         }
     }
