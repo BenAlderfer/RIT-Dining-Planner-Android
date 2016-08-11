@@ -63,9 +63,7 @@
                             android:layout_marginRight="@dimen/activity_horizontal_margin"
                             android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="@string/balanceHeader"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textStyle="bold"
-                            android:textColor="@color/orangePrimary"/>
+                            style="@style/Header"/>
 
                         <LinearLayout
                             android:id="@+id/balanceSection"
@@ -226,9 +224,7 @@
                             android:layout_marginRight="@dimen/activity_horizontal_margin"
                             android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:text="@string/dateHeader"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textStyle="bold"
-                            android:textColor="@color/orangePrimary"/>
+                            style="@style/Header"/>
 
                         <LinearLayout
                             android:id="@+id/dateSection"
@@ -344,7 +340,7 @@
                 android:orientation="vertical">
 
                 <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/initialCard"
+                    android:id="@+id/summaryCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -353,81 +349,50 @@
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
                     android:layout_marginRight="@dimen/activity_horizontal_margin"
                     android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                    android:layout_marginTop="@dimen/activity_vertical_margin"
+                    android:layout_marginTop="@dimen/activity_horizontal_margin"
                     card_view:cardCornerRadius="4dp"
                     card_view:cardElevation="4dp">
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_vertical_margin"
-                        android:layout_marginTop="@dimen/activity_vertical_margin">
+                        android:layout_height="match_parent"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        android:orientation="vertical">
 
                         <TextView
-                            android:id="@+id/initialHeader"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/summaryTop"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginStart="@dimen/activity_horizontal_margin"
-                            android:text="@string/initialHeader"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textStyle="bold"
-                            android:textColor="@color/orangePrimary" />
+                            android:gravity="center_horizontal"
+                            android:text="You can spend"
+                            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                         <TextView
-                            android:id="@+id/initDaily"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/summaryAmount"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/initialHeader"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginStart="@dimen/activity_horizontal_margin"
-                            android:text="@string/daily"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                            android:gravity="center_horizontal"
+                            android:padding="@dimen/activity_horizontal_margin"
+                            android:text="$12.34"
+                            style="@style/LargeOrange"/>
 
                         <TextView
-                            android:id="@+id/initDailyText"
-                            android:layout_width="wrap_content"
+                            android:id="@+id/summaryBottom"
+                            android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_alignBaseline="@+id/initDaily"
-                            android:layout_alignEnd="@+id/initWeeklyText"
-                            android:layout_alignRight="@+id/initWeeklyText"
-                            android:gravity="end"
-                            android:text="10.00"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                            android:gravity="center_horizontal"
+                            android:text="today and still be on schedule."
+                            android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-                        <TextView
-                            android:id="@+id/initWeekly"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/initDaily"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginStart="@dimen/activity_horizontal_margin"
-                            android:text="@string/weekly"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                        <TextView
-                            android:id="@+id/initWeeklyText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBaseline="@+id/initWeekly"
-                            android:layout_marginLeft="@dimen/large_horizontal_margin"
-                            android:layout_marginStart="@dimen/large_horizontal_margin"
-                            android:layout_toEndOf="@+id/initWeekly"
-                            android:layout_toRightOf="@+id/initWeekly"
-                            android:gravity="end"
-                            android:text="10.00"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
-
-                    </RelativeLayout>
+                    </LinearLayout>
 
                 </android.support.v7.widget.CardView>
-                <!-- initial result card  -->
+                <!-- results summary card -->
 
                 <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                    android:id="@+id/currentCard"
+                    android:id="@+id/tableCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:layout_marginLeft="@dimen/activity_horizontal_margin"
                     android:layout_marginStart="@dimen/activity_horizontal_margin"
@@ -436,92 +401,106 @@
                     card_view:cardCornerRadius="4dp"
                     card_view:cardElevation="4dp">
 
-                    <RelativeLayout
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/activity_vertical_margin"
-                        android:layout_marginTop="@dimen/activity_vertical_margin">
+                        android:layout_height="match_parent"
+                        android:orientation="vertical">
 
-                        <TextView
-                            android:id="@+id/currentHeader"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
+                        <TableLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"
                             android:layout_marginStart="@dimen/activity_horizontal_margin"
-                            android:text="@string/currentHeader"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textStyle="bold"
-                            android:textColor="@color/orangePrimary" />
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
-                        <TextView
-                            android:id="@+id/diff"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/currentHeader"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginStart="@dimen/activity_horizontal_margin"
-                            android:text="@string/difference"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                            <TableRow
+                                android:layout_marginTop="@dimen/activity_vertical_margin"
+                                android:layout_gravity="center_horizontal"
+                                android:weightSum="3">
+                                <TextView
+                                    android:text=""
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
 
-                        <TextView
-                            android:id="@+id/diffText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBaseline="@+id/diff"
-                            android:layout_alignEnd="@+id/currentWeeklyText"
-                            android:layout_alignRight="@+id/currentWeeklyText"
-                            android:gravity="end"
-                            android:text="10.00"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                                <TextView
+                                    android:text="Daily"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
 
-                        <TextView
-                            android:id="@+id/currentDaily"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/diff"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginStart="@dimen/activity_horizontal_margin"
-                            android:text="@string/daily"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                                <TextView
+                                    android:text="Monthly"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
+                            </TableRow>
 
-                        <TextView
-                            android:id="@+id/currentDailyText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBaseline="@+id/currentDaily"
-                            android:layout_alignEnd="@+id/currentWeeklyText"
-                            android:layout_alignRight="@+id/currentWeeklyText"
-                            android:gravity="end"
-                            android:text="10.00"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                            <TableRow
+                                android:layout_marginTop="@dimen/activity_vertical_margin"
+                                android:layout_gravity="center_horizontal"
+                                android:weightSum="3">
+                                <TextView
+                                    android:text="@string/initialHeader"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
 
-                        <TextView
-                            android:id="@+id/currentWeekly"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/currentDaily"
-                            android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginStart="@dimen/activity_horizontal_margin"
-                            android:text="@string/weekly"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                                <TextView
+                                    android:id="@+id/initDailyText"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
 
-                        <TextView
-                            android:id="@+id/currentWeeklyText"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignBaseline="@+id/currentWeekly"
-                            android:layout_marginLeft="@dimen/large_horizontal_margin"
-                            android:layout_marginStart="@dimen/large_horizontal_margin"
-                            android:layout_toEndOf="@+id/currentWeekly"
-                            android:layout_toRightOf="@+id/currentWeekly"
-                            android:gravity="end"
-                            android:text="10.00"
-                            android:textAppearance="?android:attr/textAppearanceMedium" />
+                                <TextView
+                                    android:id="@+id/initWeeklyText"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
+                            </TableRow>
 
-                    </RelativeLayout>
+                            <TableRow
+                                android:layout_marginTop="@dimen/activity_vertical_margin"
+                                android:layout_gravity="center_horizontal"
+                                android:weightSum="3">
+                                <TextView
+                                    android:text="@string/currentHeader"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
+
+                                <TextView
+                                    android:id="@+id/currentDailyText"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
+
+                                <TextView
+                                    android:id="@+id/currentWeeklyText"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_marginTop="@dimen/activity_vertical_margin"
+                                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                                android:layout_gravity="center_horizontal"
+                                android:weightSum="3">
+                                <TextView
+                                    android:text="Difference"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
+
+                                <TextView
+                                    android:id="@+id/differenceDailyText"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
+
+                                <TextView
+                                    android:id="@+id/differenceWeeklyText"
+                                    style="@style/TableRowItemStyle"
+                                    android:layout_weight="1"/>
+                            </TableRow>
+
+                        </TableLayout>
+
+                    </LinearLayout>
 
                 </android.support.v7.widget.CardView>
-                <!-- current result card  -->
+                <!-- table results card -->
 
             </LinearLayout>
 
