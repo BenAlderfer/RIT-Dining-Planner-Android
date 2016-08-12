@@ -638,10 +638,10 @@ public class MainActivity extends AppCompatActivity {
             tableCard.setVisibility(View.VISIBLE);
 
             double averageDaily, averageWeekly;
-            if (weekDiff > 0) {
+            if (weekDiff > 1 || (weekDiff == 1 && dayDiff > 1)) {
                 averageDaily = totalInitial / ((weekDiff * 7) + dayDiff);
                 averageWeekly = averageDaily * 7;
-            } else {    //only 1 week or less
+            } else {    //1 week or less
                 averageWeekly = totalInitial;
                 averageDaily = totalInitial / dayDiff;
             }
@@ -650,55 +650,55 @@ public class MainActivity extends AppCompatActivity {
 
             // current balance - amount that should be left initially
             double diff = curBalance - (averageWeekly * currentWeekDiff + averageDaily * currentDayDiff);
-            if (diff > 0) {
+            if (diff >= 0) {
                 tvs[0].setText("+$" + twoDecimal.format(diff));
             } else {
                 tvs[0].setText("-$" + twoDecimal.format(Math.abs(diff)));
             }
 
             double currentWeekly, currentDaily;
-            if (currentWeekDiff > 0) {
+            if (currentWeekDiff > 1 || (currentWeekDiff == 1 && currentDayDiff > 1)) {
                 currentDaily = curBalance / ((currentWeekDiff * 7) + currentDayDiff);
                 currentWeekly = currentDaily * 7;
-            } else {    //only 1 week or less
+            } else {     //1 week or less
                 currentWeekly = curBalance;
                 currentDaily = curBalance / currentDayDiff;
             }
 
             //set average calculations
-            if (averageDaily > 0) {
+            if (averageDaily >= 0) {
                 tvs[1].setText("+$" + twoDecimal.format(averageDaily));
             } else {
                 tvs[1].setText("-$" + twoDecimal.format(Math.abs(averageDaily)));
             }
 
-            if (averageWeekly > 0) {
+            if (averageWeekly >= 0) {
                 tvs[2].setText("+$" + twoDecimal.format(averageWeekly));
             } else {
                 tvs[2].setText("-$" + twoDecimal.format(Math.abs(averageWeekly)));
             }
 
             //set current calculations
-            if (currentDaily > 0) {
+            if (currentDaily >= 0) {
                 tvs[3].setText("+$" + twoDecimal.format(currentDaily));
             } else {
                 tvs[3].setText("-$" + twoDecimal.format(Math.abs(currentDaily)));
             }
 
-            if (currentWeekly > 0) {
+            if (currentWeekly >= 0) {
                 tvs[4].setText("+$" + twoDecimal.format(currentWeekly));
             } else {
                 tvs[4].setText("-$" + twoDecimal.format(Math.abs(currentWeekly)));
             }
 
             //set difference calculations
-            if (currentDaily - averageDaily  > 0) {
+            if (currentDaily - averageDaily  >= 0) {
                 tvs[5].setText("+$" + twoDecimal.format(currentDaily - averageDaily));
             } else {
                 tvs[5].setText("-$" + twoDecimal.format(Math.abs(currentDaily - averageDaily)));
             }
 
-            if (currentWeekly - averageWeekly > 0) {
+            if (currentWeekly - averageWeekly >= 0) {
                 tvs[6].setText("+$" + twoDecimal.format(currentWeekly - averageWeekly));
             } else {
                 tvs[6].setText("-$" + twoDecimal.format(Math.abs(currentWeekly - averageWeekly)));
