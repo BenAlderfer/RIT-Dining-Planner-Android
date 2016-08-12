@@ -255,7 +255,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(settingsActivity);
                 return true;
             case R.id.tigerbucks:
-                Intent tigerbucks = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu/tigerBucks/app/index.html"));
+                Intent tigerbucks = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu"));
                 tigerbucks.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 tigerbucks.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 tigerbucks.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
