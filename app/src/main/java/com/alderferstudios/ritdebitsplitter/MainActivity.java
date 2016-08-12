@@ -633,18 +633,18 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        double averageDaily, averageWeekly;
-        if (weekDiff > 0) {
-            averageDaily = totalInitial / ((weekDiff * 7) + dayDiff);
-            averageWeekly = averageDaily * 7;
-        } else {    //only 1 week or less
-            averageWeekly = totalInitial;
-            averageDaily = averageWeekly / currentDayDiff;
-        }
-
         if (currentDateIsInRange && currentBalanceIsEntered()) {
             summaryCard.setVisibility(View.VISIBLE);
             tableCard.setVisibility(View.VISIBLE);
+
+            double averageDaily, averageWeekly;
+            if (weekDiff > 0) {
+                averageDaily = totalInitial / ((weekDiff * 7) + dayDiff);
+                averageWeekly = averageDaily * 7;
+            } else {    //only 1 week or less
+                averageWeekly = totalInitial;
+                averageDaily = totalInitial / dayDiff;
+            }
 
             double curBalance = Double.parseDouble(currentBalance);
 
@@ -662,20 +662,47 @@ public class MainActivity extends AppCompatActivity {
                 currentWeekly = currentDaily * 7;
             } else {    //only 1 week or less
                 currentWeekly = curBalance;
-                currentDaily = currentWeekly / currentDayDiff;
+                currentDaily = curBalance / currentDayDiff;
             }
 
             //set average calculations
-            tvs[1].setText(twoDecimal.format(averageDaily));
-            tvs[2].setText(twoDecimal.format(averageWeekly));
+            if (averageDaily > 0) {
+                tvs[1].setText("+$" + twoDecimal.format(averageDaily));
+            } else {
+                tvs[1].setText("-$" + twoDecimal.format(Math.abs(averageDaily)));
+            }
+
+            if (averageWeekly > 0) {
+                tvs[2].setText("+$" + twoDecimal.format(averageWeekly));
+            } else {
+                tvs[2].setText("-$" + twoDecimal.format(Math.abs(averageWeekly)));
+            }
 
             //set current calculations
-            tvs[3].setText(twoDecimal.format(currentDaily));
-            tvs[4].setText(twoDecimal.format(currentWeekly));
+            if (currentDaily > 0) {
+                tvs[3].setText("+$" + twoDecimal.format(currentDaily));
+            } else {
+                tvs[3].setText("-$" + twoDecimal.format(Math.abs(currentDaily)));
+            }
+
+            if (currentWeekly > 0) {
+                tvs[4].setText("+$" + twoDecimal.format(currentWeekly));
+            } else {
+                tvs[4].setText("-$" + twoDecimal.format(Math.abs(currentWeekly)));
+            }
 
             //set difference calculations
-            tvs[5].setText(twoDecimal.format(averageDaily - currentDaily));
-            tvs[6].setText(twoDecimal.format(averageWeekly - currentWeekly));
+            if (currentDaily - averageDaily  > 0) {
+                tvs[5].setText("+$" + twoDecimal.format(currentDaily - averageDaily));
+            } else {
+                tvs[5].setText("-$" + twoDecimal.format(Math.abs(currentDaily - averageDaily)));
+            }
+
+            if (currentWeekly - averageWeekly > 0) {
+                tvs[6].setText("+$" + twoDecimal.format(currentWeekly - averageWeekly));
+            } else {
+                tvs[6].setText("-$" + twoDecimal.format(Math.abs(currentWeekly - averageWeekly)));
+            }
 
         } else { //if it can't be displayed, make sure its hidden
             summaryCard.setVisibility(View.INVISIBLE);
@@ -735,8 +762,8 @@ public class MainActivity extends AppCompatActivity {
      * Months are reported as 1 off so 1 added
      *
      * @param requestCode - useless
-     * @param resultCode  - useless
-     * @param data        - the Intent with the date
+     * @param resultCode - useless
+     * @param data - the Intent with the date
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

@@ -60,7 +60,7 @@
     <style name="TableRowItemStyle">
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceLarge</item>
+        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
     </style>
 
     <style name="Header">
