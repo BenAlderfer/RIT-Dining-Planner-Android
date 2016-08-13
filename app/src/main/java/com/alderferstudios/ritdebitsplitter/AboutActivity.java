@@ -26,6 +26,7 @@ public class AboutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setTitle(getResources().getString(R.string.title_activity_about));
         }
 
         //set the version text to the current version

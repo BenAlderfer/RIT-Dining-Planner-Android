@@ -36,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setTitle(getResources().getString(R.string.title_activity_settings));
         }
 
         //lock orientation on phones
