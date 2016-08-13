@@ -144,6 +144,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean isBooting;
 
     /**
+     * if the snackbar is currently showing
+     */
+    private boolean snackbarIsShowing = false;
+
+    /**
      * Formats a number with 2 decimal points
      */
     private DecimalFormat twoDecimal;
@@ -945,7 +950,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void showSnackbar(String textToShow) throws NullPointerException {
         final Snackbar snack = Snackbar.make(findViewById(R.id.display), textToShow, Snackbar.LENGTH_LONG);
-        snack.setAction("Dismiss", new View.OnClickListener() {
+        snack.setAction(getString(R.string.dismiss), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 snack.dismiss();
@@ -958,7 +963,23 @@ public class MainActivity extends AppCompatActivity {
         TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
         tv.setTextColor(Color.WHITE);
 
-        snack.show();
+        //set callbacks to know if snackbar is showing
+        snack.setCallback(new Snackbar.Callback() {
+            @Override
+            public void onDismissed(Snackbar snackbar, int event) {
+                super.onDismissed(snackbar, event);
+                snackbarIsShowing = false;
+            }
+
+            @Override
+            public void onShown(Snackbar snackbar) {
+                snackbarIsShowing = true;
+            }
+        });
+
+        if (!snackbarIsShowing) {
+            snack.show();
+        }
     }
 
     /**
