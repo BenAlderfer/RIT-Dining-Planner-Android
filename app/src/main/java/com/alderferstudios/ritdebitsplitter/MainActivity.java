@@ -656,7 +656,6 @@ public class MainActivity extends AppCompatActivity {
      * Updates the results text
      */
     private void updateResults() {
-        //feed it a useless view since an onClick method needs a view
         calculateDateDiff();
 
         summaryCard.setVisibility(View.VISIBLE);
