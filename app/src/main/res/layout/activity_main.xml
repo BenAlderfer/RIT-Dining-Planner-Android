@@ -115,7 +115,7 @@
                                 android:layout_height="wrap_content"
                                 android:theme="@style/TextLabel">
 
-                                <android.support.v7.widget.AppCompatEditText
+                                <android.support.design.widget.TextInputEditText
                                     android:id="@+id/customDiningText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -147,7 +147,7 @@
                             android:layout_weight="1"
                             android:theme="@style/TextLabel">
 
-                            <android.support.v7.widget.AppCompatEditText
+                            <android.support.design.widget.TextInputEditText
                                 android:id="@+id/rolloverBalanceText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -169,7 +169,7 @@
                             android:layout_weight="1"
                             android:theme="@style/TextLabel">
 
-                            <android.support.v7.widget.AppCompatEditText
+                            <android.support.design.widget.TextInputEditText
                                 android:id="@+id/currentBalanceText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -274,7 +274,7 @@
                             android:layout_weight="1"
                             android:theme="@style/TextLabel">
 
-                            <android.support.v7.widget.AppCompatEditText
+                            <android.support.design.widget.TextInputEditText
                                 android:id="@+id/totalDaysOffText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -296,7 +296,7 @@
                             android:layout_weight="1"
                             android:theme="@style/TextLabel">
 
-                            <android.support.v7.widget.AppCompatEditText
+                            <android.support.design.widget.TextInputEditText
                                 android:id="@+id/pastDaysOffText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
