@@ -48,14 +48,6 @@
     <string name="dateRange">08/22/2016-12/17/2016</string>
     <string name="daysOff">3</string>
 
-    <string name="startMonth">8</string>
-    <string name="startDay">22</string>
-    <string name="startYear">2016</string>
-
-    <string name="endMonth">12</string>
-    <string name="endDay">17</string>
-    <string name="endYear">2016</string>
-
     <!-- Results strings -->
     <string name="daily">Daily </string>
     <string name="weekly">Weekly</string>
