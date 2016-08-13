@@ -917,7 +917,6 @@ public class MainActivity extends AppCompatActivity {
         } else if (currentBalanceIsEntered()) {
             try {
                 showSnackbar(getResources().getString(R.string.dateOutOfRangeMessage));
-                updateResults();
             } catch (NullPointerException e) {
                 Log.e("date out of range error", e.getMessage());
             }
