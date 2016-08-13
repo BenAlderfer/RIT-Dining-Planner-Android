@@ -201,7 +201,7 @@ public class MainActivity extends AppCompatActivity {
 
         initializeSpinners();
 
-        clearResults();
+        hideResults();
         setDateDefaults();
         addListeners();
     }
@@ -505,7 +505,7 @@ public class MainActivity extends AppCompatActivity {
             } else if (selectedMealPlan.equals(getString(R.string.mealOption9))) {
                 return Float.parseFloat(getString(R.string.mealOptionValue9));
             } else if (selectedMealPlan.equals(getString(R.string.mealOptionCustom))) { //custom dining
-                customDining = ((EditText) findViewById(R.id.customDiningText)).getText().toString();
+                customDining = customDiningEditText.getText().toString();
                 if (!customDining.equals("")) {
                     return Float.parseFloat(customDining);
                 }
@@ -720,8 +720,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         } else { //if it can't be displayed, make sure its hidden
-            summaryCard.setVisibility(View.INVISIBLE);
-            tableCard.setVisibility(View.INVISIBLE);
+            hideResults();
         }
     }
 
@@ -729,7 +728,7 @@ public class MainActivity extends AppCompatActivity {
      * If the results cannot be updated, then nothing should be displayed
      * Makes all TextViews invisible
      */
-    private void clearResults() {
+    private void hideResults() {
         summaryCard.setVisibility(View.INVISIBLE);
         tableCard.setVisibility(View.INVISIBLE);
     }
