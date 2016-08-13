@@ -222,7 +222,7 @@ public class MainActivity extends AppCompatActivity {
 
         twoDecimal = new DecimalFormat("0.00");
 
-        initializeSpinners();
+        initializeSpinner();
 
         hideResults();
         setDateDefaults();
@@ -487,7 +487,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Sets the items in the meal option dropdown menu
      */
-    private void initializeSpinners() {
+    private void initializeSpinner() {
         String[] items = new String[]{getString(R.string.mealOption1), getString(R.string.mealOption2),
                 getString(R.string.mealOption3), getString(R.string.mealOption4),
                 getString(R.string.mealOption5), getString(R.string.mealOption6),
