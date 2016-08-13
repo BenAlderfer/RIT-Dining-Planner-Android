@@ -344,6 +344,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        customDiningEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                updateResults();
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+            }
+        });
+
         rolloverEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -772,15 +787,15 @@ public class MainActivity extends AppCompatActivity {
 
         if (resultCode != RESULT_CANCELED) {    //only gets info if they didn't press back
             if (dateBeingSet.equals("start")) {
-                startYear = data.getIntExtra("year", 2016);
-                startMonth = data.getIntExtra("month", 1) + 1;
-                startDay = data.getIntExtra("day", 25);
+                startYear = data.getIntExtra("year", Integer.parseInt(getString(R.string.startYear)));
+                startMonth = data.getIntExtra("month", Integer.parseInt(getString(R.string.startMonth))) + 1;
+                startDay = data.getIntExtra("day", Integer.parseInt(getString(R.string.startDay)));
                 startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
                 updateResults();
             } else {
-                endYear = data.getIntExtra("year", 2016);
-                endMonth = data.getIntExtra("month", 1) + 1;
-                endDay = data.getIntExtra("day", 25);
+                endYear = data.getIntExtra("year", Integer.parseInt(getString(R.string.endYear)));
+                endMonth = data.getIntExtra("month", Integer.parseInt(getString(R.string.endMonth))) + 1;
+                endDay = data.getIntExtra("day", Integer.parseInt(getString(R.string.endDay)));
                 endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
                 updateResults();
             }
@@ -837,7 +852,9 @@ public class MainActivity extends AppCompatActivity {
         String currentYear = currentDate.substring(0, 4);
         String currentMonth = currentDate.substring(5, 7);
         String currentDay = currentDate.substring(8, 10);
-        int year = 2016, month = 1, day = 25;
+        int year = Integer.parseInt(getString(R.string.startYear));
+        int month = Integer.parseInt(getString(R.string.startMonth));
+        int day = Integer.parseInt(getString(R.string.startDay));
         if (!currentYear.equals("")) {
             year = Integer.parseInt(currentYear);
         }
@@ -932,6 +949,7 @@ public class MainActivity extends AppCompatActivity {
         if (selectedMealPlan.equals(getString(R.string.mealOptionCustom)) ||
                 lastPlanSelected.equals(getString(R.string.mealOptionCustom)) &&
                 !selectedMealPlan.equals(getString(R.string.mealOptionCustom))) {
+
             ((ViewSwitcher) findViewById(R.id.totalCustomSwitcher)).showNext();
         }
     }
