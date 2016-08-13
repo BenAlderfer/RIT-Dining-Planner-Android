@@ -143,6 +143,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean isBooting;
 
     /**
+     * Formats a number with 2 decimal points
+     */
+    private DecimalFormat twoDecimal;
+
+    /**
      * Checks if the device is a tablet
      *
      * @param context the Context
@@ -214,6 +219,8 @@ public class MainActivity extends AppCompatActivity {
         defaultEndMonth = Integer.parseInt(dateRange.substring(11, 13));
         defaultEndDay = Integer.parseInt(dateRange.substring(14, 16));
         defaultEndYear = Integer.parseInt(dateRange.substring(17));
+
+        twoDecimal = new DecimalFormat("0.00");
 
         initializeSpinners();
 
@@ -633,15 +640,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Formats given number with leading sign and $
+     * @param number the number to format
+     * @return the formatted number
+     */
+    private String formatNumber(double number) {
+        if (number >= 0) {
+            return "+$" + twoDecimal.format(number);
+        } else {
+            return "-$" + twoDecimal.format(Math.abs(number));
+        }
+    }
+
+    /**
      * Updates the results text
      */
     private void updateResults() {
         //feed it a useless view since an onClick method needs a view
-        calculateDateDiff(findViewById(R.id.rolloverBalanceText));
+        calculateDateDiff();
 
         summaryCard.setVisibility(View.VISIBLE);
 
-        DecimalFormat twoDecimal = new DecimalFormat("0.00");
         totalInitial = getPlanValue();
         if (!rollOver.equals("")) {
             totalInitial += Float.parseFloat(rollOver);
@@ -673,11 +692,7 @@ public class MainActivity extends AppCompatActivity {
 
             // current balance - amount that should be left initially
             double diff = curBalance - (averageWeekly * currentWeekDiff + averageDaily * currentDayDiff);
-            if (diff >= 0) {
-                tvs[0].setText("+$" + twoDecimal.format(diff));
-            } else {
-                tvs[0].setText("-$" + twoDecimal.format(Math.abs(diff)));
-            }
+            tvs[0].setText(formatNumber(diff));
 
             double currentWeekly, currentDaily;
             if (currentWeekDiff > 1 || (currentWeekDiff == 1 && currentDayDiff > 1)) {
@@ -689,43 +704,16 @@ public class MainActivity extends AppCompatActivity {
             }
 
             //set average calculations
-            if (averageDaily >= 0) {
-                tvs[1].setText("+$" + twoDecimal.format(averageDaily));
-            } else {
-                tvs[1].setText("-$" + twoDecimal.format(Math.abs(averageDaily)));
-            }
-
-            if (averageWeekly >= 0) {
-                tvs[2].setText("+$" + twoDecimal.format(averageWeekly));
-            } else {
-                tvs[2].setText("-$" + twoDecimal.format(Math.abs(averageWeekly)));
-            }
+            tvs[1].setText(formatNumber(averageDaily));
+            tvs[2].setText(formatNumber(averageWeekly));
 
             //set current calculations
-            if (currentDaily >= 0) {
-                tvs[3].setText("+$" + twoDecimal.format(currentDaily));
-            } else {
-                tvs[3].setText("-$" + twoDecimal.format(Math.abs(currentDaily)));
-            }
-
-            if (currentWeekly >= 0) {
-                tvs[4].setText("+$" + twoDecimal.format(currentWeekly));
-            } else {
-                tvs[4].setText("-$" + twoDecimal.format(Math.abs(currentWeekly)));
-            }
+            tvs[3].setText(formatNumber(currentDaily));
+            tvs[4].setText(formatNumber(currentWeekly));
 
             //set difference calculations
-            if (currentDaily - averageDaily  >= 0) {
-                tvs[5].setText("+$" + twoDecimal.format(currentDaily - averageDaily));
-            } else {
-                tvs[5].setText("-$" + twoDecimal.format(Math.abs(currentDaily - averageDaily)));
-            }
-
-            if (currentWeekly - averageWeekly >= 0) {
-                tvs[6].setText("+$" + twoDecimal.format(currentWeekly - averageWeekly));
-            } else {
-                tvs[6].setText("-$" + twoDecimal.format(Math.abs(currentWeekly - averageWeekly)));
-            }
+            tvs[5].setText(formatNumber(currentDaily - averageDaily));
+            tvs[6].setText(formatNumber(currentWeekly - averageWeekly));
 
         } else { //if it can't be displayed, make sure its hidden
             hideResults();
@@ -830,7 +818,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Calculates the difference in the two dates
      */
-    public void calculateDateDiff(View v) {
+    public void calculateDateDiff() {
 
         DateTimeZone Eastern = DateTimeZone.forID("America/New_York");
         DateTime start = new DateTime(startYear, startMonth, startDay, 0, 0, 0, Eastern);
