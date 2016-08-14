@@ -75,4 +75,10 @@
         <item name="android:textColor">@color/orangePrimary</item>
     </style>
 
+    <style name="ColoredButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/orangePrimaryDark</item>
+        <item name="colorButtonNormal">@color/orangePrimary</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
 </resources>

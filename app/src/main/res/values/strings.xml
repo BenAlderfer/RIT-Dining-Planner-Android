@@ -44,6 +44,8 @@
     <string name="mealOptionValue8">930</string>
     <string name="mealOptionValue9">515</string>
 
+    <string name="calculate">Calculate</string>
+
     <!-- Date strings -->
     <string name="dateRange">08/22/2016-12/17/2016</string>
     <string name="daysOff">3</string>

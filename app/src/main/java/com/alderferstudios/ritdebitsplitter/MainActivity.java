@@ -659,6 +659,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * Manually update results
+     * Separate method needed so main method
+     * doesn't need the useless view
+     * @param v useless
+     */
+    public void updateResultsManual(View v) {
+        updateResults();
+    }
+
+    /**
      * Updates the results text
      */
     private void updateResults() {
