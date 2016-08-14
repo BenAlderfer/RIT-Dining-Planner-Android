@@ -137,6 +137,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/balanceSection"
+                        android:baselineAligned="false"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
@@ -236,7 +237,7 @@
                             android:clickable="true"
                             android:gravity="center"
                             android:onClick="setStartDate"
-                            android:text="1/24/16"
+                            android:text="@string/startDate"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
 
                         <View
@@ -253,7 +254,7 @@
                             android:clickable="true"
                             android:gravity="center"
                             android:onClick="setEndDate"
-                            android:text="5/20/16"
+                            android:text="@string/endDate"
                             android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     </LinearLayout>
@@ -264,6 +265,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/dateSection"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:baselineAligned="false"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
@@ -357,7 +359,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="You can spend"
+                        android:text="@string/summaryTop"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                     <TextView
@@ -366,7 +368,6 @@
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
                         android:padding="@dimen/activity_horizontal_margin"
-                        android:text="$12.34"
                         style="@style/LargeOrange"/>
 
                     <TextView
@@ -374,7 +375,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:gravity="center_horizontal"
-                        android:text="today and still be on schedule."
+                        android:text="@string/summaryBottom"
                         android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                 </LinearLayout>
@@ -394,103 +395,96 @@
                 card_view:cardCornerRadius="4dp"
                 card_view:cardElevation="4dp">
 
-                <LinearLayout
+                <TableLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical">
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
-                    <TableLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
-                        android:layout_marginEnd="@dimen/activity_horizontal_margin">
+                    <TableRow
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_gravity="center_horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:text=""
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                        <TableRow
-                            android:layout_marginTop="@dimen/activity_vertical_margin"
-                            android:layout_gravity="center_horizontal"
-                            android:weightSum="3">
-                            <TextView
-                                android:text=""
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
+                        <TextView
+                            android:text="@string/daily"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                            <TextView
-                                android:text="@string/daily"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
+                        <TextView
+                            android:text="@string/weekly"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+                    </TableRow>
 
-                            <TextView
-                                android:text="@string/weekly"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
-                        </TableRow>
+                    <TableRow
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_gravity="center_horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:text="@string/initialHeader"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                        <TableRow
-                            android:layout_marginTop="@dimen/activity_vertical_margin"
-                            android:layout_gravity="center_horizontal"
-                            android:weightSum="3">
-                            <TextView
-                                android:text="@string/initialHeader"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/initDailyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                            <TextView
-                                android:id="@+id/initDailyText"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/initWeeklyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+                    </TableRow>
 
-                            <TextView
-                                android:id="@+id/initWeeklyText"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
-                        </TableRow>
+                    <TableRow
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_gravity="center_horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:text="@string/currentHeader"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                        <TableRow
-                            android:layout_marginTop="@dimen/activity_vertical_margin"
-                            android:layout_gravity="center_horizontal"
-                            android:weightSum="3">
-                            <TextView
-                                android:text="@string/currentHeader"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/currentDailyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                            <TextView
-                                android:id="@+id/currentDailyText"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/currentWeeklyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+                    </TableRow>
 
-                            <TextView
-                                android:id="@+id/currentWeeklyText"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
-                        </TableRow>
+                    <TableRow
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_gravity="center_horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:text="@string/differenceHeader"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                        <TableRow
-                            android:layout_marginTop="@dimen/activity_vertical_margin"
-                            android:layout_marginBottom="@dimen/activity_vertical_margin"
-                            android:layout_gravity="center_horizontal"
-                            android:weightSum="3">
-                            <TextView
-                                android:text="@string/differenceHeader"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/differenceDailyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                            <TextView
-                                android:id="@+id/differenceDailyText"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
+                        <TextView
+                            android:id="@+id/differenceWeeklyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+                    </TableRow>
 
-                            <TextView
-                                android:id="@+id/differenceWeeklyText"
-                                style="@style/TableRowItemStyle"
-                                android:layout_weight="1"/>
-                        </TableRow>
-
-                    </TableLayout>
-
-                </LinearLayout>
+                </TableLayout>
 
             </android.support.v7.widget.CardView>
             <!-- table results card -->

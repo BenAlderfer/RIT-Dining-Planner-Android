@@ -47,11 +47,15 @@
     <string name="calculate">Calculate</string>
 
     <!-- Date strings -->
-    <string name="dateRange">08/22/2016-12/17/2016</string>
+    <string name="startDate">08/22/2016</string>
+    <string name="endDate">12/17/2016</string>
     <string name="daysOff">3</string>
 
     <!-- Results strings -->
-    <string name="daily">Daily </string>
+    <string name="summaryTop">You can spend</string>
+    <string name="summaryBottom">today and still be on schedule.</string>
+
+    <string name="daily">Daily</string>
     <string name="weekly">Weekly</string>
 
     <string name="initialHeader">Average</string>

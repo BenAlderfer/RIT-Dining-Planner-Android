@@ -216,15 +216,16 @@ public class MainActivity extends AppCompatActivity {
         summaryCard = (CardView) findViewById(R.id.summaryCard);
         tableCard = (CardView) findViewById(R.id.tableCard);
 
-        String dateRange = getResources().getString(R.string.dateRange);
+        String startDate = getResources().getString(R.string.startDate);
+        String endDate = getResources().getString(R.string.endDate);
 
-        defaultStartMonth = Integer.parseInt(dateRange.substring(0, 2));
-        defaultStartDay = Integer.parseInt(dateRange.substring(3, 5));
-        defaultStartYear = Integer.parseInt(dateRange.substring(6, 10));
+        defaultStartMonth = Integer.parseInt(startDate.substring(0, 2));
+        defaultStartDay = Integer.parseInt(startDate.substring(3, 5));
+        defaultStartYear = Integer.parseInt(startDate.substring(6, 10));
 
-        defaultEndMonth = Integer.parseInt(dateRange.substring(11, 13));
-        defaultEndDay = Integer.parseInt(dateRange.substring(14, 16));
-        defaultEndYear = Integer.parseInt(dateRange.substring(17));
+        defaultEndMonth = Integer.parseInt(endDate.substring(0, 2));
+        defaultEndDay = Integer.parseInt(endDate.substring(3, 5));
+        defaultEndYear = Integer.parseInt(endDate.substring(6, 10));
 
         twoDecimal = new DecimalFormat("0.00");
 
@@ -596,17 +597,15 @@ public class MainActivity extends AppCompatActivity {
         //only restore values if they want to
         if (shared.getBoolean("saveBox", true)) {
 
-            String dateRange = getResources().getString(R.string.dateRange);
-
             //restore start date
-            startMonth = shared.getInt("startMonth", Integer.parseInt(dateRange.substring(0, 2)));
-            startDay = shared.getInt("startDay", Integer.parseInt(dateRange.substring(3, 5)));
-            startYear = shared.getInt("startYear", Integer.parseInt(dateRange.substring(6, 10)));
+            startMonth = shared.getInt("startMonth", defaultStartMonth);
+            startDay = shared.getInt("startDay", defaultStartDay);
+            startYear = shared.getInt("startYear", defaultStartYear);
 
             //restore end date
-            endMonth = shared.getInt("endMonth", Integer.parseInt(dateRange.substring(11, 13)));
-            endDay = shared.getInt("endDay", Integer.parseInt(dateRange.substring(14, 16)));
-            endYear = shared.getInt("endYear", Integer.parseInt(dateRange.substring(17)));
+            endMonth = shared.getInt("endMonth", defaultEndMonth);
+            endDay = shared.getInt("endDay", defaultEndDay);
+            endYear = shared.getInt("endYear", defaultEndYear);
 
             //update date field texts
             startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
@@ -749,8 +748,6 @@ public class MainActivity extends AppCompatActivity {
      * Hides results
      */
     private void resetDefaults() {
-        String dateRange = getResources().getString(R.string.dateRange);
-
         startMonth = defaultStartMonth;
         startDay = defaultStartDay;
         startYear = defaultStartYear;
