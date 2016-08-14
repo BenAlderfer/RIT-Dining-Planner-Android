@@ -946,10 +946,13 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     *
+     * Shows a snackbar with given message
+     * Colors the text and button for readability
      */
     private void showSnackbar(String textToShow) throws NullPointerException {
         final Snackbar snack = Snackbar.make(findViewById(R.id.display), textToShow, Snackbar.LENGTH_LONG);
+
+        //color dismiss button to fit theme (default is greenish)
         snack.setAction(getString(R.string.dismiss), new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -977,6 +980,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //only show if none is currently showing
         if (!snackbarIsShowing) {
             snack.show();
         }
