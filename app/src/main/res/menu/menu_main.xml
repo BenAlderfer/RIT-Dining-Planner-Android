@@ -17,18 +17,23 @@
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="98"
+        android:orderInCategory="97"
         android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/help"
-        android:orderInCategory="99"
+        android:orderInCategory="98"
         android:title="@string/action_help"
         app:showAsAction="never" />
     <item
         android:id="@+id/about"
-        android:orderInCategory="100"
+        android:orderInCategory="99"
         android:title="@string/action_about"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/reset"
+        android:orderInCategory="100"
+        android:title="@string/action_reset"
         app:showAsAction="never" />
 
 </menu>

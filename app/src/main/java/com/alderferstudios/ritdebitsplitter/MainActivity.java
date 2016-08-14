@@ -306,6 +306,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent aboutActivity = new Intent(this, AboutActivity.class);
                 startActivity(aboutActivity);
                 return true;
+            case R.id.reset:
+                resetDefaults();
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
