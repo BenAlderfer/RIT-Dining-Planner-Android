@@ -676,8 +676,6 @@ public class MainActivity extends AppCompatActivity {
     private void updateResults() {
         calculateDateDiff();
 
-        summaryCard.setVisibility(View.VISIBLE);
-
         totalInitial = getPlanValue();
         if (!rollOver.equals("")) {
             totalInitial += Float.parseFloat(rollOver);
@@ -742,8 +740,8 @@ public class MainActivity extends AppCompatActivity {
      * Makes all TextViews invisible
      */
     private void hideResults() {
-        summaryCard.setVisibility(View.INVISIBLE);
-        tableCard.setVisibility(View.INVISIBLE);
+        summaryCard.setVisibility(View.GONE);
+        tableCard.setVisibility(View.GONE);
     }
 
     /**
