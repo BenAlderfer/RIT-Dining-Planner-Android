@@ -28,6 +28,7 @@
         <item name="android:textColorPrimary">@color/white</item>        <!-- activity name text color -->
         <item name="android:textColorSecondary">@color/white</item>        <!-- overflow text color -->
         <item name="android:background">@color/orangePrimary</item>        <!-- background color -->
+        <item name="android:textColor">@color/white</item>        <!-- TextView color -->
         <item name="android:actionMenuTextColor">@color/orangePrimary</item>        <!-- Action button color -->
     </style>
 

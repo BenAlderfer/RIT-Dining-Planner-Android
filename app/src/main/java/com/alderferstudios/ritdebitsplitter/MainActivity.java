@@ -261,14 +261,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Sets up the menu (none for now)
+     * Sets up the menu
      *
      * @param menu - the menu to set up
      * @return true (useless)
      */
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
         getMenuInflater().inflate(R.menu.menu_main, menu);
+
         return true;
     }
 
@@ -357,6 +359,7 @@ public class MainActivity extends AppCompatActivity {
      * Updates the results if possible
      */
     private void addListeners() {
+        //field listeners
         mealOptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
