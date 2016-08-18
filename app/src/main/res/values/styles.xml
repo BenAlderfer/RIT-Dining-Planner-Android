@@ -15,6 +15,8 @@
         <item name="android:windowBackground">@color/lightgrey</item>        <!-- background color -->
         <item name="android:textColor">@color/black</item>        <!-- TextView color -->
         <item name="android:textColorHighlight">@color/blueHighlight</item>        <!--  Highlight color -->
+        <item name="colorControlActivated">@color/orangePrimary</item>    <!-- Pressed Radio Button -->
+        <item name="colorControlNormal">@color/orangePrimary</item>   <!-- Unpressed Radio Button -->
     </style>
 
     <style name="OrangeToolbar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -39,10 +41,6 @@
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:textSize">15sp</item>
-    </style>
-
     <!-- Calendar pop up theme -->
     <style name="OrangeLightPopUp" parent="Theme.AppCompat.Light.Dialog">
         <item name="windowActionBar">false</item>
@@ -57,7 +55,7 @@
     <style name="TableRowItemStyle">
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceSmall</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <style name="Header">

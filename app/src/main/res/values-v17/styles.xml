@@ -1,10 +1,5 @@
 <resources>>
 
-    <style name="AppTheme.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="android:windowNoTitle">true</item>
@@ -20,6 +15,8 @@
         <item name="android:windowBackground">@color/lightgrey</item>        <!-- background color -->
         <item name="android:textColor">@color/black</item>        <!-- TextView color -->
         <item name="android:textColorHighlight">@color/blueHighlight</item>        <!--  Highlight color -->
+        <item name="colorControlActivated">@color/orangePrimary</item>    <!-- Pressed Radio Button -->
+        <item name="colorControlNormal">@color/orangePrimary</item>   <!-- Unpressed Radio Button -->
     </style>
 
     <style name="OrangeToolbar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -30,22 +27,6 @@
         <item name="android:background">@color/orangePrimary</item>        <!-- background color -->
         <item name="android:textColor">@color/white</item>        <!-- TextView color -->
         <item name="android:actionMenuTextColor">@color/orangePrimary</item>        <!-- Action button color -->
-    </style>
-
-    <style name="orangeEditText" parent="@android:style/Widget.EditText">
-        <item name="android:textColor">@color/orangePrimary</item>
-    </style>
-
-    <style name="TextLabel" parent="TextAppearance.AppCompat">
-        <item name="android:textColorHint">@color/grey</item>
-        <item name="colorAccent">@color/orangePrimary</item>
-        <item name="colorControlNormal">@color/orangePrimary</item>
-        <item name="colorControlActivated">@color/orangePrimary</item>
-        <item name="android:textSize">20sp</item>
-    </style>
-
-    <style name="RadioButton" parent="@android:style/Widget.CompoundButton.RadioButton">
-        <item name="android:textSize">15sp</item>
     </style>
 
     <!-- Calendar pop up theme -->
@@ -64,19 +45,7 @@
         <item name="android:paddingStart">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
         <item name="android:paddingEnd">@dimen/activity_horizontal_margin</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
-    </style>
-
-    <style name="Header">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
-        <item name="android:textColor">@color/orangePrimary</item>
-    </style>
-
-    <style name="LargeOrange">
-        <item name="android:textStyle">bold</item>
-        <item name="android:textSize">30sp</item>
-        <item name="android:textColor">@color/orangePrimary</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
 </resources>
