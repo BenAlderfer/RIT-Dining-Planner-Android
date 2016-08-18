@@ -14,10 +14,7 @@
         <item name="android:editTextStyle">@style/orangeEditText</item>        <!-- EditText color -->
         <item name="android:windowBackground">@color/lightgrey</item>        <!-- background color -->
         <item name="android:textColor">@color/black</item>        <!-- TextView color -->
-        <item name="android:actionMenuTextColor">@color/orangePrimary</item>        <!-- Action button color -->
-        <item name="android:textColorHighlight">@color/orangeHighlight</item>        <!--  Highlight color -->
-        <item name="colorControlActivated">@color/orangePrimary</item>        <!-- Pressed Radio Button -->
-        <item name="colorControlNormal">@color/orangePrimary</item>        <!-- Unpressed Radio Button -->
+        <item name="android:textColorHighlight">@color/blueHighlight</item>        <!--  Highlight color -->
     </style>
 
     <style name="OrangeToolbar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -26,7 +23,6 @@
         <item name="android:textColorPrimary">@color/white</item>        <!-- activity name text color -->
         <item name="android:textColorSecondary">@color/white</item>        <!-- overflow text color -->
         <item name="android:background">@color/orangePrimary</item>        <!-- background color -->
-        <item name="android:textColor">@color/white</item>        <!-- TextView color -->
         <item name="android:actionMenuTextColor">@color/orangePrimary</item>        <!-- Action button color -->
     </style>
 
