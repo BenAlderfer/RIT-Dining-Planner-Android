@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -715,7 +716,7 @@ public class MainActivity extends AppCompatActivity {
                 currentWeekly = currentDaily * 7;
             } else {     //1 week or less
                 currentWeekly = curBalance;
-                currentDaily = curBalance / currentDayDiff;
+                currentDaily = curBalance / ((currentWeekDiff * 7) + currentDayDiff);
             }
 
             //set average calculations
