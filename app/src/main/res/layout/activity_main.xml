@@ -14,7 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
-            android:theme="@style/BlueToolbar" />
+            android:theme="@style/OrangeToolbar" />
 
     </android.support.design.widget.AppBarLayout>
 
@@ -32,12 +32,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginTop="@dimen/activity_vertical_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
                 card_view:cardCornerRadius="4dp"
                 card_view:cardElevation="4dp">
 
@@ -51,13 +51,12 @@
                         android:id="@+id/balanceHeader"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
                         android:text="@string/balanceHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        style="@style/Header"/>
 
                     <LinearLayout
                         android:id="@+id/balanceSection"
@@ -72,32 +71,64 @@
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                            android:layout_marginRight="@dimen/activity_horizontal_margin"
                             android:layout_marginStart="@dimen/activity_horizontal_margin"
+                            android:layout_marginRight="@dimen/activity_horizontal_margin"
+                            android:layout_marginEnd="@dimen/activity_horizontal_margin"
                             android:layout_weight="1" />
 
-                        <android.support.design.widget.TextInputLayout
-                            android:id="@+id/rolloverBalance"
+                        <ViewSwitcher
+                            android:id="@+id/totalCustomSwitcher"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            android:theme="@style/TextLabel">
+                            android:layout_weight="1">
 
-                            <android.support.v7.widget.AppCompatEditText
-                                android:id="@+id/rolloverBalanceText"
+                            <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                                android:hint="@string/rolloverBalance"
-                                android:inputType="numberDecimal"
-                                android:maxLength="8"
-                                android:nextFocusDown="@+id/currentBalanceText"
-                                android:textColor="@color/bluePrimary" />
+                                android:layout_gravity="center"
+                                android:orientation="vertical" >
 
-                        </android.support.design.widget.TextInputLayout>
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                    android:text="@string/initial"
+                                    android:textAppearance="?android:attr/textAppearanceSmall"
+                                    android:textColor="@color/grey" />
+
+                                <TextView
+                                    android:id="@+id/totalInitialText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                    android:text="@string/mealOptionValue1"
+                                    android:textAppearance="?android:attr/textAppearanceLarge"/>
+
+                            </LinearLayout>
+
+                            <android.support.design.widget.TextInputLayout
+                                android:id="@+id/customDining"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:theme="@style/TextLabel">
+
+                                <android.support.design.widget.TextInputEditText
+                                    android:id="@+id/customDiningText"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                    android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                                    android:hint="@string/custom"
+                                    android:inputType="numberDecimal"
+                                    android:maxLength="8"
+                                    android:nextFocusDown="@+id/rolloverBalanceText" />
+
+                            </android.support.design.widget.TextInputLayout>
+
+                        </ViewSwitcher>
 
                     </LinearLayout>
 
@@ -106,40 +137,31 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/balanceSection"
+                        android:baselineAligned="false"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
-                        <LinearLayout
+                        <android.support.design.widget.TextInputLayout
+                            android:id="@+id/rolloverBalance"
                             android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_gravity="center"
+                            android:layout_height="wrap_content"
                             android:layout_weight="1"
-                            android:orientation="vertical">
+                            android:theme="@style/TextLabel">
 
-                            <TextView
+                            <android.support.design.widget.TextInputEditText
+                                android:id="@+id/rolloverBalanceText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                                android:layout_marginRight="@dimen/activity_horizontal_margin"
                                 android:layout_marginStart="@dimen/activity_horizontal_margin"
-                                android:text="@string/initial"
-                                android:textAppearance="?android:attr/textAppearanceSmall"
-                                android:textColor="@color/grey" />
-
-                            <TextView
-                                android:id="@+id/totalInitialText"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/activity_horizontal_margin"
                                 android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                                android:text="@string/mealOptionValue1"
-                                android:textAppearance="?android:attr/textAppearanceLarge"
-                                android:textColor="@color/bluePrimary" />
+                                android:hint="@string/rolloverBalance"
+                                android:inputType="numberDecimal"
+                                android:maxLength="8"
+                                android:nextFocusDown="@+id/currentBalanceText" />
 
-                        </LinearLayout>
+                        </android.support.design.widget.TextInputLayout>
 
                         <android.support.design.widget.TextInputLayout
                             android:id="@+id/currentBalance"
@@ -148,19 +170,18 @@
                             android:layout_weight="1"
                             android:theme="@style/TextLabel">
 
-                            <android.support.v7.widget.AppCompatEditText
+                            <android.support.design.widget.TextInputEditText
                                 android:id="@+id/currentBalanceText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                                android:layout_marginRight="@dimen/activity_horizontal_margin"
                                 android:layout_marginStart="@dimen/activity_horizontal_margin"
+                                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                                 android:hint="@string/currentBalance"
                                 android:imeOptions="actionDone"
                                 android:inputType="numberDecimal"
-                                android:maxLength="8"
-                                android:textColor="@color/bluePrimary" />
+                                android:maxLength="8"/>
 
                         </android.support.design.widget.TextInputLayout>
                     </LinearLayout>
@@ -175,10 +196,10 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 card_view:cardCornerRadius="4dp"
                 card_view:cardElevation="4dp">
 
@@ -188,24 +209,22 @@
                     android:layout_marginBottom="@dimen/activity_vertical_margin"
                     android:layout_marginTop="@dimen/activity_vertical_margin">
 
-                    <android.support.v7.widget.AppCompatSpinner
-                        android:id="@+id/termSpinner"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/dateHeader"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
                         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
                         android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="@string/springTerm"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        android:layout_marginRight="@dimen/activity_horizontal_margin"
+                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                        android:text="@string/dateHeader"
+                        style="@style/Header"/>
 
                     <LinearLayout
                         android:id="@+id/dateSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/termSpinner"
-
+                        android:layout_below="@+id/dateHeader"
                         android:layout_marginTop="@dimen/activity_vertical_margin"
                         android:orientation="horizontal"
                         android:weightSum="2">
@@ -218,9 +237,8 @@
                             android:clickable="true"
                             android:gravity="center"
                             android:onClick="setStartDate"
-                            android:text="1/24/16"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/bluePrimary" />
+                            android:text="@string/startDate"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
 
                         <View
                             android:layout_width="0dp"
@@ -236,53 +254,18 @@
                             android:clickable="true"
                             android:gravity="center"
                             android:onClick="setEndDate"
-                            android:text="5/20/16"
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:textColor="@color/bluePrimary" />
+                            android:text="@string/endDate"
+                            android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     </LinearLayout>
-
-                </RelativeLayout>
-
-            </android.support.v7.widget.CardView>
-            <!-- date card  -->
-
-            <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
-                android:layout_marginStart="@dimen/activity_horizontal_margin"
-                card_view:cardCornerRadius="4dp"
-                card_view:cardElevation="4dp">
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/activity_vertical_margin">
-
-                    <TextView
-                        android:id="@+id/daysOffHeader"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/activity_horizontal_margin"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginRight="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="@string/daysOffHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
 
                     <LinearLayout
                         android:id="@+id/daysSection"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/daysOffHeader"
-
+                        android:layout_below="@+id/dateSection"
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:baselineAligned="false"
                         android:orientation="horizontal"
                         android:weightSum="2">
 
@@ -293,19 +276,18 @@
                             android:layout_weight="1"
                             android:theme="@style/TextLabel">
 
-                            <android.support.v7.widget.AppCompatEditText
+                            <android.support.design.widget.TextInputEditText
                                 android:id="@+id/totalDaysOffText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                                android:layout_marginRight="@dimen/activity_horizontal_margin"
                                 android:layout_marginStart="@dimen/activity_horizontal_margin"
+                                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                                 android:hint="@string/total"
                                 android:inputType="number"
                                 android:maxLength="3"
-                                android:nextFocusDown="@+id/pastDaysOffText"
-                                android:textColor="@color/bluePrimary" />
+                                android:nextFocusDown="@+id/pastDaysOffText" />
 
                         </android.support.design.widget.TextInputLayout>
 
@@ -316,19 +298,18 @@
                             android:layout_weight="1"
                             android:theme="@style/TextLabel">
 
-                            <android.support.v7.widget.AppCompatEditText
+                            <android.support.design.widget.TextInputEditText
                                 android:id="@+id/pastDaysOffText"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                                android:layout_marginRight="@dimen/activity_horizontal_margin"
                                 android:layout_marginStart="@dimen/activity_horizontal_margin"
+                                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                                 android:hint="@string/past"
                                 android:imeOptions="actionDone"
                                 android:inputType="number"
-                                android:maxLength="3"
-                                android:textColor="@color/bluePrimary" />
+                                android:maxLength="3" />
 
                         </android.support.design.widget.TextInputLayout>
 
@@ -337,194 +318,176 @@
                 </RelativeLayout>
 
             </android.support.v7.widget.CardView>
-            <!-- days off card  -->
+            <!-- date card  -->
+
+            <Button
+                android:id="@+id/login_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
+                android:layout_marginBottom="@dimen/activity_vertical_margin"
+                android:padding="@dimen/activity_horizontal_margin"
+                android:text="@string/calculate"
+                android:theme="@style/ColoredButton"
+                android:onClick="updateResultsManual"
+                android:singleLine="true"/>
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/initialCard"
+                android:id="@+id/summaryCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 card_view:cardCornerRadius="4dp"
                 card_view:cardElevation="4dp">
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/activity_vertical_margin">
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/activity_horizontal_margin"
+                    android:orientation="vertical">
+                    
+                    <TextView
+                        android:id="@+id/summaryTop"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_horizontal"
+                        android:text="@string/summaryTop"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
                     <TextView
-                        android:id="@+id/initialHeader"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/summaryAmount"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="@string/initialHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        android:gravity="center_horizontal"
+                        android:padding="@dimen/activity_horizontal_margin"
+                        style="@style/LargeOrange"/>
 
                     <TextView
-                        android:id="@+id/initDaily"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/summaryBottom"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/initialHeader"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="@string/daily"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        android:gravity="center_horizontal"
+                        android:text="@string/summaryBottom"
+                        android:textAppearance="?android:attr/textAppearanceLarge"/>
 
-                    <TextView
-                        android:id="@+id/initDailyText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/initDaily"
-                        android:layout_alignEnd="@+id/initWeeklyText"
-                        android:layout_alignRight="@+id/initWeeklyText"
-                        android:gravity="end"
-                        android:text="10.00"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
-
-                    <TextView
-                        android:id="@+id/initWeekly"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/initDaily"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="@string/weekly"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
-
-                    <TextView
-                        android:id="@+id/initWeeklyText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/initWeekly"
-                        android:layout_marginLeft="@dimen/large_horizontal_margin"
-                        android:layout_marginStart="@dimen/large_horizontal_margin"
-                        android:layout_toEndOf="@+id/initWeekly"
-                        android:layout_toRightOf="@+id/initWeekly"
-                        android:gravity="end"
-                        android:text="10.00"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
-
-                </RelativeLayout>
+                </LinearLayout>
 
             </android.support.v7.widget.CardView>
-            <!-- initial result card  -->
+            <!-- results summary card -->
 
             <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
-                android:id="@+id/currentCard"
+                android:id="@+id/tableCard"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
                 android:layout_marginBottom="@dimen/activity_vertical_margin"
-                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                android:layout_marginRight="@dimen/activity_horizontal_margin"
                 android:layout_marginStart="@dimen/activity_horizontal_margin"
+                android:layout_marginRight="@dimen/activity_horizontal_margin"
+                android:layout_marginEnd="@dimen/activity_horizontal_margin"
                 card_view:cardCornerRadius="4dp"
                 card_view:cardElevation="4dp">
 
-                <RelativeLayout
+                <TableLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/activity_vertical_margin"
-                    android:layout_marginTop="@dimen/activity_vertical_margin">
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="@dimen/activity_horizontal_margin"
+                    android:layout_marginStart="@dimen/activity_horizontal_margin"
+                    android:layout_marginRight="@dimen/activity_horizontal_margin"
+                    android:layout_marginEnd="@dimen/activity_horizontal_margin">
 
-                    <TextView
-                        android:id="@+id/currentHeader"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="@string/currentHeader"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                    <TableRow
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_gravity="center_horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:text=""
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                    <TextView
-                        android:id="@+id/diff"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/currentHeader"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="@string/difference"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        <TextView
+                            android:text="@string/daily"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                    <TextView
-                        android:id="@+id/diffText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/diff"
-                        android:layout_alignEnd="@+id/currentWeeklyText"
-                        android:layout_alignRight="@+id/currentWeeklyText"
-                        android:gravity="end"
-                        android:text="10.00"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        <TextView
+                            android:text="@string/weekly"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+                    </TableRow>
 
-                    <TextView
-                        android:id="@+id/currentDaily"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/diff"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="@string/daily"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                    <TableRow
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_gravity="center_horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:text="@string/initialHeader"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                    <TextView
-                        android:id="@+id/currentDailyText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/currentDaily"
-                        android:layout_alignEnd="@+id/currentWeeklyText"
-                        android:layout_alignRight="@+id/currentWeeklyText"
-                        android:gravity="end"
-                        android:text="10.00"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        <TextView
+                            android:id="@+id/initDailyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                    <TextView
-                        android:id="@+id/currentWeekly"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/currentDaily"
-                        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-                        android:layout_marginStart="@dimen/activity_horizontal_margin"
-                        android:text="@string/weekly"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                        <TextView
+                            android:id="@+id/initWeeklyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+                    </TableRow>
 
-                    <TextView
-                        android:id="@+id/currentWeeklyText"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/currentWeekly"
-                        android:layout_marginLeft="@dimen/large_horizontal_margin"
-                        android:layout_marginStart="@dimen/large_horizontal_margin"
-                        android:layout_toEndOf="@+id/currentWeekly"
-                        android:layout_toRightOf="@+id/currentWeekly"
-                        android:gravity="end"
-                        android:text="10.00"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:textColor="@color/bluePrimary" />
+                    <TableRow
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_gravity="center_horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:text="@string/currentHeader"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
 
-                </RelativeLayout>
+                        <TextView
+                            android:id="@+id/currentDailyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:id="@+id/currentWeeklyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+                    </TableRow>
+
+                    <TableRow
+                        android:layout_marginTop="@dimen/activity_vertical_margin"
+                        android:layout_marginBottom="@dimen/activity_vertical_margin"
+                        android:layout_gravity="center_horizontal"
+                        android:weightSum="3">
+                        <TextView
+                            android:text="@string/differenceHeader"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:id="@+id/differenceDailyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+
+                        <TextView
+                            android:id="@+id/differenceWeeklyText"
+                            style="@style/TableRowItemStyle"
+                            android:layout_weight="1"/>
+                    </TableRow>
+
+                </TableLayout>
 
             </android.support.v7.widget.CardView>
-            <!-- current result card  -->
+            <!-- table results card -->
 
         </LinearLayout>
 

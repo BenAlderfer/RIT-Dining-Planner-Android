@@ -11,7 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 /**
- * Settings activity of the Budget Splitter
+ * Settings activity
  *
  * @author Ben Alderfer
  *         Alderfer Studios
@@ -36,6 +36,7 @@ public class SettingsActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setTitle(getResources().getString(R.string.title_activity_settings));
         }
 
         //lock orientation on phones

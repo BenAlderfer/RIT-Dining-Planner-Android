@@ -6,11 +6,12 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.text.method.LinkMovementMethod;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
 /**
- * About section of the Budget Splitter
+ * About section
  *
  * @author Ben Alderfer
  *         Alderfer Studios
@@ -25,6 +26,7 @@ public class AboutActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setTitle(getResources().getString(R.string.title_activity_about));
         }
 
         //set the version text to the current version
@@ -37,9 +39,13 @@ public class AboutActivity extends AppCompatActivity {
         }
 
         //make links clickable
-        ((TextView) findViewById(R.id.opensource)).setMovementMethod(LinkMovementMethod.getInstance());
-        ((TextView) findViewById(R.id.translate)).setMovementMethod(LinkMovementMethod.getInstance());
-        ((TextView) findViewById(R.id.contact)).setMovementMethod(LinkMovementMethod.getInstance());
+        try {
+            ((TextView) findViewById(R.id.opensource)).setMovementMethod(LinkMovementMethod.getInstance());
+            ((TextView) findViewById(R.id.translate)).setMovementMethod(LinkMovementMethod.getInstance());
+            ((TextView) findViewById(R.id.contact)).setMovementMethod(LinkMovementMethod.getInstance());
+        } catch (NullPointerException e) {
+            Log.e("Clickable link error", e.getMessage());
+        }
     }
 
     /**

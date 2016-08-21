@@ -6,7 +6,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 
 /**
- * Help section of the Budget Splitter
+ * Help section
  *
  * @author Ben Alderfer
  *         Alderfer Studios
@@ -21,6 +21,7 @@ public class HelpActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            setTitle(getResources().getString(R.string.title_activity_help));
         }
     }
 
