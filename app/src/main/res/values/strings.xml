@@ -70,6 +70,7 @@
     <string name="endDateBeforeStart">The end date must be after the start date plus the days off</string>
     <string name="totalNotEntered">The total days off must be entered with the past days off</string>
     <string name="pastGreaterThanTotal">The past days off cannot be more than the total days off</string>
+    <string name="remainingBalanceNotEntered">The remaining balance must be entered</string>
 
     <!-- Settings strings -->
     <string name="saveLabel">Save values?</string>

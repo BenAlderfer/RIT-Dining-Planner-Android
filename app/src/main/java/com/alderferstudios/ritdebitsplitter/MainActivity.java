@@ -742,6 +742,7 @@ public class MainActivity extends AppCompatActivity {
             tvs[6].setText(formatNumber(currentWeekly - averageWeekly));
 
         } else { //if it can't be displayed, make sure its hidden
+            showSnackbar(getResources().getString(R.string.remainingBalanceNotEntered), false);
             hideResults();
         }
     }
