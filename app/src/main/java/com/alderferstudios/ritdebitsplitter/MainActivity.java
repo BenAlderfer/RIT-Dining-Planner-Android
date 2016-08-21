@@ -701,7 +701,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
 
-        if (currentDateIsInRange && currentBalanceIsEntered()) {
+        if (currentBalanceIsEntered()) {
             summaryCard.setVisibility(View.VISIBLE);
             tableCard.setVisibility(View.VISIBLE);
 
@@ -892,6 +892,7 @@ public class MainActivity extends AppCompatActivity {
         String currentYear = currentDate.substring(0, 4);
         String currentMonth = currentDate.substring(5, 7);
         String currentDay = currentDate.substring(8, 10);
+
         int year = defaultStartYear;
         int month = defaultStartMonth;
         int day = defaultStartDay;
@@ -929,20 +930,22 @@ public class MainActivity extends AppCompatActivity {
             currentDateIsInRange = false;
         }
 
-        if (currentDateIsInRange) {
-            currentDayDiff = Days.daysBetween(localDate, end.toLocalDate()).getDays();
+        //calculate current values
+        currentDayDiff = Days.daysBetween(localDate, end.toLocalDate()).getDays();
 
-            //subtract the total days off like before but add back any days that have passed
-            if (!totalDaysOff.equals("")) {
-                currentDayDiff -= Integer.parseInt(totalDaysOff);
-            }
-            if (!pastDaysOff.equals("")) {
-                currentDayDiff += Integer.parseInt(pastDaysOff);
-            }
+        //subtract the total days off like before but add back any days that have passed
+        if (!totalDaysOff.equals("")) {
+            currentDayDiff -= Integer.parseInt(totalDaysOff);
+        }
+        if (!pastDaysOff.equals("")) {
+            currentDayDiff += Integer.parseInt(pastDaysOff);
+        }
 
-            currentWeekDiff = currentDayDiff / 7;
-            currentDayDiff -= currentWeekDiff * 7;
-        } else if (currentBalanceIsEntered()) {
+        currentWeekDiff = currentDayDiff / 7;
+        currentDayDiff -= currentWeekDiff * 7;
+
+        //if outside the date range but current is entered
+        if (!currentDateIsInRange && currentBalanceIsEntered()) {
             try {
                 showSnackbar(getResources().getString(R.string.dateOutOfRangeMessage), false);
             } catch (NullPointerException e) {
