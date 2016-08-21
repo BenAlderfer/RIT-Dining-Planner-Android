@@ -307,6 +307,10 @@ public class MainActivity extends AppCompatActivity {
                 Intent eservices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://eservices.rit.edu/eServices"));
                 startActivity(eservices);
                 return true;
+            case R.id.dining_services:
+                Intent diningServices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.rit.edu/fa/diningservices"));
+                startActivity(diningServices);
+                return true;
             case R.id.help:
                 Intent helpActivity = new Intent(this, HelpActivity.class);
                 startActivity(helpActivity);
