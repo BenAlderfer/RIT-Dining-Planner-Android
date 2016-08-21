@@ -433,7 +433,7 @@ public class MainActivity extends AppCompatActivity {
                         currentBalance = totalInitial + "";
                         currentBalanceEditText.setText(currentBalance);
                         try {
-                            showSnackbar(getResources().getString(R.string.remainingGreaterThanInitial));
+                            showSnackbar(getResources().getString(R.string.remainingGreaterThanInitial), true);
                         } catch (NullPointerException e) {
                             Log.e("remain. > initial error", e.getMessage());
                         }
@@ -478,7 +478,7 @@ public class MainActivity extends AppCompatActivity {
                     totalDaysOff = pastDaysOff;
                     totalDaysOffEditText.setText(totalDaysOff);
                     try {
-                        showSnackbar(getResources().getString(R.string.totalNotEntered));
+                        showSnackbar(getResources().getString(R.string.totalNotEntered), false);
                     } catch (NullPointerException e) {
                         Log.e("total missing error", e.getMessage());
                     }
@@ -489,7 +489,7 @@ public class MainActivity extends AppCompatActivity {
                     pastDaysOff = totalDaysOff;
                     pastDaysOffEditText.setText(totalDaysOff);
                     try {
-                        showSnackbar(getResources().getString(R.string.pastGreaterThanTotal));
+                        showSnackbar(getResources().getString(R.string.pastGreaterThanTotal), true);
                     } catch (NullPointerException e) {
                         Log.e("past days > total error", e.getMessage());
                     }
@@ -783,6 +783,9 @@ public class MainActivity extends AppCompatActivity {
         //this will be called after restoring default dates
         startDateText.setText(startMonth + "/" + startDay + "/" + startYear);
         endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
+
+        totalDaysOff = getResources().getString(R.string.daysOff);
+        totalDaysOffEditText.setText(totalDaysOff);
     }
 
     /**
@@ -872,7 +875,7 @@ public class MainActivity extends AppCompatActivity {
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
 
             try {
-                showSnackbar(getResources().getString(R.string.endDateBeforeStart));
+                showSnackbar(getResources().getString(R.string.endDateBeforeStart), true);
             } catch (NullPointerException e) {
                 Log.e("end date before start", e.getMessage());
             }
@@ -941,7 +944,7 @@ public class MainActivity extends AppCompatActivity {
             currentDayDiff -= currentWeekDiff * 7;
         } else if (currentBalanceIsEntered()) {
             try {
-                showSnackbar(getResources().getString(R.string.dateOutOfRangeMessage));
+                showSnackbar(getResources().getString(R.string.dateOutOfRangeMessage), false);
             } catch (NullPointerException e) {
                 Log.e("date out of range error", e.getMessage());
             }
@@ -968,10 +971,10 @@ public class MainActivity extends AppCompatActivity {
      * Shows a snackbar with given message
      * Colors the text and button for readability
      */
-    private void showSnackbar(String textToShow) throws NullPointerException {
+    private void showSnackbar(String textToShow, boolean overrideSuppress) throws NullPointerException {
         //only show error messages on boot and manual calculate
         //auto-calculate does not show error messages
-        if (isManuallyCalculating) {
+        if (isManuallyCalculating || overrideSuppress) {
             final Snackbar snack = Snackbar.make(findViewById(R.id.display), textToShow, Snackbar.LENGTH_LONG);
 
             //color dismiss button to fit theme (default is greenish)
