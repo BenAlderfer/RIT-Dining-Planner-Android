@@ -150,6 +150,11 @@ public class MainActivity extends AppCompatActivity {
     private boolean snackbarIsShowing = false;
 
     /**
+     * If the user is manually calculating (or on boot)
+     */
+    private boolean isManuallyCalculating = false;
+
+    /**
      * Formats a number with 2 decimal points
      */
     private DecimalFormat twoDecimal;
@@ -246,6 +251,7 @@ public class MainActivity extends AppCompatActivity {
         super.onResume();
         if (!isEnteringDate) {
             restoreValues();
+            updateResultsManual(currentBalanceEditText);
         } else {
             isEnteringDate = false;
         }
@@ -671,6 +677,7 @@ public class MainActivity extends AppCompatActivity {
      * @param v useless
      */
     public void updateResultsManual(View v) {
+        isManuallyCalculating = true;
         updateResults();
     }
 
@@ -962,39 +969,45 @@ public class MainActivity extends AppCompatActivity {
      * Colors the text and button for readability
      */
     private void showSnackbar(String textToShow) throws NullPointerException {
-        final Snackbar snack = Snackbar.make(findViewById(R.id.display), textToShow, Snackbar.LENGTH_LONG);
+        //only show error messages on boot and manual calculate
+        //auto-calculate does not show error messages
+        if (isManuallyCalculating) {
+            final Snackbar snack = Snackbar.make(findViewById(R.id.display), textToShow, Snackbar.LENGTH_LONG);
 
-        //color dismiss button to fit theme (default is greenish)
-        snack.setAction(getString(R.string.dismiss), new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                snack.dismiss();
+            //color dismiss button to fit theme (default is greenish)
+            snack.setAction(getString(R.string.dismiss), new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    snack.dismiss();
+                }
+            });
+            snack.setActionTextColor(ContextCompat.getColor(this, R.color.orangePrimary));
+
+            //set text color to white
+            View view = snack.getView();
+            TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+            tv.setTextColor(Color.WHITE);
+
+            //set callbacks to know if snackbar is showing
+            snack.setCallback(new Snackbar.Callback() {
+                @Override
+                public void onDismissed(Snackbar snackbar, int event) {
+                    super.onDismissed(snackbar, event);
+                    snackbarIsShowing = false;
+                }
+
+                @Override
+                public void onShown(Snackbar snackbar) {
+                    snackbarIsShowing = true;
+                }
+            });
+
+            //only show if none is currently showing
+            if (!snackbarIsShowing) {
+                snack.show();
             }
-        });
-        snack.setActionTextColor(ContextCompat.getColor(this, R.color.orangePrimary));
 
-        //set text color to white
-        View view = snack.getView();
-        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
-        tv.setTextColor(Color.WHITE);
-
-        //set callbacks to know if snackbar is showing
-        snack.setCallback(new Snackbar.Callback() {
-            @Override
-            public void onDismissed(Snackbar snackbar, int event) {
-                super.onDismissed(snackbar, event);
-                snackbarIsShowing = false;
-            }
-
-            @Override
-            public void onShown(Snackbar snackbar) {
-                snackbarIsShowing = true;
-            }
-        });
-
-        //only show if none is currently showing
-        if (!snackbarIsShowing) {
-            snack.show();
+            isManuallyCalculating = false;
         }
     }
 
