@@ -777,6 +777,7 @@ public class MainActivity extends AppCompatActivity {
      * Note - only clears fields, not any saved data
      */
     private void clearFields() {
+        rolloverEditText.setText("");
         currentBalanceEditText.setText("");
         totalDaysOffEditText.setText("");
         pastDaysOffEditText.setText("");
