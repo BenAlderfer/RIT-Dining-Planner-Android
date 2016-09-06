@@ -79,9 +79,12 @@
     <string name="disabledSaveDesc">The values are not being saved</string>
 
     <!-- Help strings -->
-    <string name="actionButtons">Toolbar buttons:\n\n• The pawprint button opens Tigerbucks (may need a refresh to load content)\n• The \'e\' button opens eServices</string>
-    <string name="userfields">User fields:\n\n• Rollover: How much you are rolling over from a previous semester\n• Remaining balance: How much you have now\n• Click on the meal plan and term drop-downs to change them\n• Click on the dates to change them\n• Total days off: The total number of days off in the date range\n• Past days off: The number of days off that have already past</string>
-    <string name="resultsfields">Results fields:\n\n• Average: Average amount you can spend based on starting dining dollars\n• Currently: Average amount you can spend based on current dining dollars\n• Difference: Currently - Average</string>
+    <string name="actionButtonsHeader">Toolbar buttons</string>
+    <string name="actionButtons">• The pawprint button opens Tigerbucks (may need a refresh to load content)\n• The \'e\' button opens eServices</string>
+    <string name="userHeader">User fields</string>
+    <string name="userFields">• Rollover: How much you are rolling over from a previous semester\n• Remaining balance: How much you have now\n• Click on the meal plan and term drop-downs to change them\n• Click on the dates to change them\n• Total days off: The total number of days off in the date range\n• Past days off: The number of days off that have already past</string>
+    <string name="resultsHeader">Results fields</string>
+    <string name="resultsFields">• Average: Average amount you can spend based on starting dining dollars\n• Currently: Average amount you can spend based on current dining dollars\n• Difference: Currently - Average</string>
 
     <!-- About strings -->
     <string name="appInfo">RIT Dining Planner by Alderfer Studios</string>
