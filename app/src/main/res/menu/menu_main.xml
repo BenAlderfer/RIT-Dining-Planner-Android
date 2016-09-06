@@ -16,14 +16,14 @@
         android:title="@string/eservices"
         app:showAsAction="ifRoom" />
     <item
-        android:id="@+id/action_settings"
+        android:id="@+id/dining_services"
         android:orderInCategory="10"
-        android:title="@string/action_settings"
+        android:title="@string/action_dining_services"
         app:showAsAction="never" />
     <item
-        android:id="@+id/dining_services"
+        android:id="@+id/action_settings"
         android:orderInCategory="11"
-        android:title="@string/action_dining_services"
+        android:title="@string/action_settings"
         app:showAsAction="never" />
     <item
         android:id="@+id/help"
