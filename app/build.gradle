@@ -2,14 +2,14 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 24
-    buildToolsVersion "24.0.1"
+    buildToolsVersion "24.0.2"
 
     defaultConfig {
         applicationId "com.alderferstudios.ritdebitsplitter"
         minSdkVersion 11
         targetSdkVersion 24
-        versionCode 33
-        versionName "2.3.0"
+        versionCode 36
+        versionName "2.3.3"
     }
     buildTypes {
         release {
@@ -26,5 +26,5 @@ dependencies {
     compile 'com.android.support:design:24.2.0'
     compile 'com.android.support:support-v4:24.2.0'
     compile 'com.android.support:appcompat-v7:24.2.0'
-    compile 'net.danlew:android.joda:2.9.1'
+    compile 'net.danlew:android.joda:2.9.4'
 }
