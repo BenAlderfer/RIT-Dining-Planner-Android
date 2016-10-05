@@ -35,6 +35,7 @@ import org.joda.time.Days;
 import org.joda.time.LocalDate;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 /**
  * Main window
@@ -114,22 +115,12 @@ public class MainActivity extends AppCompatActivity {
     /**
      * Whether the fields have been entered
      */
-    private boolean currentDateIsInRange, isEnteringDate;
+    private boolean isEnteringDate;
 
     /**
      * Either start or end date
      */
     private String dateBeingSet;
-
-    /**
-     * Context reference for later
-     */
-    private Context c;
-
-    /**
-     * Adapter for the two spinners
-     */
-    private ArrayAdapter<String> mealPlanAdapter;
 
     /**
      * The total initial debit
@@ -183,8 +174,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         JodaTimeAndroid.init(this);
-
-        c = this;
 
         if (!isTablet(this)) {
             setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT);
@@ -516,7 +505,7 @@ public class MainActivity extends AppCompatActivity {
                 getString(R.string.mealOption5), getString(R.string.mealOption6),
                 getString(R.string.mealOption7), getString(R.string.mealOption8),
                 getString(R.string.mealOption9), getString(R.string.mealOptionCustom)};
-        mealPlanAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, items);
+        ArrayAdapter<String> mealPlanAdapter = new ArrayAdapter<>(this, R.layout.spinner_item, items);
         mealOptionSpinner.setAdapter(mealPlanAdapter);
     }
 
@@ -631,17 +620,17 @@ public class MainActivity extends AppCompatActivity {
 
             float customDiningRestored = shared.getFloat("customDining", 0.0f);
             if (customDiningRestored != 0.0f) {
-                customDiningEditText.setText(String.format("%.02f", customDiningRestored));
+                customDiningEditText.setText(String.format(Locale.US, "%.02f", customDiningRestored));
             }
 
             float rollOver = shared.getFloat("rollOver", 0.0f);
             if (rollOver != 0.0f) {
-                rolloverEditText.setText(String.format("%.02f", rollOver));
+                rolloverEditText.setText(String.format(Locale.US, "%.02f", rollOver));
             }
 
             float current = shared.getFloat("currentBalance", 0.0f);
             if (current != 0.0f) {
-                currentBalanceEditText.setText(String.format("%.02f", current));
+                currentBalanceEditText.setText(String.format(Locale.US, "%.02f", current));
             }
 
             int totalDays = shared.getInt("totalDaysOff", 0);
@@ -911,6 +900,7 @@ public class MainActivity extends AppCompatActivity {
             day = Integer.parseInt(currentDay);
         }
 
+        boolean currentDateIsInRange;
         //check year
         if (year <= endYear && year >= startYear) {
             //check month
