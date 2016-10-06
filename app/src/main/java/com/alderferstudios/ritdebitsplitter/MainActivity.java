@@ -421,7 +421,10 @@ public class MainActivity extends AppCompatActivity {
                         currentBalance = currentBalance.substring(0, currentBalance.length());
                     }
                     //if current balance > initial, fix that
+                    //Log.d("current before reset", currentBalance + "");
+                    //Log.d("initial before reset", totalInitial + "");
                     if (!currentBalance.equals("") && Double.parseDouble(currentBalance) > totalInitial) {
+                        //Log.d("reseting current", "current balance was > initial");
                         currentBalance = totalInitial + "";
                         currentBalanceEditText.setText(currentBalance);
                         try {
@@ -564,6 +567,7 @@ public class MainActivity extends AppCompatActivity {
             editor.putFloat("rollOver", 0.0f);
         }
 
+        //Log.i("current before save", currentBalance);
         if (currentBalanceIsEntered()) {
             editor.putFloat("currentBalance", Float.parseFloat(currentBalance));
         } else { //save 0 to overwrite previous value
@@ -593,6 +597,8 @@ public class MainActivity extends AppCompatActivity {
         editor.putInt("endYear", endYear);
 
         editor.commit();
+
+        //Log.i("current after save", String.valueOf(shared.getFloat("currentBalance", 0.0f)));
     }
 
     /**
@@ -617,6 +623,9 @@ public class MainActivity extends AppCompatActivity {
             endDateText.setText(endMonth + "/" + endDay + "/" + endYear);
 
             mealOptionSpinner.setSelection(shared.getInt("mealPlan", 0));
+            totalInitial = getPlanValue();
+            //Log.i("meal option", mealOptionSpinner.getSelectedItem().toString());
+            //Log.i("current before", currentBalanceEditText.getText().toString());
 
             float customDiningRestored = shared.getFloat("customDining", 0.0f);
             if (customDiningRestored != 0.0f) {
@@ -628,10 +637,15 @@ public class MainActivity extends AppCompatActivity {
                 rolloverEditText.setText(String.format(Locale.US, "%.02f", rollOver));
             }
 
+            //Log.i("current restored", String.valueOf(shared.getFloat("currentBalance", 0.0f)));
             float current = shared.getFloat("currentBalance", 0.0f);
+            //Log.i("current restored var", String.valueOf(current));
             if (current != 0.0f) {
+                //Log.i("inside current", "Hey - I got inside");
                 currentBalanceEditText.setText(String.format(Locale.US, "%.02f", current));
             }
+
+            //Log.d("current after", currentBalanceEditText.getText().toString());
 
             int totalDays = shared.getInt("totalDaysOff", 0);
             if (totalDays != 0) {
@@ -953,7 +967,8 @@ public class MainActivity extends AppCompatActivity {
      * Checks if the current balance is entered
      * @return true if the current balance is entered
      */
-    private boolean currentBalanceIsEntered() {
+    boolean currentBalanceIsEntered() {
+        //Log.i("balance is entered", String.valueOf(!currentBalance.equals("") && currentBalance.charAt(0) != '.'));
         return !currentBalance.equals("") && currentBalance.charAt(0) != '.';
     }
 
