@@ -997,7 +997,7 @@ public class MainActivity extends AppCompatActivity {
                     snack.dismiss();
                 }
             });
-            snack.setActionTextColor(ContextCompat.getColor(this, R.color.orangePrimary));
+            snack.setActionTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
 
             //set text color to white
             View view = snack.getView();
