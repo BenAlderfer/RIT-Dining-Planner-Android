@@ -1,41 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Standard colors (IDK what some of these are)-->
-    <color name="white">#FFFFFF</color>
-    <color name="yellow">#FFFF00</color>
-    <color name="fuchsia">#FF00FF</color>
-    <color name="red">#FF0000</color>
-    <color name="silver">#C0C0C0</color>
-    <color name="grey">#808080</color>
-    <color name="olive">#808000</color>
-    <color name="purple">#800080</color>
-    <color name="maroon">#800000</color>
-    <color name="aqua">#00FFFF</color>
-    <color name="lime">#00FF00</color>
-    <color name="teal">#008080</color>
-    <color name="green">#008000</color>
-    <color name="blue">#0000FF</color>
-    <color name="navy">#000080</color>
-    <color name="black">#000000</color>
+    <color name="colorPrimary">#FF5722</color>
+    <color name="colorPrimaryDark">#E64A19</color>
+    <color name="colorAccent">#90CAF9</color>
+    <color name="colorHighlight">#FFCC80</color>
+    <color name="textColorPrimary">#212121</color>
 
     <color name="lightgrey">#EEEEEE</color>
-
-    <!-- Custom colors -->
-    <color name="greenPrimary">#0F9D58</color>
-    <color name="greenPrimaryDark">#0B8043</color>
-
-    <color name="orangePrimary">#FF5722</color>
-    <color name="orangePrimaryDark">#E64A19</color>
-    <color name="orangeHighlight">#FFCC80</color>
-
-    <color name="redPrimary">#DB4437</color>
-    <color name="redPrimaryDark">#BC3A31</color>
-
-    <color name="bluePrimary">#4285F4</color>
-    <color name="bluePrimaryDark">#3367D6</color>
-    <color name="blueHighlight">#90CAF9</color>
-
-    <color name="blackPrimary">#ff212121</color>
-    <color name="blackPrimaryDark">#ff000000</color>
-
+    <color name="white">#FFFFFF</color>
+    <color name="grey">#808080</color>
 </resources>

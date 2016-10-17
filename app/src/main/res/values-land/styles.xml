@@ -10,13 +10,13 @@
     <style name="Header">
         <item name="android:textStyle">bold</item>
         <item name="android:textAppearance">?android:attr/textAppearanceMedium</item>
-        <item name="android:textColor">@color/orangePrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
     <style name="LargeOrange">
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">30sp</item>
-        <item name="android:textColor">@color/orangePrimary</item>
+        <item name="android:textColor">@color/colorPrimary</item>
     </style>
 
 </resources>
