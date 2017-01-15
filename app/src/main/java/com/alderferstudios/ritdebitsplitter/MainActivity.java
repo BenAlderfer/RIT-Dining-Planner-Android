@@ -25,6 +25,7 @@ import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
 import net.danlew.android.joda.JodaTimeAndroid;
@@ -53,13 +54,15 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * The starting date
+     * Set from strings value, does not need to be manually set
      */
-    private int startYear = 2016, startMonth = 1, startDay = 1;
+    private int startYear = 2017, startMonth = 1, startDay = 1;
 
     /**
      * The ending date
+     * Set from strings value, does not need to be manually set
      */
-    private int endYear = 2016, endMonth = 2, endDay = 2;
+    private int endYear = 2017, endMonth = 2, endDay = 2;
 
     /**
      * week and day difference between dates
@@ -357,6 +360,8 @@ public class MainActivity extends AppCompatActivity {
      * Updates the results if possible
      */
     private void addListeners() {
+        final Context c = this;
+
         //field listeners
         mealOptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -424,6 +429,7 @@ public class MainActivity extends AppCompatActivity {
                     //Log.d("current before reset", currentBalance + "");
                     //Log.d("initial before reset", totalInitial + "");
                     if (!currentBalance.equals("") && Double.parseDouble(currentBalance) > totalInitial) {
+                       // Toast.makeText(c, getPlanValue() + Float.parseFloat(rollOver) + ", " + totalInitial, Toast.LENGTH_LONG).show();
                         //Log.d("reseting current", "current balance was > initial");
                         currentBalance = totalInitial + "";
                         currentBalanceEditText.setText(currentBalance);
