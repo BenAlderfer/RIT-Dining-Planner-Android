@@ -360,7 +360,6 @@ public class MainActivity extends AppCompatActivity {
      * Updates the results if possible
      */
     private void addListeners() {
-        final Context c = this;
 
         //field listeners
         mealOptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -429,7 +428,6 @@ public class MainActivity extends AppCompatActivity {
                     //Log.d("current before reset", currentBalance + "");
                     //Log.d("initial before reset", totalInitial + "");
                     if (!currentBalance.equals("") && Double.parseDouble(currentBalance) > totalInitial) {
-                       // Toast.makeText(c, getPlanValue() + Float.parseFloat(rollOver) + ", " + totalInitial, Toast.LENGTH_LONG).show();
                         //Log.d("reseting current", "current balance was > initial");
                         currentBalance = totalInitial + "";
                         currentBalanceEditText.setText(currentBalance);
@@ -524,31 +522,31 @@ public class MainActivity extends AppCompatActivity {
      *
      * @return the value of the selected plan
      */
-    private float getPlanValue() {
+    private double getPlanValue() {
         if (mealOptionSpinner.getSelectedItem() != null) {
             selectedMealPlan = mealOptionSpinner.getSelectedItem().toString();
             if (selectedMealPlan.equals(getString(R.string.mealOption1))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue1));
+                return Double.parseDouble(getString(R.string.mealOptionValue1));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption2))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue2));
+                return Double.parseDouble(getString(R.string.mealOptionValue2));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption3))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue3));
+                return Double.parseDouble(getString(R.string.mealOptionValue3));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption4))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue4));
+                return Double.parseDouble(getString(R.string.mealOptionValue4));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption5))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue5));
+                return Double.parseDouble(getString(R.string.mealOptionValue5));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption6))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue6));
+                return Double.parseDouble(getString(R.string.mealOptionValue6));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption7))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue7));
+                return Double.parseDouble(getString(R.string.mealOptionValue7));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption8))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue8));
+                return Double.parseDouble(getString(R.string.mealOptionValue8));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption9))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue9));
+                return Double.parseDouble(getString(R.string.mealOptionValue9));
             } else if (selectedMealPlan.equals(getString(R.string.mealOptionCustom))) { //custom dining
                 customDining = customDiningEditText.getText().toString();
                 if (!customDining.equals("")) {
-                    return Float.parseFloat(customDining);
+                    return Double.parseDouble(customDining);
                 }
             }
         }
@@ -701,7 +699,7 @@ public class MainActivity extends AppCompatActivity {
 
         totalInitial = getPlanValue();
         if (!rollOver.equals("")) {
-            totalInitial += Float.parseFloat(rollOver);
+            totalInitial += Double.parseDouble(rollOver);
         }
 
         //only update total text if its showing, doesn't show with custom
