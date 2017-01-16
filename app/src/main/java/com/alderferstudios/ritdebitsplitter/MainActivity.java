@@ -284,7 +284,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(settingsActivity);
                 return true;
             case R.id.tigerbucks:
-                Intent tigerbucks = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu"));
+                Intent tigerbucks = new Intent(Intent.ACTION_VIEW, Uri.parse("http://tigerbucks.rit.edu"));
                 tigerbucks.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 tigerbucks.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 tigerbucks.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
@@ -294,11 +294,11 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(tigerbucks);
                 return true;
             case R.id.eservices:
-                Intent eservices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://eservices.rit.edu/eServices"));
+                Intent eservices = new Intent(Intent.ACTION_VIEW, Uri.parse("http://eservices.rit.edu/eServices"));
                 startActivity(eservices);
                 return true;
             case R.id.dining_services:
-                Intent diningServices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.rit.edu/fa/diningservices"));
+                Intent diningServices = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.rit.edu/fa/diningservices"));
                 startActivity(diningServices);
                 return true;
             case R.id.help:
