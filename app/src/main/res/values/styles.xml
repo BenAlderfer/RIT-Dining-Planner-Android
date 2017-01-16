@@ -14,7 +14,6 @@
         <item name="android:editTextStyle">@style/orangeEditText</item>        <!-- EditText color -->
         <item name="android:windowBackground">@color/lightgrey</item>        <!-- background color -->
         <item name="android:textColor">@color/textColorPrimary</item>        <!-- TextView color -->
-        <item name="android:textColorHighlight">@color/colorAccent</item>        <!--  Highlight color -->
         <item name="colorControlActivated">@color/colorPrimary</item>    <!-- Pressed Radio Button -->
         <item name="colorControlNormal">@color/colorPrimary</item>   <!-- Unpressed Radio Button -->
     </style>
