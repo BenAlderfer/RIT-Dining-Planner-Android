@@ -53,13 +53,15 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * The starting date
+     * Set from strings value, does not need to be manually set
      */
-    private int startYear = 2016, startMonth = 1, startDay = 1;
+    private int startYear = 2017, startMonth = 1, startDay = 1;
 
     /**
      * The ending date
+     * Set from strings value, does not need to be manually set
      */
-    private int endYear = 2016, endMonth = 2, endDay = 2;
+    private int endYear = 2017, endMonth = 2, endDay = 2;
 
     /**
      * week and day difference between dates
@@ -357,6 +359,7 @@ public class MainActivity extends AppCompatActivity {
      * Updates the results if possible
      */
     private void addListeners() {
+
         //field listeners
         mealOptionSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -518,31 +521,31 @@ public class MainActivity extends AppCompatActivity {
      *
      * @return the value of the selected plan
      */
-    private float getPlanValue() {
+    private double getPlanValue() {
         if (mealOptionSpinner.getSelectedItem() != null) {
             selectedMealPlan = mealOptionSpinner.getSelectedItem().toString();
             if (selectedMealPlan.equals(getString(R.string.mealOption1))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue1));
+                return Double.parseDouble(getString(R.string.mealOptionValue1));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption2))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue2));
+                return Double.parseDouble(getString(R.string.mealOptionValue2));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption3))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue3));
+                return Double.parseDouble(getString(R.string.mealOptionValue3));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption4))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue4));
+                return Double.parseDouble(getString(R.string.mealOptionValue4));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption5))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue5));
+                return Double.parseDouble(getString(R.string.mealOptionValue5));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption6))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue6));
+                return Double.parseDouble(getString(R.string.mealOptionValue6));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption7))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue7));
+                return Double.parseDouble(getString(R.string.mealOptionValue7));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption8))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue8));
+                return Double.parseDouble(getString(R.string.mealOptionValue8));
             } else if (selectedMealPlan.equals(getString(R.string.mealOption9))) {
-                return Float.parseFloat(getString(R.string.mealOptionValue9));
+                return Double.parseDouble(getString(R.string.mealOptionValue9));
             } else if (selectedMealPlan.equals(getString(R.string.mealOptionCustom))) { //custom dining
                 customDining = customDiningEditText.getText().toString();
                 if (!customDining.equals("")) {
-                    return Float.parseFloat(customDining);
+                    return Double.parseDouble(customDining);
                 }
             }
         }
@@ -695,7 +698,7 @@ public class MainActivity extends AppCompatActivity {
 
         totalInitial = getPlanValue();
         if (!rollOver.equals("")) {
-            totalInitial += Float.parseFloat(rollOver);
+            totalInitial += Double.parseDouble(rollOver);
         }
 
         //only update total text if its showing, doesn't show with custom
@@ -997,7 +1000,7 @@ public class MainActivity extends AppCompatActivity {
                     snack.dismiss();
                 }
             });
-            snack.setActionTextColor(ContextCompat.getColor(this, R.color.orangePrimary));
+            snack.setActionTextColor(ContextCompat.getColor(this, R.color.colorPrimary));
 
             //set text color to white
             View view = snack.getView();

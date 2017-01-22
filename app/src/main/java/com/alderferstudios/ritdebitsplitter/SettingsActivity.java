@@ -69,16 +69,12 @@ public class SettingsActivity extends AppCompatActivity {
             super.onCreate(savedInstanceState);
             PreferenceManager.setDefaultValues(getActivity(), R.xml.prefs, false);
             addPreferencesFromResource(R.xml.prefs);
-
-            setSummaries();
             shared.registerOnSharedPreferenceChangeListener(this);
         }
 
-        /**
-         * Sets the summaries on start
-         */
-        protected void setSummaries() {
-            setSaveBoxSummary();                                                                  //Save box
+        public void onResume() {
+            super.onResume();
+            setSaveBoxSummary();
         }
 
         /**

@@ -49,9 +49,9 @@
     <string name="calculate">Calculate</string>
 
     <!-- Date strings -->
-    <string name="startDate">08/22/2016</string>
-    <string name="endDate">12/17/2016</string>
-    <string name="daysOff">3</string>
+    <string name="startDate">01/23/2017</string>
+    <string name="endDate">05/19/2017</string>
+    <string name="daysOff">9</string>
 
     <!-- Results strings -->
     <string name="summaryTop">You can spend</string>
