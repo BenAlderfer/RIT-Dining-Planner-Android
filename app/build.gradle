@@ -18,7 +18,7 @@ android {
         }
     }
 
-    // `return void` removes the lint error: `Not all execution paths return a value`.
+    // return void removes the lint error: Not all execution paths return a value.
     return void
 }
 
