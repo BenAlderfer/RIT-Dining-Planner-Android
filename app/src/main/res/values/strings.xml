@@ -93,6 +93,6 @@
     <string name="openSource">This app is open source. You can find it here: <a href="https://github.com/BenAlderfer/RIT-Dining-Planner-Android">https://github.com/BenAlderfer/RIT-Dining-Planner-Android</a></string>
     <string name="translate">If you would like to translate this app, please email <a href="mailto:alderferstudios@gmail.com">alderferstudios@gmail.com</a> with your request and I will send you instructions.\n\nIf you already know how to do this, you can edit the strings.xml (\\app\\src\\main\\res\\values) file in the source and send it to the above email.</string>
     <string name="contact">If you have any questions, bug reports, or suggestions, contact: <a href="mailto:alderferstudios@gmail.com">alderferstudios@gmail.com</a>\n\nPlease include your device and version of Android with any bug reports.\n\nIf you run into an error while using the app, please tap \"Report\" to send the error message to me.</string>
-    <string name="donate">If you would like to show your appreciation, donate to a charity - they need it more than me.</string>
+    <string name="donate">If you would like to show your appreciation, donate to a charity - they need it more.</string>
 
 </resources>
