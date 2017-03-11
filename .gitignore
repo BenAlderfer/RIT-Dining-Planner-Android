@@ -32,6 +32,4 @@ proguard/
 #Custom
 .idea/
 *.jks
-*.jpg
-*.png
 /Store\ files/
