@@ -1,14 +1,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context="com.alderferstudios.budgetsplitter.MainActivity">
+    tools:context="com.alderferstudios.ritdebitsplitter.MainActivity">
 
     <item
         android:id="@+id/tigerbucks"
         android:icon="@drawable/t_button"
         android:orderInCategory="1"
         android:title="@string/tigerbucks"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
     <item
         android:id="@+id/eservices"
         android:icon="@drawable/e_button"

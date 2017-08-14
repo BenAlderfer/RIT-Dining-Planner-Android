@@ -25,33 +25,33 @@
     <string name="past">Past Days Off</string>
 
     <!-- Spinner related values -->
-    <string name="mealOption1">Tiger 5 ($1300)</string>
-    <string name="mealOption2">Tiger 10 ($700)</string>
-    <string name="mealOption3">Tiger 14 ($500)</string>
-    <string name="mealOption4">Tiger 20 ($300)</string>
-    <string name="mealOption5">Orange ($2669)</string>
-    <string name="mealOption6">Brown ($1914)</string>
-    <string name="mealOption7">Gold ($1340)</string>
-    <string name="mealOption8">Silver ($930)</string>
-    <string name="mealOption9">Bronze ($515)</string>
+    <string name="mealOption1">Tiger 5 ($1325)</string>
+    <string name="mealOption2">Tiger 10 ($725)</string>
+    <string name="mealOption3">Tiger 14 ($525)</string>
+    <string name="mealOption4">Tiger 20 ($325)</string>
+    <string name="mealOption5">Orange ($2762)</string>
+    <string name="mealOption6">Brown ($2000)</string>
+    <string name="mealOption7">Gold ($1400)</string>
+    <string name="mealOption8">Silver ($1000)</string>
+    <string name="mealOption9">Bronze ($550)</string>
     <string name="mealOptionCustom">Custom</string>
 
-    <string name="mealOptionValue1">1300</string>
-    <string name="mealOptionValue2">700</string>
-    <string name="mealOptionValue3">500</string>
-    <string name="mealOptionValue4">300</string>
-    <string name="mealOptionValue5">2669</string>
-    <string name="mealOptionValue6">1914</string>
-    <string name="mealOptionValue7">1340</string>
-    <string name="mealOptionValue8">930</string>
-    <string name="mealOptionValue9">515</string>
+    <string name="mealOptionValue1">1325</string>
+    <string name="mealOptionValue2">725</string>
+    <string name="mealOptionValue3">525</string>
+    <string name="mealOptionValue4">325</string>
+    <string name="mealOptionValue5">2762</string>
+    <string name="mealOptionValue6">2000</string>
+    <string name="mealOptionValue7">1400</string>
+    <string name="mealOptionValue8">1000</string>
+    <string name="mealOptionValue9">550</string>
 
     <string name="calculate">Calculate</string>
 
     <!-- Date strings -->
-    <string name="startDate">01/23/2017</string>
-    <string name="endDate">05/19/2017</string>
-    <string name="daysOff">9</string>
+    <string name="startDate">08/28/2017</string>
+    <string name="endDate">12/19/2017</string>
+    <string name="daysOff">5</string>
 
     <!-- Results strings -->
     <string name="summaryTop">You can spend</string>
