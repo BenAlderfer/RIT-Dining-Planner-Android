@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 26
-    buildToolsVersion "26.0.1"
+    compileSdkVersion 27
+    buildToolsVersion "27.0.3"
 
     defaultConfig {
         applicationId "com.alderferstudios.ritdebitsplitter"
         minSdkVersion 14
-        targetSdkVersion 26
+        targetSdkVersion 27
         versionCode 47
         versionName "2.3.9.5"
     }
@@ -23,7 +23,7 @@ android {
 }
 
 ext {
-    support_lib = '26.0.1'
+    support_lib = '27.0.2'
 }
 
 dependencies {
