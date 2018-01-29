@@ -8,8 +8,8 @@ android {
         applicationId "com.alderferstudios.ritdebitsplitter"
         minSdkVersion 14
         targetSdkVersion 27
-        versionCode 48
-        versionName "2.3.9.6"
+        versionCode 49
+        versionName "2.3.9.7"
     }
     buildTypes {
         release {
