@@ -4,19 +4,19 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <android.support.design.widget.AppBarLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/bar_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:minHeight="?attr/actionBarSize"
             android:theme="@style/OrangeToolbar" />
 
-    </android.support.design.widget.AppBarLayout>
+    </com.google.android.material.appbar.AppBarLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
-                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -116,13 +116,13 @@
 
                                 </LinearLayout>
 
-                                <android.support.design.widget.TextInputLayout
+                                <com.google.android.material.textfield.TextInputLayout
                                     android:id="@+id/customDining"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:theme="@style/TextLabel">
 
-                                    <android.support.design.widget.TextInputEditText
+                                    <com.google.android.material.textfield.TextInputEditText
                                         android:id="@+id/customDiningText"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
                                         android:maxLength="8"
                                         android:nextFocusDown="@+id/rolloverBalanceText" />
 
-                                </android.support.design.widget.TextInputLayout>
+                                </com.google.android.material.textfield.TextInputLayout>
 
                             </ViewSwitcher>
 
@@ -148,14 +148,14 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <android.support.design.widget.TextInputLayout
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/rolloverBalance"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:theme="@style/TextLabel">
 
-                                <android.support.design.widget.TextInputEditText
+                                <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/rolloverBalanceText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -168,16 +168,16 @@
                                     android:maxLength="8"
                                     android:nextFocusDown="@+id/currentBalanceText" />
 
-                            </android.support.design.widget.TextInputLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                            <android.support.design.widget.TextInputLayout
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/currentBalance"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:theme="@style/TextLabel">
 
-                                <android.support.design.widget.TextInputEditText
+                                <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/currentBalanceText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -190,15 +190,15 @@
                                     android:inputType="numberDecimal"
                                     android:maxLength="8"/>
 
-                            </android.support.design.widget.TextInputLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
                         </LinearLayout>
 
                     </RelativeLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
                 <!-- balance card  -->
 
-                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -276,14 +276,14 @@
                             android:orientation="horizontal"
                             android:weightSum="2">
 
-                            <android.support.design.widget.TextInputLayout
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/totalDaysOff"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:theme="@style/TextLabel">
 
-                                <android.support.design.widget.TextInputEditText
+                                <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/totalDaysOffText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -296,16 +296,16 @@
                                     android:maxLength="3"
                                     android:nextFocusDown="@+id/pastDaysOffText" />
 
-                            </android.support.design.widget.TextInputLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
 
-                            <android.support.design.widget.TextInputLayout
+                            <com.google.android.material.textfield.TextInputLayout
                                 android:id="@+id/currentDays"
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:theme="@style/TextLabel">
 
-                                <android.support.design.widget.TextInputEditText
+                                <com.google.android.material.textfield.TextInputEditText
                                     android:id="@+id/pastDaysOffText"
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -318,13 +318,13 @@
                                     android:inputType="number"
                                     android:maxLength="3" />
 
-                            </android.support.design.widget.TextInputLayout>
+                            </com.google.android.material.textfield.TextInputLayout>
 
                         </LinearLayout>
 
                     </RelativeLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
                 <!-- date card  -->
 
             </LinearLayout>
@@ -357,7 +357,7 @@
                     android:onClick="updateResultsManual"
                     android:singleLine="true"/>
 
-                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/summaryCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -402,10 +402,10 @@
 
                     </LinearLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
                 <!-- results summary card -->
 
-                <android.support.v7.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                <androidx.cardview.widget.CardView xmlns:card_view="http://schemas.android.com/apk/res-auto"
                     android:id="@+id/tableCard"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -508,7 +508,7 @@
 
                     </TableLayout>
 
-                </android.support.v7.widget.CardView>
+                </androidx.cardview.widget.CardView>
                 <!-- table results card -->
 
             </LinearLayout>

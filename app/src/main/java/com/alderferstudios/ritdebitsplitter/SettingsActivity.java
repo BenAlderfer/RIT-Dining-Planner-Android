@@ -6,15 +6,15 @@ import android.os.Bundle;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 /**
  * Settings activity
  *
  * @author Ben Alderfer
- *         Alderfer Studios
  */
 public class SettingsActivity extends AppCompatActivity {
 
@@ -32,7 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
         PreferenceManager.setDefaultValues(this, R.xml.prefs, false);
 
         setContentView(R.layout.activity_settings);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);

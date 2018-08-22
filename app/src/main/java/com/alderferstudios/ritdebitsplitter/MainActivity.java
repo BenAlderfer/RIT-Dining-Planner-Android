@@ -9,11 +9,6 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.support.design.widget.Snackbar;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.CardView;
-import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -27,6 +22,8 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.ViewSwitcher;
 
+import com.google.android.material.snackbar.Snackbar;
+
 import net.danlew.android.joda.JodaTimeAndroid;
 
 import org.joda.time.DateTime;
@@ -37,11 +34,15 @@ import org.joda.time.LocalDate;
 import java.text.DecimalFormat;
 import java.util.Locale;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
+
 /**
  * Main window
  *
  * @author Ben Alderfer
- *         Alderfer Studios
  */
 public class MainActivity extends AppCompatActivity {
 
@@ -420,14 +421,14 @@ public class MainActivity extends AppCompatActivity {
                 currentBalance = currentBalanceEditText.getText().toString();
                 if (currentBalanceIsEntered()) {
                     //if it ends with a "." remove the "." before getting the number
-                    if (currentBalance.length() > 0 && currentBalance.charAt(0) != '.' && currentBalance.substring(currentBalance.length() - 1, currentBalance.length()).equals(".")) {
-                        currentBalance = currentBalance.substring(0, currentBalance.length());
+                    if (currentBalance.length() > 0 && currentBalance.charAt(0) != '.' && currentBalance.substring(currentBalance.length() - 1).equals(".")) {
+                        currentBalance = currentBalance.substring(0, currentBalance.length() - 1);
                     }
                     //if current balance > initial, fix that
                     //Log.d("current before reset", currentBalance + "");
                     //Log.d("initial before reset", totalInitial + "");
                     if (!currentBalance.equals("") && Double.parseDouble(currentBalance) > totalInitial) {
-                        //Log.d("reseting current", "current balance was > initial");
+                        //Log.d("resetting current", "current balance was > initial");
                         currentBalance = totalInitial + "";
                         currentBalanceEditText.setText(currentBalance);
                         try {
@@ -668,6 +669,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Formats given number with leading sign and $
+     *
      * @param number the number to format
      * @return the formatted number
      */
@@ -683,6 +685,7 @@ public class MainActivity extends AppCompatActivity {
      * Manually update results
      * Separate method needed so main method
      * doesn't need the useless view
+     *
      * @param v useless
      */
     public void updateResultsManual(View v) {
@@ -828,8 +831,8 @@ public class MainActivity extends AppCompatActivity {
      * Months are reported as 1 off so 1 added
      *
      * @param requestCode - useless
-     * @param resultCode - useless
-     * @param data - the Intent with the date
+     * @param resultCode  - useless
+     * @param data        - the Intent with the date
      */
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -870,7 +873,7 @@ public class MainActivity extends AppCompatActivity {
             dayDiff -= totalDaysOffNumber;
         }
 
-        /**
+        /*
          * if end date is not at least 1 day after the start after removing days off
          * change the end date to be 1 month after start + number of months in days off
          */
@@ -968,6 +971,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Checks if the current balance is entered
+     *
      * @return true if the current balance is entered
      */
     boolean currentBalanceIsEntered() {
@@ -977,6 +981,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * Checks if the total days off is entered
+     *
      * @return true if the total days off is entered
      */
     private boolean totalDaysOffIsEntered() {
@@ -1004,11 +1009,11 @@ public class MainActivity extends AppCompatActivity {
 
             //set text color to white
             View view = snack.getView();
-            TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+            TextView tv = view.findViewById(R.id.snackbar_text);
             tv.setTextColor(Color.WHITE);
 
             //set callbacks to know if snackbar is showing
-            snack.setCallback(new Snackbar.Callback() {
+            snack.addCallback(new Snackbar.Callback() {
                 @Override
                 public void onDismissed(Snackbar snackbar, int event) {
                     super.onDismissed(snackbar, event);
@@ -1037,7 +1042,7 @@ public class MainActivity extends AppCompatActivity {
     public void switchTotalCustom() {
         if (selectedMealPlan.equals(getString(R.string.mealOptionCustom)) ||
                 lastPlanSelected.equals(getString(R.string.mealOptionCustom)) &&
-                !selectedMealPlan.equals(getString(R.string.mealOptionCustom))) {
+                        !selectedMealPlan.equals(getString(R.string.mealOptionCustom))) {
 
             ((ViewSwitcher) findViewById(R.id.totalCustomSwitcher)).showNext();
         }

@@ -2,15 +2,15 @@ package com.alderferstudios.ritdebitsplitter;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MotionEvent;
 import android.widget.DatePicker;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 /**
  * Popup calendar
  *
  * @author Ben Alderfer
- *         Alderfer Studios
  */
 public class CalendarDialog extends AppCompatActivity {
 
@@ -25,7 +25,7 @@ public class CalendarDialog extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.calendar_dialog);
-        calendar = (DatePicker) findViewById(R.id.calendar);
+        calendar = findViewById(R.id.calendar);
         int month = getIntent().getIntExtra("month", 3);
         int day = getIntent().getIntExtra("day", 1);
         int year = getIntent().getIntExtra("year", 2016);
