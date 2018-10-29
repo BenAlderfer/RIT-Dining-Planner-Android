@@ -10,23 +10,31 @@
     <style name="OrangeTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>        <!-- TextInputLayout text color -->
-        <item name="android:editTextStyle">@style/orangeEditText</item>        <!-- EditText color -->
-        <item name="android:windowBackground">@color/lightgrey</item>        <!-- background color -->
+        <item name="android:textColorPrimary">@color/textColorPrimary
+        </item>        <!-- TextInputLayout text color -->
+        <item name="android:editTextStyle">@style/orangeEditText
+        </item>        <!-- EditText color -->
+        <item name="android:windowBackground">@color/lightgrey
+        </item>        <!-- background color -->
         <item name="android:textColor">@color/textColorPrimary</item>        <!-- TextView color -->
-        <item name="android:textColorHighlight">@color/colorAccent</item>        <!--  Highlight color -->
-        <item name="colorControlActivated">@color/colorPrimary</item>    <!-- Pressed Radio Button -->
+        <item name="android:textColorHighlight">@color/colorAccent
+        </item>        <!--  Highlight color -->
+        <item name="colorControlActivated">@color/colorPrimary
+        </item>    <!-- Pressed Radio Button -->
         <item name="colorControlNormal">@color/colorPrimary</item>   <!-- Unpressed Radio Button -->
     </style>
 
     <style name="OrangeToolbar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
-        <item name="android:textColorPrimary">@color/white</item>        <!-- activity name text color -->
-        <item name="android:textColorSecondary">@color/white</item>        <!-- overflow text color -->
+        <item name="android:textColorPrimary">@color/white
+        </item>        <!-- activity name text color -->
+        <item name="android:textColorSecondary">@color/white
+        </item>        <!-- overflow text color -->
         <item name="android:background">@color/colorPrimary</item>        <!-- background color -->
         <item name="android:textColor">@color/white</item>        <!-- TextView color -->
-        <item name="android:actionMenuTextColor">@color/colorPrimary</item>        <!-- Action button color -->
+        <item name="android:actionMenuTextColor">@color/colorPrimary
+        </item>        <!-- Action button color -->
     </style>
 
     <!-- Calendar pop up theme -->
@@ -34,8 +42,10 @@
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="colorAccent">@color/colorPrimary</item>
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>        <!-- activity name text color -->
-        <item name="android:windowBackground">@color/lightgrey</item>        <!-- background color -->
+        <item name="android:textColorPrimary">@color/textColorPrimary
+        </item>        <!-- activity name text color -->
+        <item name="android:windowBackground">@color/lightgrey
+        </item>        <!-- background color -->
         <item name="android:textColorSecondary">@color/textColorPrimary</item>
         <item name="android:textColor">@color/textColorPrimary</item>
     </style>
