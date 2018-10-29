@@ -1,0 +1,22 @@
+apply plugin: 'com.android.instantapp'
+
+android {
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    flavorDimensions "experience"
+    productFlavors {
+        instant_module {
+        }
+        apk_module {
+        }
+    }
+}
+
+dependencies {
+    implementation project(':base_feature_module')
+}

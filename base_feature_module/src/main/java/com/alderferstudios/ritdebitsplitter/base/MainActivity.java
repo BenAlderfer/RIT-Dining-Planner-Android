@@ -1,4 +1,4 @@
-package com.alderferstudios.ritdebitsplitter;
+package com.alderferstudios.ritdebitsplitter.base;
 
 import android.content.Context;
 import android.content.Intent;
@@ -187,31 +187,31 @@ public class MainActivity extends AppCompatActivity {
         //set the default value for the preferences
         PreferenceManager.setDefaultValues(this, R.xml.prefs, false);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         isBooting = true;
 
-        mealOptionSpinner = (Spinner) findViewById(R.id.mealOption);
-        customDiningEditText = (EditText) findViewById(R.id.customDiningText);
-        rolloverEditText = (EditText) findViewById(R.id.rolloverBalanceText);
-        currentBalanceEditText = (EditText) findViewById(R.id.currentBalanceText);
-        startDateText = (TextView) findViewById(R.id.startDate);
-        endDateText = (TextView) findViewById(R.id.endDate);
-        totalDaysOffEditText = (EditText) findViewById(R.id.totalDaysOffText);
-        pastDaysOffEditText = (EditText) findViewById(R.id.pastDaysOffText);
+        mealOptionSpinner = findViewById(R.id.mealOption);
+        customDiningEditText = findViewById(R.id.customDiningText);
+        rolloverEditText = findViewById(R.id.rolloverBalanceText);
+        currentBalanceEditText = findViewById(R.id.currentBalanceText);
+        startDateText = findViewById(R.id.startDate);
+        endDateText = findViewById(R.id.endDate);
+        totalDaysOffEditText = findViewById(R.id.totalDaysOffText);
+        pastDaysOffEditText = findViewById(R.id.pastDaysOffText);
 
-        tvs[0] = (TextView) findViewById(R.id.summaryAmount);
+        tvs[0] = findViewById(R.id.summaryAmount);
 
-        tvs[1] = (TextView) findViewById(R.id.initDailyText);
-        tvs[2] = (TextView) findViewById(R.id.initWeeklyText);
-        tvs[3] = (TextView) findViewById(R.id.currentDailyText);
-        tvs[4] = (TextView) findViewById(R.id.currentWeeklyText);
-        tvs[5] = (TextView) findViewById(R.id.differenceDailyText);
-        tvs[6] = (TextView) findViewById(R.id.differenceWeeklyText);
+        tvs[1] = findViewById(R.id.initDailyText);
+        tvs[2] = findViewById(R.id.initWeeklyText);
+        tvs[3] = findViewById(R.id.currentDailyText);
+        tvs[4] = findViewById(R.id.currentWeeklyText);
+        tvs[5] = findViewById(R.id.differenceDailyText);
+        tvs[6] = findViewById(R.id.differenceWeeklyText);
 
-        summaryCard = (CardView) findViewById(R.id.summaryCard);
-        tableCard = (CardView) findViewById(R.id.tableCard);
+        summaryCard = findViewById(R.id.summaryCard);
+        tableCard = findViewById(R.id.tableCard);
 
         String startDate = getResources().getString(R.string.startDate);
         String endDate = getResources().getString(R.string.endDate);
@@ -279,40 +279,40 @@ public class MainActivity extends AppCompatActivity {
      */
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.action_settings:
-                Intent settingsActivity = new Intent(this, SettingsActivity.class);
-                startActivity(settingsActivity);
-                return true;
-            case R.id.tigerbucks:
-                Intent tigerbucks = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu"));
-                tigerbucks.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                tigerbucks.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                tigerbucks.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
-                Bundle b = new Bundle();
-                b.putBoolean("new_window", true);
-                tigerbucks.putExtras(b);
-                startActivity(tigerbucks);
-                return true;
-            case R.id.eservices:
-                Intent eservices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://eservices.rit.edu/eServices"));
-                startActivity(eservices);
-                return true;
-            case R.id.dining_services:
-                Intent diningServices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.rit.edu/fa/diningservices"));
-                startActivity(diningServices);
-                return true;
-            case R.id.help:
-                Intent helpActivity = new Intent(this, HelpActivity.class);
-                startActivity(helpActivity);
-                return true;
-            case R.id.about:
-                Intent aboutActivity = new Intent(this, AboutActivity.class);
-                startActivity(aboutActivity);
-                return true;
-            case R.id.reset:
-                resetDefaults();
-                return true;
+        int id = item.getItemId();
+        if (id == R.id.action_settings) {
+            Intent settingsActivity = new Intent(this, SettingsActivity.class);
+            startActivity(settingsActivity);
+            return true;
+        } else if (id == R.id.tigerbucks) {
+            Intent tigerBucks = new Intent(Intent.ACTION_VIEW, Uri.parse("https://tigerbucks.rit.edu"));
+            tigerBucks.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            tigerBucks.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            tigerBucks.setFlags(Intent.FLAG_ACTIVITY_RESET_TASK_IF_NEEDED);
+            Bundle b = new Bundle();
+            b.putBoolean("new_window", true);
+            tigerBucks.putExtras(b);
+            startActivity(tigerBucks);
+            return true;
+        } else if (id == R.id.eservices) {
+            Intent eServices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://eservices.rit.edu/eServices"));
+            startActivity(eServices);
+            return true;
+        } else if (id == R.id.dining_services) {
+            Intent diningServices = new Intent(Intent.ACTION_VIEW, Uri.parse("https://www.rit.edu/fa/diningservices"));
+            startActivity(diningServices);
+            return true;
+        } else if (id == R.id.help) {
+            Intent helpActivity = new Intent(this, HelpActivity.class);
+            startActivity(helpActivity);
+            return true;
+        } else if (id == R.id.about) {
+            Intent aboutActivity = new Intent(this, AboutActivity.class);
+            startActivity(aboutActivity);
+            return true;
+        } else if (id == R.id.reset) {
+            resetDefaults();
+            return true;
         }
         return super.onOptionsItemSelected(item);
     }

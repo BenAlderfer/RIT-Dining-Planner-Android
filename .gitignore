@@ -9,6 +9,9 @@
 *.apk
 *.ap_
 *.abb
+/app/release/
+/apk_module/release/
+
 
 # Files for the Dalvik VM
 *.dex

@@ -1,4 +1,4 @@
-package com.alderferstudios.ritdebitsplitter;
+package com.alderferstudios.ritdebitsplitter.base;
 
 import android.os.Bundle;
 import android.view.MenuItem;

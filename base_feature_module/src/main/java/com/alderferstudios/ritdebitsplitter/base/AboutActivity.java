@@ -1,4 +1,4 @@
-package com.alderferstudios.ritdebitsplitter;
+package com.alderferstudios.ritdebitsplitter.base;
 
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;

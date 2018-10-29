@@ -39,7 +39,7 @@ class CompileTzDataTask extends DefaultTask {
         outputDir.delete()
 
         // Compile the data
-        ZoneInfoCompiler zoneInfoCompiler = new ZoneInfoCompiler();
+        ZoneInfoCompiler zoneInfoCompiler = new ZoneInfoCompiler()
         zoneInfoCompiler.compile(outputDir, sources)
     }
 }

@@ -1,4 +1,4 @@
-package com.alderferstudios.ritdebitsplitter;
+package com.alderferstudios.ritdebitsplitter.base;
 
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -18,10 +18,7 @@ import androidx.appcompat.widget.Toolbar;
  */
 public class SettingsActivity extends AppCompatActivity {
 
-    /**
-     * SharedPreferences objects for saving values
-     */
-    protected static SharedPreferences shared;
+    private static SharedPreferences shared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,15 +82,15 @@ public class SettingsActivity extends AppCompatActivity {
             switch (key) {
                 case "saveBox":
                     setSaveBoxSummary();
-                    break;                                       //Save box
+                    break;  //Save box
             }
         }
 
         /**
          * Sets the summary for the save box
          */
-        protected void setSaveBoxSummary() {
-            if (isAdded()) {                                                                       //must check if the fragment is added to the activity
+        private void setSaveBoxSummary() {
+            if (isAdded()) {    //must check if the fragment is added to the activity
                 Preference p = findPreference("saveBox");
                 if (p != null) {
                     if (shared.getBoolean("saveBox", false)) {

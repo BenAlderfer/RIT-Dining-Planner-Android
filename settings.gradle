@@ -1,1 +1,1 @@
-include ':app'
+include ':base_feature_module', ':apk_module', ':instant_module'

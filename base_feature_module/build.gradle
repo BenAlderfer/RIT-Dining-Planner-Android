@@ -1,15 +1,14 @@
-apply plugin: 'com.android.application'
+apply plugin: 'com.android.feature'
 
 android {
     compileSdkVersion 28
     buildToolsVersion "28.0.2"
 
+    baseFeature true
+
     defaultConfig {
-        applicationId "com.alderferstudios.ritdebitsplitter"
         minSdkVersion 14
         targetSdkVersion 28
-        versionCode 51
-        versionName "2.3.9.9"
     }
     buildTypes {
         release {
@@ -18,20 +17,30 @@ android {
         }
     }
 
+    flavorDimensions "experience"
+    productFlavors {
+        instant_module {
+        }
+        apk_module {
+        }
+    }
+
     // return void removes the lint error: Not all execution paths return a value.
     return void
 }
 
 ext {
-    support_lib = '1.0.0-rc02'
+    support_lib = '1.0.0'
 }
 
 dependencies {
+    application project(":apk_module")
+
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     testImplementation 'junit:junit:4.12'
 
     implementation "androidx.cardview:cardview:$support_lib"
-    implementation "com.google.android.material:material:1.0.0-rc01"
+    implementation "com.google.android.material:material:1.0.0"
     implementation "androidx.legacy:legacy-support-v4:$support_lib"
     implementation "androidx.appcompat:appcompat:$support_lib"
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
