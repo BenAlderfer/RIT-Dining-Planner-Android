@@ -25,32 +25,32 @@
     <string name="past">Past Days Off</string>
 
     <!-- Spinner related values -->
-    <string name="mealOption1">Tiger 5 ($1325)</string>
-    <string name="mealOption2">Tiger 10 ($725)</string>
-    <string name="mealOption3">Tiger 14 ($525)</string>
-    <string name="mealOption4">Tiger 20 ($325)</string>
-    <string name="mealOption5">Orange ($2900)</string>
-    <string name="mealOption6">Brown ($2100)</string>
-    <string name="mealOption7">Gold ($1500)</string>
-    <string name="mealOption8">Silver ($1000)</string>
+    <string name="mealOption1">Tiger 5 ($1350)</string>
+    <string name="mealOption2">Tiger 10 ($750)</string>
+    <string name="mealOption3">Tiger 14 ($550)</string>
+    <string name="mealOption4">Tiger 19 ($350)</string>
+    <string name="mealOption5">Orange ($2950)</string>
+    <string name="mealOption6">Brown ($2200)</string>
+    <string name="mealOption7">Gold ($1600)</string>
+    <string name="mealOption8">Silver ($1100)</string>
     <string name="mealOption9">Bronze ($500)</string>
     <string name="mealOptionCustom">Custom</string>
 
-    <string name="mealOptionValue1">1325</string>
-    <string name="mealOptionValue2">725</string>
-    <string name="mealOptionValue3">525</string>
-    <string name="mealOptionValue4">325</string>
-    <string name="mealOptionValue5">2900</string>
-    <string name="mealOptionValue6">2100</string>
-    <string name="mealOptionValue7">1500</string>
-    <string name="mealOptionValue8">1000</string>
+    <string name="mealOptionValue1">1350</string>
+    <string name="mealOptionValue2">750</string>
+    <string name="mealOptionValue3">550</string>
+    <string name="mealOptionValue4">350</string>
+    <string name="mealOptionValue5">2950</string>
+    <string name="mealOptionValue6">2200</string>
+    <string name="mealOptionValue7">1600</string>
+    <string name="mealOptionValue8">1100</string>
     <string name="mealOptionValue9">500</string>
 
     <string name="calculate">Calculate</string>
 
     <!-- Date strings -->
-    <string name="startDate">08/27/2018</string>
-    <string name="endDate">12/19/2018</string>
+    <string name="startDate">08/26/2019</string>
+    <string name="endDate">12/18/2019</string>
     <string name="daysOff">9</string>
 
     <!-- Results strings -->
