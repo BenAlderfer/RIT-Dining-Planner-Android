@@ -6,9 +6,9 @@ android {
     defaultConfig {
         applicationId "com.alderferstudios.ritdebitsplitter"
         minSdkVersion 14
-        targetSdkVersion 28
-        versionCode 60
-        versionName "2.5.1"
+        targetSdkVersion 29
+        versionCode 61
+        versionName "2.5.2"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
