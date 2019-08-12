@@ -1,14 +1,14 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 29
 
     defaultConfig {
         applicationId "com.alderferstudios.ritdebitsplitter"
         minSdkVersion 14
         targetSdkVersion 29
-        versionCode 61
-        versionName "2.5.2"
+        versionCode 65
+        versionName "2.5.5"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
